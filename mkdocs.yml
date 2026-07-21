@@ -1,0 +1,100 @@
+site_name: Embedded Systems Mastery Path
+site_description: A structured, module-wise embedded systems training program from entry level to master level, starting with Arduino/ESP32 and C/C++ — every example runnable in the free Wokwi online simulator, no hardware required.
+site_url: https://sigilipelli.github.io/embedded-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/embedded-mastery-path
+repo_name: embedded-mastery-path
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: teal
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Privacy Policy: privacy.md
+  - "Level 1 · Entry":
+      - Overview: level-1/index.md
+      - "01 · Setup & Toolchain": level-1/01-setup-toolchain.md
+      - "02 · C/C++ for Embedded": level-1/02-c-cpp-for-embedded.md
+      - "03 · Digital I/O": level-1/03-digital-io.md
+      - "04 · Analog I/O & PWM": level-1/04-analog-io-pwm.md
+      - "05 · Serial/UART Communication": level-1/05-serial-uart.md
+      - "06 · Sensors, I2C & SPI": level-1/06-sensors-i2c-spi.md
+      - "07 · Timers & Interrupts": level-1/07-timers-interrupts.md
+      - "08 · Memory & Power Basics": level-1/08-memory-power.md
+      - "09 · ESP32 WiFi Intro": level-1/09-esp32-wifi.md
+      - "10 · Capstone — Environment Monitor": level-1/10-capstone-project.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · FreeRTOS Tasks & Queues": level-2/01-freertos-tasks-queues.md
+      - "02 · ESP-IDF Development": level-2/02-esp-idf.md
+      - "03 · Bluetooth Low Energy (BLE)": level-2/03-ble.md
+      - "04 · MQTT & IoT Messaging": level-2/04-mqtt-iot-messaging.md
+      - "05 · OTA Firmware Updates": level-2/05-ota-updates.md
+      - "06 · Advanced Peripherals (I2S, RMT, CAN)": level-2/06-advanced-peripherals.md
+      - "07 · Filesystems & Storage (LittleFS, SD)": level-2/07-filesystems-storage.md
+      - "08 · Watchdogs & Robust Firmware": level-2/08-watchdogs-robust-firmware.md
+      - "09 · Debugging & Unit Testing": level-2/09-debugging-unit-testing.md
+      - "10 · Project — WiFi Data Logger": level-2/10-project-wifi-data-logger.md
+  - "Level 3 · Advanced":
+      - Overview: level-3/index.md
+      - "01 · Bare-Metal ARM Cortex-M (STM32)": level-3/01-bare-metal-arm-stm32.md
+      - "02 · Registers, Linker Scripts & Startup Code": level-3/02-registers-linker-startup.md
+      - "03 · RTOS Internals": level-3/03-rtos-internals.md
+      - "04 · DMA & High-Speed Peripherals": level-3/04-dma-high-speed-peripherals.md
+      - "05 · Low-Power Design Deep Dive": level-3/05-low-power-design.md
+      - "06 · Interrupts & the NVIC": level-3/06-interrupts-nvic.md
+      - "07 · PCB Design Basics (KiCad)": level-3/07-pcb-design-kicad.md
+      - "08 · Protocol Deep Dive (UART/I2C/SPI/CAN)": level-3/08-protocol-deep-dive.md
+      - "09 · Bootloaders & Firmware Updates": level-3/09-bootloaders.md
+      - "10 · Project — Custom Sensor Board Firmware": level-3/10-project-sensor-board.md
+  - "Level 4 · Master":
+      - Overview: level-4/index.md
+      - "01 · Production Firmware Architecture": level-4/01-production-firmware-architecture.md
+      - "02 · Secure Boot & Encrypted OTA at Scale": level-4/02-secure-boot-ota-scale.md
+      - "03 · TinyML & Edge AI": level-4/03-tinyml-edge-ai.md
+      - "04 · RF & Wireless Protocol Design": level-4/04-rf-protocol-design.md
+      - "05 · HIL Testing & CI for Firmware": level-4/05-hil-testing-ci.md
+      - "06 · Functional Safety & MISRA": level-4/06-functional-safety-misra.md
+      - "07 · Ultra-Low-Power & Energy Harvesting": level-4/07-ultra-low-power.md
+      - "08 · Manufacturing, DFM & Factory Test": level-4/08-manufacturing-dfm-test.md
+      - "09 · Fleet Management & Device Clouds": level-4/09-fleet-management.md
+      - "10 · Capstone — Production IoT Product": level-4/10-capstone-production-iot.md
