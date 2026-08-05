@@ -2,54 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/privacy/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/01-setup-toolchain/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/02-c-cpp-for-embedded/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/03-digital-io/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/04-analog-io-pwm/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/05-serial-uart/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/06-sensors-i2c-spi/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/07-timers-interrupts/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/08-memory-power/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/09-esp32-wifi/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/embedded-mastery-path/level-1/10-capstone-project/</loc>
-         <lastmod>2026-07-31</lastmod>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/01-freertos-tasks-queues/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/02-esp-idf/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/03-ble/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/04-mqtt-iot-messaging/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/05-ota-updates/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/06-advanced-peripherals/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/07-filesystems-storage/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/08-watchdogs-robust-firmware/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/09-debugging-unit-testing/</loc>
+         <lastmod>2026-08-05</lastmod>
+    </url>
+    <url>
+         <loc>https://sigilipelli.github.io/embedded-mastery-path/level-2/10-project-wifi-data-logger/</loc>
+         <lastmod>2026-08-05</lastmod>
     </url>
 </urlset>

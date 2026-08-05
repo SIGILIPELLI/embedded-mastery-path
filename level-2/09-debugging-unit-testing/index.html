@@ -1,0 +1,1922 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A structured, module-wise embedded systems training program from entry level to master level, starting with Arduino/ESP32 and C/C++ — every example runnable in the free Wokwi online simulator, no hardware required.">
+      
+      
+      
+        <link rel="canonical" href="https://sigilipelli.github.io/embedded-mastery-path/level-2/09-debugging-unit-testing/">
+      
+      
+        <link rel="prev" href="../08-watchdogs-robust-firmware/">
+      
+      
+        <link rel="next" href="../10-project-wifi-data-logger/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Debugging & Unit Testing - Embedded Systems Mastery Path</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Embedded Systems Mastery Path">
+  <meta property="og:title" content="Debugging & Unit Testing">
+  <meta property="og:description" content="A structured, module-wise embedded systems training program from entry level to master level — free, starting with Arduino/ESP32 and C/C++, every example runnable in the Wokwi online simulator.">
+  <meta property="og:url" content="https://sigilipelli.github.io/embedded-mastery-path/level-2/09-debugging-unit-testing/">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Debugging & Unit Testing">
+  <meta name="twitter:description" content="A structured, module-wise embedded systems training program from entry level to master level — free, starting with Arduino/ESP32 and C/C++, every example runnable in the Wokwi online simulator.">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#debugging-unit-testing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Embedded Systems Mastery Path" class="md-header__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Embedded Systems Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Debugging & Unit Testing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../privacy/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Privacy Policy
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Embedded Systems Mastery Path" class="md-nav__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Embedded Systems Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacy Policy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3" id="__nav_3_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/01-setup-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & Toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/02-c-cpp-for-embedded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · C/C++ for Embedded
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/03-digital-io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Digital I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/04-analog-io-pwm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Analog I/O & PWM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/05-serial-uart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Serial/UART Communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/06-sensors-i2c-spi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Sensors, I2C & SPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/07-timers-interrupts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Timers & Interrupts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/08-memory-power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Memory & Power Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/09-esp32-wifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · ESP32 WiFi Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../level-1/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone — Environment Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-freertos-tasks-queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FreeRTOS Tasks & Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-esp-idf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-IDF Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-ble/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bluetooth Low Energy (BLE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-mqtt-iot-messaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MQTT & IoT Messaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Firmware Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-advanced-peripherals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Peripherals (I2S, RMT, CAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-filesystems-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filesystems & Storage (LittleFS, SD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-watchdogs-robust-firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Watchdogs & Robust Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging & Unit Testing
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging & Unit Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#read-the-panic-before-you-guess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read the panic before you guess
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-that-survives-contact-with-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging that survives contact with production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-dumps-the-crash-nobody-was-watching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core dumps: the crash nobody was watching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtag-when-printf-has-run-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JTAG, when printf has run out
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-bugs-leaks-and-corruption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heap bugs: leaks and corruption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing-the-logic-that-doesnt-need-a-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit testing the logic that doesn't need a chip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-project-wifi-data-logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project — WiFi Data Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#read-the-panic-before-you-guess" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Read the panic before you guess
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logging-that-survives-contact-with-production" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Logging that survives contact with production
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#core-dumps-the-crash-nobody-was-watching" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Core dumps: the crash nobody was watching
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jtag-when-printf-has-run-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        JTAG, when printf has run out
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#heap-bugs-leaks-and-corruption" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Heap bugs: leaks and corruption
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#unit-testing-the-logic-that-doesnt-need-a-chip" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Unit testing the logic that doesn't need a chip
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cheat-sheet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercise
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="debugging-unit-testing">Debugging &amp; Unit Testing<a class="headerlink" href="#debugging-unit-testing" title="Permanent link">&para;</a></h1>
+<p>Module 2-08 gave you the machinery to survive a fault in the field. This
+module is about the other half: finding out <em>why</em> it happened, and catching
+the next one before it ever reaches flash. Embedded debugging is genuinely
+harder than debugging a laptop program — you cannot attach a debugger to a
+device on a rooftop, the act of printing changes the timing you're trying to
+observe, and a memory bug can corrupt something a hundred milliseconds
+before the crash you actually see. So you build layers: readable panics,
+disciplined logging, core dumps for the crashes nobody watched, JTAG for the
+ones you can reproduce, and unit tests for the logic that shouldn't need a
+chip at all.</p>
+<h2 id="read-the-panic-before-you-guess">Read the panic before you guess<a class="headerlink" href="#read-the-panic-before-you-guess" title="Permanent link">&para;</a></h2>
+<p>The single most-wasted debugging hour in embedded work is spent theorising
+about a crash whose cause was already printed on the serial port. An ESP32
+panic looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Guru Meditation Error: Core 0 panic&#39;ed (LoadProhibited). Exception was unhandled.
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Core 0 register dump:
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>PC      : 0x400d1a2f  PS      : 0x00060730  A0      : 0x800d1b40  A1      : 0x3ffb5020
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>...
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>EXCVADDR: 0x00000000
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>Backtrace: 0x400d1a2f:0x3ffb5020 0x400d1b3d:0x3ffb5040 0x400d2011:0x3ffb5070
+</code></pre></div>
+<p>Three fields carry almost all the information:</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cause</strong></td>
+<td><code>LoadProhibited</code> / <code>StoreProhibited</code> = bad pointer read/write; <code>IllegalInstruction</code> = executing something that isn't code</td>
+</tr>
+<tr>
+<td><strong><code>EXCVADDR</code></strong></td>
+<td>The address the code tried to touch. <code>0x00000000</code> is a null dereference; garbage means a corrupted pointer</td>
+</tr>
+<tr>
+<td><strong>Backtrace</strong></td>
+<td><code>PC:SP</code> pairs, innermost frame first — the call chain into the crash</td>
+</tr>
+</tbody>
+</table>
+<p><code>IllegalInstruction</code> has one cause worth memorising because it looks
+mysterious: <strong>a task function that returned instead of calling
+<code>vTaskDelete(NULL)</code></strong>. The task falls off the end of its function into
+whatever bytes follow, and the CPU tries to execute them.</p>
+<p>Use <code>idf.py monitor</code> rather than a plain serial terminal and the backtrace
+arrives already symbolicated — function names, files, line numbers — because
+the monitor cross-references your build's ELF file. If you only have a log
+someone else captured, decode it by hand:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>xtensa-esp32-elf-addr2line<span class="w"> </span>-pfiaC<span class="w"> </span>-e<span class="w"> </span>build/my_project.elf<span class="w"> </span>0x400d1a2f<span class="w"> </span>0x400d1b3d
+</code></pre></div>
+<p>You can also print a backtrace without crashing, which is the fastest way to
+answer "who is calling this?":</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_debug_helpers.h&quot;</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">suspicious_function</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">{</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">    </span><span class="n">esp_backtrace_print</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span><span class="w">        </span><span class="cm">/* up to 10 frames, to the console */</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>esp_backtrace_print_all_tasks()</code> does the same for every task at once —
+useful when the question is "what was everything else doing?" rather than
+"how did I get here?".</p>
+<p>By default a panic prints and reboots. <code>menuconfig</code> → <strong>Component config →
+ESP System Settings → Panic handler behaviour</strong> (<code>CONFIG_ESP_SYSTEM_PANIC</code>)
+also offers <strong>halt</strong> (freeze so you can inspect over JTAG) and <strong>GDBStub</strong>,
+which turns the panic into a live GDB session over the same serial cable —
+no JTAG hardware needed. For bench work that is the best-value setting in
+the whole menu.</p>
+<h2 id="logging-that-survives-contact-with-production">Logging that survives contact with production<a class="headerlink" href="#logging-that-survives-contact-with-production" title="Permanent link">&para;</a></h2>
+<p><code>ESP_LOGx</code> (module 2-02) has two independent level controls, and confusing
+them is a common time sink:</p>
+<ul>
+<li><strong><code>CONFIG_LOG_MAXIMUM_LEVEL</code></strong> is a <em>compile-time</em> ceiling. Anything above
+  it is not merely hidden — it is not in the binary, so the format strings
+  cost no flash and the calls cost no cycles.</li>
+<li><strong><code>CONFIG_LOG_DEFAULT_LEVEL</code></strong> is the runtime default, adjustable per tag:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_log.h&quot;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">tune_logging</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">{</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="n">esp_log_level_set</span><span class="p">(</span><span class="s">&quot;*&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ESP_LOG_WARN</span><span class="p">);</span><span class="w">          </span><span class="cm">/* quiet everything ... */</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="n">esp_log_level_set</span><span class="p">(</span><span class="s">&quot;sampler&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ESP_LOG_DEBUG</span><span class="p">);</span><span class="w">   </span><span class="cm">/* ... except the suspect */</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">}</span>
+</code></pre></div>
+<p>To keep debug output <em>available</em> in a shipped build, set the compile-time
+maximum to <code>Debug</code> and the runtime default to <code>Info</code> — then a support command
+over MQTT (module 2-04) can raise one tag's verbosity on a device in the
+field without an OTA. For binary protocol work, dump the bytes rather than
+describing them:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">ESP_LOG_BUFFER_HEXDUMP</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="n">rx_buf</span><span class="p">,</span><span class="w"> </span><span class="n">len</span><span class="p">,</span><span class="w"> </span><span class="n">ESP_LOG_DEBUG</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Logging changes the timing you're trying to measure</p>
+<p>A log line is not free: at 115200 baud each character takes roughly
+90 µs to leave the UART, and the call blocks while it does. Drop one
+into a 1 kHz sampling loop and the bug moves, disappears, or is replaced
+by a new one — the classic heisenbug. Two rules follow. <strong>Never log from
+an ISR</strong>: set a flag or push to a queue and log from the task (module
+1-07). And when you must instrument fast code, toggle a GPIO and watch
+it on a logic analyser instead — a pin toggle costs a handful of cycles,
+a log line costs milliseconds.</p>
+</div>
+<h2 id="core-dumps-the-crash-nobody-was-watching">Core dumps: the crash nobody was watching<a class="headerlink" href="#core-dumps-the-crash-nobody-was-watching" title="Permanent link">&para;</a></h2>
+<p>A backtrace only helps if someone had a terminal open. <strong>Core dumps</strong> fix
+that: on panic, ESP-IDF writes a snapshot of the task stacks into a flash
+partition, where it survives the reboot and waits for you.</p>
+<p>Enable it in <code>menuconfig</code> → <strong>Component config → Core dump → Data
+destination → Flash</strong> (<code>CONFIG_ESP_COREDUMP_ENABLE_TO_FLASH</code>), and give it a
+partition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a># Name,     Type, SubType,  Offset,   Size
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>nvs,        data, nvs,      0x9000,   0x4000,
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>otadata,    data, ota,      0xd000,   0x2000,
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>phy_init,   data, phy,      0xf000,   0x1000,
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>coredump,   data, coredump, ,         0x10000,
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>ota_0,      app,  ota_0,    0x20000,  0x1A0000,
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>ota_1,      app,  ota_1,    ,         0x1A0000,
+</code></pre></div>
+<p>After the device reboots, read it back over the same USB cable:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>idf.py<span class="w"> </span>coredump-info<span class="w">      </span><span class="c1"># summary: panic reason, faulting task, backtrace</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>idf.py<span class="w"> </span>coredump-debug<span class="w">     </span><span class="c1"># full GDB session against the crashed state</span>
+</code></pre></div>
+<p><code>coredump-debug</code> is the good one. It reconstructs an ELF from the dump and
+drops you into GDB, so you can <code>bt</code>, switch between tasks, and print locals
+from a crash that happened yesterday on a device you weren't watching.</p>
+<p>Firmware can also notice a stored dump at boot and report it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_core_dump.h&quot;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="kt">void</span><span class="w"> </span><span class="nf">report_last_crash</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">{</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="kt">size_t</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">esp_core_dump_image_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">size</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;no core dump stored&quot;</span><span class="p">);</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="n">ESP_LOGW</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;core dump: %u bytes at 0x%08x&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="n">size</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">unsigned</span><span class="p">)</span><span class="n">addr</span><span class="p">);</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">    </span><span class="cm">/* publish the fact over MQTT so the dashboard flags this device, then</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="cm">       clear the partition so the *next* crash has somewhere to go */</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_core_dump_image_erase</span><span class="p">());</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a><span class="p">}</span>
+</code></pre></div>
+<p>Erasing matters: the partition holds exactly one dump. Leave a stale one
+there and the crash you actually care about is silently discarded.</p>
+<h2 id="jtag-when-printf-has-run-out">JTAG, when printf has run out<a class="headerlink" href="#jtag-when-printf-has-run-out" title="Permanent link">&para;</a></h2>
+<p>Everything above is post-mortem. JTAG gives you breakpoints, single
+stepping, and live variable inspection on a running chip — the same
+experience as a desktop debugger. The classic ESP32 needs an external probe
+(ESP-Prog, or an ESP-WROVER-KIT with its onboard FT2232H); the ESP32-C3, -S3
+and later have a USB-Serial-JTAG peripheral built in, so one USB cable is
+enough. <code>idf.py</code> drives the whole stack:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>idf.py openocd</code></td>
+<td>Start the OpenOCD server with your board's configuration</td>
+</tr>
+<tr>
+<td><code>idf.py gdb</code></td>
+<td>Attach GDB, using the project's ELF automatically</td>
+</tr>
+<tr>
+<td><code>idf.py gdbgui</code></td>
+<td>Same, with a browser-based front end</td>
+</tr>
+<tr>
+<td><code>idf.py openocd gdb</code></td>
+<td>Both — <code>idf.py</code> orders background and interactive actions for you</td>
+</tr>
+</tbody>
+</table>
+<p>On the classic ESP32, <strong>GPIO12–GPIO15 are the JTAG pins</strong> (MTDI, MTCK, MTMS,
+MTDO), so a debug session conflicts with anything you wired there. GPIO12
+(MTDI) is worse than a conflict: it is a bootstrapping pin sampled at reset
+to select the flash chip's supply voltage, so a probe driving it can stop the
+device booting at all. Plan the pinout with JTAG in mind, or accept that this
+build is not debuggable that way.</p>
+<h2 id="heap-bugs-leaks-and-corruption">Heap bugs: leaks and corruption<a class="headerlink" href="#heap-bugs-leaks-and-corruption" title="Permanent link">&para;</a></h2>
+<p>Two failure modes dominate long-running firmware, and neither one crashes
+where the bug actually is.</p>
+<p><strong>A leak</strong> shows up as weeks of uptime followed by allocation failures.
+Track the trend, not the instant value: <code>esp_get_free_heap_size()</code> fluctuates
+constantly, but <code>esp_get_minimum_free_heap_size()</code> only ever falls. If it
+keeps falling over days, something leaks. To find out what, use the
+standalone heap tracer (<code>CONFIG_HEAP_TRACING_STANDALONE</code>):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_heap_trace.h&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="cp">#define NUM_RECORDS 100</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">static</span><span class="w"> </span><span class="n">heap_trace_record_t</span><span class="w"> </span><span class="n">s_records</span><span class="p">[</span><span class="n">NUM_RECORDS</span><span class="p">];</span><span class="w">   </span><span class="cm">/* must be static */</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">find_the_leak</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="p">{</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">heap_trace_init_standalone</span><span class="p">(</span><span class="n">s_records</span><span class="p">,</span><span class="w"> </span><span class="n">NUM_RECORDS</span><span class="p">));</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">heap_trace_start</span><span class="p">(</span><span class="n">HEAP_TRACE_LEAKS</span><span class="p">));</span>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="n">run_suspect_workload</span><span class="p">();</span><span class="w">          </span><span class="cm">/* one full cycle of whatever leaks */</span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">heap_trace_stop</span><span class="p">());</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">    </span><span class="n">heap_trace_dump</span><span class="p">();</span><span class="w">               </span><span class="cm">/* every unfreed block, with its caller */</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>HEAP_TRACE_LEAKS</code> records only allocations that were never freed, and the
+dump names the calling address for each. Run one cycle of something that
+should be net-neutral, and whatever is left in the list is your leak.</p>
+<p><strong>Corruption</strong> — a write past the end of a buffer — is nastier, because the
+symptom appears whenever the damaged neighbour is next used, which can be
+anywhere. Turn <code>CONFIG_HEAP_CORRUPTION_DETECTION</code> up to <strong>Comprehensive</strong>
+while hunting it: the allocator puts canary words around every block, fills
+fresh allocations with <code>0xCE</code> and freed memory with <code>0xFE</code>, so a
+use-after-free shows up as suspiciously <code>0xFEFEFEFE</code> data instead of
+plausible-looking garbage. Then bisect with explicit checks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;esp_heap_caps.h&quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">heap_caps_check_integrity_all</span><span class="p">(</span><span class="nb">true</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w">     </span><span class="cm">/* true = print what&#39;s broken */</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;heap already corrupted at this point&quot;</span><span class="p">);</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">}</span>
+</code></pre></div>
+<p>Move that call around until it flips from passing to failing; the overrun is
+between the last good position and the first bad one. Comprehensive
+poisoning is slow and memory-hungry — it is a debugging setting, not a
+shipping one.</p>
+<p>The third member of the family, <strong>stack overflow</strong>, was covered in module
+2-01. One ESP-IDF-specific detail belongs here though: this port's
+<code>uxTaskGetStackHighWaterMark()</code> reports the worst-ever free stack <strong>in
+bytes</strong>, matching the byte-based stack sizes <code>xTaskCreate()</code> takes on this
+platform, whereas vanilla FreeRTOS documentation describes it in words. The
+factor of four has sent plenty of people chasing a problem they didn't have.
+Also leave <code>CONFIG_FREERTOS_CHECK_STACKOVERFLOW</code> enabled (Canary is the
+default) so an overrun is reported by task name instead of quietly
+corrupting a neighbour.</p>
+<h2 id="unit-testing-the-logic-that-doesnt-need-a-chip">Unit testing the logic that doesn't need a chip<a class="headerlink" href="#unit-testing-the-logic-that-doesnt-need-a-chip" title="Permanent link">&para;</a></h2>
+<p>Most firmware bugs are not in the drivers. They are in a CRC routine, a
+ring-buffer index, a parser, a state machine, a unit conversion — plain C
+logic that has no business requiring an ESP32 to test. Split that logic into
+its own component (module 2-02) with no hardware calls in it, and its tests
+run in seconds, on every commit.</p>
+<p>ESP-IDF ships <strong>Unity</strong>. Test files live in a <code>test</code> subdirectory of the
+component under test, must be named starting with <code>test</code>, and that directory
+is itself a component:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="cm">/* components/sample_buf/test/test_sample_buf.c */</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;unity.h&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;sample_buf.h&quot;</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;a fresh buffer reports empty&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[sample_buf]&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">{</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">    </span><span class="n">sample_buf_t</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">    </span><span class="n">sample_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="n">TEST_ASSERT_TRUE</span><span class="p">(</span><span class="n">sample_buf_is_empty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">));</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">    </span><span class="n">TEST_ASSERT_EQUAL_INT</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">sample_buf_count</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">));</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="p">}</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;pushing past capacity drops the oldest sample&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[sample_buf]&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="p">{</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w">    </span><span class="n">sample_buf_t</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w">    </span><span class="n">sample_buf_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">SAMPLE_BUF_CAP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="w">        </span><span class="n">sample_buf_push</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="p">);</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="w">    </span><span class="n">TEST_ASSERT_EQUAL_INT</span><span class="p">(</span><span class="n">SAMPLE_BUF_CAP</span><span class="p">,</span><span class="w"> </span><span class="n">sample_buf_count</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">));</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="n">TEST_ASSERT_EQUAL_FLOAT</span><span class="p">(</span><span class="mf">3.0f</span><span class="p">,</span><span class="w"> </span><span class="n">sample_buf_peek</span><span class="p">(</span><span class="o">&amp;</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">));</span><span class="w">   </span><span class="cm">/* 0,1,2 evicted */</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="p">}</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="n">TEST_CASE</span><span class="p">(</span><span class="s">&quot;a null buffer is rejected, not dereferenced&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;[sample_buf]&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="p">{</span>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a><span class="w">    </span><span class="n">TEST_ASSERT_EQUAL</span><span class="p">(</span><span class="n">ESP_ERR_INVALID_ARG</span><span class="p">,</span><span class="w"> </span><span class="n">sample_buf_push</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0f</span><span class="p">));</span>
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c"># components/sample_buf/test/CMakeLists.txt</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">idf_component_register</span><span class="p">(</span><span class="s">SRC_DIRS</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">                       </span><span class="s">INCLUDE_DIRS</span><span class="w"> </span><span class="s2">&quot;.&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">                       </span><span class="s">REQUIRES</span><span class="w"> </span><span class="s">unity</span><span class="w"> </span><span class="s">sample_buf</span><span class="p">)</span>
+</code></pre></div>
+<p>There is no <code>main()</code> — Unity's platform layer provides one. Build and flash
+the test app, then press Enter in the monitor to get an interactive menu:
+type a test's number, its name in quotes, <code>[sample_buf]</code> to run one tag, or
+<code>*</code> to run everything. For CI you don't want a human pressing keys, so
+ESP-IDF integrates <strong><code>pytest-embedded</code></strong>, which drives that menu
+automatically and reports pass/fail per case.</p>
+<p>The assertions worth knowing: <code>TEST_ASSERT_TRUE</code>, <code>TEST_ASSERT_EQUAL_INT</code>,
+<code>TEST_ASSERT_EQUAL_FLOAT</code> (tolerance-based — never compare floats with the
+integer macro), <code>TEST_ASSERT_EQUAL_STRING</code>, <code>TEST_ASSERT_EQUAL_HEX8_ARRAY</code>
+for buffers, and <code>TEST_FAIL_MESSAGE</code> for an explicit give-up.</p>
+<p>Test the ugly cases, not the happy path: empty input, one element, exactly
+full, one past full, null pointers, integer wraparound. That is where the
+field failures actually live.</p>
+<h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LoadProhibited</code> / <code>StoreProhibited</code></td>
+<td>Bad pointer; <code>EXCVADDR</code> holds the address, <code>0x0</code> = null</td>
+</tr>
+<tr>
+<td><code>IllegalInstruction</code></td>
+<td>Often a task function that returned without <code>vTaskDelete(NULL)</code></td>
+</tr>
+<tr>
+<td>Backtrace</td>
+<td><code>PC:SP</code> pairs, innermost first; <code>idf.py monitor</code> symbolicates them</td>
+</tr>
+<tr>
+<td><code>addr2line -pfiaC -e build/app.elf &lt;pc&gt;</code></td>
+<td>Decode a backtrace captured elsewhere</td>
+</tr>
+<tr>
+<td><code>esp_backtrace_print(depth)</code></td>
+<td>Print the current stack without crashing</td>
+</tr>
+<tr>
+<td><code>CONFIG_ESP_SYSTEM_PANIC</code></td>
+<td>Print+reboot / halt / <strong>GDBStub</strong> (live GDB over plain serial)</td>
+</tr>
+<tr>
+<td><code>CONFIG_LOG_MAXIMUM_LEVEL</code></td>
+<td>Compile-time ceiling — above it, the code isn't in the binary</td>
+</tr>
+<tr>
+<td><code>esp_log_level_set(tag, level)</code></td>
+<td>Runtime, per tag; <code>"*"</code> for all tags</td>
+</tr>
+<tr>
+<td><code>ESP_LOG_BUFFER_HEXDUMP(tag, buf, len, level)</code></td>
+<td>Hex + ASCII dump for protocol work</td>
+</tr>
+<tr>
+<td>Logging trap</td>
+<td>Blocks for milliseconds; never from an ISR — toggle a GPIO instead</td>
+</tr>
+<tr>
+<td>Core dump</td>
+<td><code>coredump</code> data partition + <code>CONFIG_ESP_COREDUMP_ENABLE_TO_FLASH</code></td>
+</tr>
+<tr>
+<td><code>idf.py coredump-info</code> / <code>coredump-debug</code></td>
+<td>Summary / full GDB session on a stored crash</td>
+</tr>
+<tr>
+<td><code>esp_core_dump_image_get()</code> / <code>_erase()</code></td>
+<td>Detect a dump at boot; clear it or lose the next one</td>
+</tr>
+<tr>
+<td><code>idf.py openocd gdb</code></td>
+<td>Live JTAG; ESP32 needs ESP-Prog, C3/S3 have USB-JTAG built in</td>
+</tr>
+<tr>
+<td>ESP32 JTAG pins</td>
+<td>GPIO12–15; GPIO12 (MTDI) also straps the flash supply voltage at reset</td>
+</tr>
+<tr>
+<td>Leak hunting</td>
+<td><code>esp_get_minimum_free_heap_size()</code> trend, then <code>HEAP_TRACE_LEAKS</code></td>
+</tr>
+<tr>
+<td><code>heap_trace_init_standalone(recs, n)</code> → <code>start</code> → <code>stop</code> → <code>dump</code></td>
+<td>Names the caller of every unfreed block</td>
+</tr>
+<tr>
+<td><code>CONFIG_HEAP_CORRUPTION_DETECTION</code></td>
+<td>Comprehensive: <code>0xCE</code> fresh, <code>0xFE</code> freed, canaries around blocks</td>
+</tr>
+<tr>
+<td><code>heap_caps_check_integrity_all(true)</code></td>
+<td>Bisect to where the overrun happens</td>
+</tr>
+<tr>
+<td><code>uxTaskGetStackHighWaterMark()</code></td>
+<td>On ESP-IDF this is <strong>bytes</strong> (vanilla FreeRTOS docs say words)</td>
+</tr>
+<tr>
+<td>Unity test</td>
+<td><code>TEST_CASE("name", "[tag]")</code> in <code>components/&lt;c&gt;/test/test_*.c</code></td>
+</tr>
+<tr>
+<td>Test CMake</td>
+<td><code>idf_component_register(SRC_DIRS "." INCLUDE_DIRS "." REQUIRES unity &lt;comp&gt;)</code></td>
+</tr>
+<tr>
+<td>Running tests</td>
+<td>Flash, press Enter for the menu; <code>*</code> runs all; <code>pytest-embedded</code> for CI</td>
+</tr>
+</tbody>
+</table>
+<h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
+<p>Take one piece of pure logic out of an earlier project — a ring buffer, a
+CSV line formatter, or the command parser from module 2-04 — and move it
+into its own component with no ESP-IDF hardware calls in it. Write at least
+six Unity <code>TEST_CASE</code>s covering empty, single-element, exactly-full,
+one-past-full, null-pointer and wraparound inputs. Run them, then
+deliberately break one boundary condition in the implementation (change a
+<code>&lt;=</code> to a <code>&lt;</code>) and confirm that exactly the test you predicted goes red.</p>
+<p>Then build a crash-forensics loop. Add a <code>coredump</code> partition, enable core
+dump to flash, and add three serial commands that crash the device three
+different ways: a null dereference, a task function that <code>return</code>s instead
+of calling <code>vTaskDelete(NULL)</code>, and a 64-byte write into a 16-byte
+<code>malloc()</code>. Reboot after each and run <code>idf.py coredump-info</code> — note in a
+comment which of the three the dump pinpoints and which it doesn't, then
+re-run the third with <code>CONFIG_HEAP_CORRUPTION_DETECTION</code> set to
+Comprehensive and record how much closer that gets you to the real bug.
+Finally, have <code>app_main()</code> call <code>esp_core_dump_image_get()</code> at startup, log
+that a dump is waiting, and erase it — proving the device can report its own
+crashes with nobody watching the cable.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "navigation.indexes", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
