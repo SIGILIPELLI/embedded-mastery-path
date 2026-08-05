@@ -62,8 +62,19 @@ nav:
       - "08 · Memory & Power Basics": level-1/08-memory-power.md
       - "09 · ESP32 WiFi Intro": level-1/09-esp32-wifi.md
       - "10 · Capstone — Environment Monitor": level-1/10-capstone-project.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "FreeRTOS Tasks & Queues": level-2/01-freertos-tasks-queues.md
+      - "ESP-IDF Development": level-2/02-esp-idf.md
+      - "Bluetooth Low Energy (BLE)": level-2/03-ble.md
+      - "MQTT & IoT Messaging": level-2/04-mqtt-iot-messaging.md
+      - "OTA Firmware Updates": level-2/05-ota-updates.md
+      - "Advanced Peripherals (I2S, RMT, CAN)": level-2/06-advanced-peripherals.md
+      - "Filesystems & Storage (LittleFS, SD)": level-2/07-filesystems-storage.md
+      - "Watchdogs & Robust Firmware": level-2/08-watchdogs-robust-firmware.md
+      - "Debugging & Unit Testing": level-2/09-debugging-unit-testing.md
+      - "Project — WiFi Data Logger": level-2/10-project-wifi-data-logger.md
 # --- auto-pruned stub levels (see AdSense low-value-content fix) ---
 exclude_docs: |
-  level-2/*.md
   level-3/*.md
   level-4/*.md
