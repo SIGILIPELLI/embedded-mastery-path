@@ -21,8 +21,8 @@ unchanged on real boards when you get one.
 |-------|-------|---------|
 | [Level 1 · Entry](level-1/index.md) | Arduino/ESP32 with C/C++: GPIO, PWM, serial, I2C/SPI sensors, interrupts, WiFi | 9 topics + 1 capstone |
 | [Level 2 · Intermediate](level-2/index.md) | FreeRTOS, ESP-IDF, BLE, MQTT, OTA updates, filesystems, robust firmware | 9 topics + 1 project |
-| Level 3 · Advanced (coming soon) | Bare-metal ARM/STM32, registers & linker scripts, RTOS internals, DMA, PCB basics | 9 topics + 1 project |
-| Level 4 · Master (coming soon) | Production firmware, secure boot & OTA at scale, TinyML, RF design, manufacturing | 9 topics + 1 capstone |
+| [Level 3 · Advanced](level-3/index.md) | Bare-metal ARM/STM32, registers & linker scripts, RTOS internals, DMA, PCB basics | 9 topics + 1 project |
+| [Level 4 · Master](level-4/index.md) | Production firmware, secure boot & OTA at scale, TinyML, RF design, manufacturing | 9 topics + 1 capstone |
 
 ## How to use this site
 
