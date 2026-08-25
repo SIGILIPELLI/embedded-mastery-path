@@ -16,8 +16,3 @@ a device from prototype through manufacturing to a managed fleet.
 8. [Manufacturing, DFM & Factory Test](08-manufacturing-dfm-test.md)
 9. [Fleet Management & Device Clouds](09-fleet-management.md)
 10. [Capstone — Production IoT Product](10-capstone-production-iot.md)
-
-!!! info "Content status"
-    Level 4 module content is being written — every page below has its
-    scope defined and will be filled in next. [Level 1](../level-1/index.md)
-    is complete and is the prerequisite for everything here.

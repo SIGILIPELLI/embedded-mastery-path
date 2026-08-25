@@ -16,8 +16,3 @@ low-power design, and design your first PCB.
 8. [Protocol Deep Dive (UART/I2C/SPI/CAN)](08-protocol-deep-dive.md)
 9. [Bootloaders & Firmware Updates](09-bootloaders.md)
 10. [Project — Custom Sensor Board Firmware](10-project-sensor-board.md)
-
-!!! info "Content status"
-    Level 3 module content is being written — every page below has its
-    scope defined and will be filled in next. [Level 1](../level-1/index.md)
-    is complete and is the prerequisite for everything here.
