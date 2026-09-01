@@ -1,8 +1,8 @@
 site_name: Embedded Systems Mastery Path
 site_description: A structured, module-wise embedded systems training program from entry level to master level, starting with Arduino/ESP32 and C/C++ — every example runnable in the free Wokwi online simulator, no hardware required.
-site_url: https://sigilipelli.github.io/embedded-skillmastery/
-repo_url: https://github.com/SIGILIPELLI/embedded-skillmastery
-repo_name: embedded-skillmastery
+site_url: https://sigilipelli.github.io/embedded-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/embedded-mastery-path
+repo_name: embedded-mastery-path
 
 theme:
   name: material
