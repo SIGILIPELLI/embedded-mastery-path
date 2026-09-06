@@ -148,6 +148,43 @@ Build it in Wokwi (potentiometer + LED + resistor as wired above) and you
 have a working dimmer — the complete sense → compute → act pattern that
 every embedded system is built on, in 20 lines.
 
+## How It Actually Works
+
+**How the ADC actually measures a voltage**: both AVR and ESP32 use a
+**successive-approximation register (SAR) ADC**. Internally it holds a
+digital-to-analog converter (DAC) and a comparator: it guesses the top bit
+(sets its internal DAC to half of full scale), compares that guess's voltage
+against the pin's actual voltage, keeps the bit if the pin is higher and
+clears it if lower, then repeats for each remaining bit from most- to
+least-significant — 10 comparisons for a 10-bit result, 12 for a 12-bit one.
+Each comparison takes a fixed number of ADC clock cycles, which is why an
+`analogRead()` call isn't instantaneous — on AVR it's roughly 100 µs, since the
+ADC clock is deliberately divided down from the CPU clock (accuracy trades
+against speed for a SAR converter). "Non-linear near the extremes" on ESP32
+is a physical limitation of its ADC's input attenuator/reference circuitry
+close to 0 V and close to full-scale, not a software bug — this is why the
+Level 2 material moves precision work to an external ADC chip with a
+dedicated, better-characterized reference voltage.
+
+**How PWM fakes an analog voltage**: `analogWrite`/`ledcWrite` don't create a
+new voltage level — they reconfigure a hardware **timer/counter peripheral**
+to run in "compare output" mode. The timer counts up on every clock tick, and
+dedicated compare-match hardware toggles the pin low the instant the count
+passes the duty-cycle value, then resets and starts high again at the top of
+the count (or vice versa) — entirely in hardware, with no CPU instruction
+executed per pulse edge. `ledcAttach(pin, freq, res)` computes and loads a
+**clock divider** into the LEDC peripheral's registers so the timer's
+overflow rate equals your requested frequency at your requested bit
+resolution (there's a real trade-off here: `freq × 2^resolution` is capped by
+the peripheral's source clock, which is why higher resolution forces lower
+achievable frequency). What your LED, motor, or ear actually experiences is
+this square wave low-pass-filtered by physics: an LED's perceived brightness
+integrates light output over the eye's ~50 ms persistence, and a motor's
+mechanical inertia integrates torque over many pulse periods — both average
+out the on/off transitions into what looks and feels like a proportional
+analog signal, even though the pin itself is only ever fully HIGH or fully
+LOW at any instant.
+
 ## Cheat sheet
 
 | Concept | Uno | ESP32 |

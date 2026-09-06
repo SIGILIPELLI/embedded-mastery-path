@@ -168,6 +168,59 @@ that failed, not just the first thing.
   manufacturing time, turning every field failure investigation into
   guesswork.
 
+## How It Actually Works
+
+**Why stencil aperture design directly determines solder-joint quality, not
+just paste appearance**: solder paste is deposited by squeegeeing it through
+laser-cut openings in a thin steel or polymer stencil aligned over the
+board's pads, and the volume of paste deposited on a given pad is
+essentially the aperture's area times the stencil's thickness — too much
+paste on a fine-pitch IC's tightly-spaced pins means adjacent deposits merge
+during reflow (when the paste's solder particles melt and the flux
+activates, letting surface tension pull the joint into shape), creating a
+solder bridge that electrically shorts two pins that were never meant to
+connect. A "1:1 stencil-to-pad ratio" applies the same-size opening
+regardless of pitch, but the paste-to-pad-area ratio that works fine on a
+2mm-pitch connector delivers proportionally far too much paste relative to
+the tiny gap between pins on a 0.4mm-pitch fine-pitch part — which is
+exactly why stencil design reduces aperture size specifically for fine-pitch
+parts (a "home plate" or reduced-aperture pattern) rather than using one
+ratio everywhere: the physical bridging risk scales with pitch, not with
+paste ratio alone.
+
+**Why boundary-scan (JTAG) can verify connectivity without a physical probe
+touching every net**: chips that support the IEEE 1149.1 standard contain a
+**scan chain** — a long shift register wired internally so that every I/O
+pin has an associated boundary-scan cell that can either pass the pin's
+normal signal through or be loaded/read via a serial shift operation driven
+entirely through the four/five JTAG pins (TDI, TDO, TMS, TCK). A test
+fixture can shift a known bit pattern into the output-side scan cells of one
+chip, then shift out what the input-side scan cells of a neighboring chip on
+the same net actually captured — if the board's copper trace between them is
+intact, the captured pattern matches what was driven; a solder-bridge short
+or an open trace produces a mismatch, detected without a single physical
+pogo pin touching that specific net. This is what lets boundary-scan replace
+bed-of-nails testing on boards dense enough that physically fitting a test
+point onto every net is not mechanically feasible — the verification travels
+through the chips' own internal shift registers instead of external probes.
+
+**Why running every factory test to completion — never stopping at the first
+failure — is the economically correct choice, not just thoroughness for its
+own sake**: a unit that fails one test at the end of a production line has
+already consumed the full cost of fabrication, assembly, and reaching that
+test station — the marginal cost of running the *remaining* tests on that
+already-built unit is small compared to those sunk costs, while the
+diagnostic value of a complete result set is large: a unit failing only the
+LED test versus a unit failing the LED test *and* the flash write/read test
+point to very different root causes (a cosmetic assembly defect versus a
+serious power or bus problem), and that distinction is invisible if testing
+stops at the first failure. This is precisely why the aggregation logic
+`run_factory_tests` deliberately continues through the loop regardless of
+`rc`, only tracking `all_pass` as a summary flag — the design decision that
+every result gets logged is what makes the recorded data useful for
+yield-trend analysis across an entire production run, not just a per-unit
+ship/no-ship gate.
+
 ## Cheat sheet
 
 | Concept | Detail |

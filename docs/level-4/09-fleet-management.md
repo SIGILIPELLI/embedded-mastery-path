@@ -148,6 +148,57 @@ int main(void) {
   functioning during any network outage even if its actual sensing/control
   function doesn't depend on connectivity at all.
 
+## How It Actually Works
+
+**Why MAC-address-based identity fails at fleet scale specifically**: a MAC
+address is assigned by whichever radio/networking chip vendor supplied a
+given batch of parts, drawn from that vendor's allocated address block — a
+fleet sourcing the same MCU/radio combination across multiple manufacturing
+lots, or worse, from two different vendors' compatible parts as a
+supply-chain substitution, has no guarantee those blocks don't overlap or
+that a vendor's own allocation process was error-free at the scale of
+millions of parts (documented collisions exist in the wild). Worse, MAC
+addresses are typically stored in the *radio chip's own* fuses/EEPROM, not
+the main MCU's — a board repair that swaps a failed radio module changes the
+device's "identity" without any application code decision at all, silently
+breaking any backend record keyed on that value. A provisioned UUID, by
+contrast, is generated and burned in specifically as an identity field
+(often alongside the device certificate, in the same manufacturing step as
+module 4-08's factory test) independent of any component that might later be
+swapped during repair — the identity is a deliberate manufacturing artifact,
+not a side-effect of which radio chip happened to be soldered on.
+
+**Why aggregating telemetry before transmission is a real bandwidth/energy
+trade and not just data reduction for its own sake**: transmitting data over
+a radio (module 4-04's link budget) costs energy roughly proportional to
+payload size and, more significantly, to radio-on time — bringing a radio
+out of its low-power state, establishing a connection or transmission
+window, and returning to sleep carries fixed overhead cost regardless of how
+much actual data rides along, similar in kind to a flash sector's fixed
+erase cost from module 2-07 dominating over the actual bytes written. A
+device sampling every second but transmitting a summary once a minute pays
+that fixed radio overhead once per 60 samples instead of once per sample —
+a 60x reduction in the dominant cost — while `{min, max, mean, count}` still
+preserves the statistical shape of that minute's data (an anomalous spike is
+visible in `max` even though it's smoothed out of `mean`), which is exactly
+why the aggregate is chosen to include min/max and not just an average.
+
+**Why config validation must run identically to firmware verify-before-apply,
+mechanically**: from the receiving device's perspective, an incoming
+configuration blob and an incoming firmware image are both just untrusted
+bytes arriving over a network connection, parsed by code that has no
+inherent guarantee the sender validated them correctly (a backend bug, a
+truncated transfer, or a malicious actor with access to the update channel
+are all indistinguishable failure modes from the device's point of view). A
+`sample_interval_ms == 0` accepted without validation isn't a hypothetical —
+it's a divisor or loop-bound elsewhere in the firmware that, given that
+specific value, produces a divide-by-zero fault or an unbounded busy-loop
+the instant the new configuration is applied, on every device in the fleet
+simultaneously if pushed without staging — which is precisely why
+`validate_config` runs the identical logical role as `esp_ota_end()`'s image
+validation in module 2-05: the last checkpoint before untrusted external
+input becomes live device behavior.
+
 ## Cheat sheet
 
 | Concept | Detail |

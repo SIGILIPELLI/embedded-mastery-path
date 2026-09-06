@@ -173,6 +173,53 @@ On ESP32 literals effectively stay in flash anyway and `F()` is a harmless
 no-op — so using `F()` for fixed message strings is a good portable habit.
 Module 8 covers the memory map in detail.
 
+## How It Actually Works
+
+**Why `int` changes size**: the compiler picks `int`'s width to match the
+target CPU's natural register/ALU width, because that's the size the chip can
+operate on in one instruction. AVR (Uno) is an 8-bit core with 16-bit
+addressing conventions and `int` set to 16 bits by the AVR ABI; the ESP32's
+Xtensa core is a full 32-bit machine, so 32-bit arithmetic is exactly as cheap
+as 16-bit and the ABI sets `int` to 32 bits. `sizeof` isn't querying some
+table — it's a compile-time constant baked in by the exact toolchain module 1
+installed for that board.
+
+**Why overflow is silent**: integer types in C/C++ are literally a fixed
+number of bits with no out-of-band "overflow" flag exposed to your code — the
+CPU's ALU does have a hardware carry/overflow flag internally (used by
+multi-word arithmetic instructions), but ordinary `+`/`++` never checks it.
+`uint8_t counter = 255; counter++;` performs `11111111 + 1` in binary, which
+is `1 00000000` — the carry out of bit 7 is simply discarded, leaving `0`.
+Same mechanism, different name, for signed overflow (`int16_t` wrapping
+negative): the bit pattern doesn't care about signedness, only how you
+*interpret* it, which is what two's-complement representation is for.
+
+**Why `String` fragments the heap**: `String`'s internal `char*` buffer is
+allocated with the same allocator as C's `malloc` — on Arduino/AVR that's a
+simple bump-and-freelist allocator with no compaction. Every concatenation
+that outgrows the current buffer calls `realloc`, which — when it can't grow
+in place — allocates a new, bigger block and frees the old one. On a heap of
+only ~1.5 KB usable, dozens of these free/alloc cycles per minute leave the
+freelist full of small, non-adjacent holes; eventually a request needs a
+contiguous run bigger than any single hole, `malloc` returns `NULL`, and code
+that doesn't check for that (most doesn't) writes through a null/garbage
+pointer — the "runs fine for hours then crashes" signature. `char buf[32]` on
+the stack sidesteps the heap entirely: its address is fixed by the compiler at
+build time and reclaimed automatically when the function returns.
+
+**Why `F()` works**: normally, a `"string literal"` is emitted into the
+`.data`/`.rodata` section of the ELF file, and on AVR the startup code (`crt0`)
+*copies* `.data` from flash into RAM before `main()` runs, specifically so
+ordinary pointers can dereference it directly (AVR's Harvard architecture keeps
+program and data memory in separate address spaces — a plain pointer can't
+read flash). `F("...")` instead places the string in `.progmem` — flash that's
+*not* copied to RAM at startup — and returns a special `__FlashStringHelper*`
+that `Serial.print` recognizes, at which point it calls `pgm_read_byte()`
+per character to read directly out of flash through AVR's separate `LPM`
+instruction. This is also why it's a no-op on ESP32: Xtensa is a more unified
+memory architecture where flash is memory-mapped and directly addressable, so
+there was never a RAM copy to eliminate.
+
 ## Cheat sheet
 
 | Concept | Guidance |

@@ -221,6 +221,56 @@ void can_rx_task(void *pv)
   8 RMT channels split between TX and RX). Check the chip's datasheet before
   designing a board that needs three of anything.
 
+## How It Actually Works
+
+**Why "hardware state machine with DMA" is the actual mechanism, not just
+marketing language**: I2S, RMT, and TWAI each contain dedicated silicon —
+shift registers, sample-rate generators, and sequencers — that operate
+entirely independently of the CPU core once configured, and each is wired
+directly to the chip's **DMA (Direct Memory Access) controller**. DMA is
+itself a small, separate piece of hardware that can read/write system memory
+over the same internal bus the CPU uses, without the CPU executing a single
+instruction per byte transferred: you program it with a source address, a
+destination address, and a length, and it moves the data autonomously,
+raising an interrupt only when a whole buffer is done. For I2S, this means
+incoming microphone samples are written into your `buf[512]` by DMA the
+instant each sample clocks in on BCLK/WS, entirely between calls to
+`i2s_channel_read()` — the function you call is really just "block until the
+DMA controller signals the buffer it's filling is full," which is exactly why
+FreeRTOS scheduling other tasks around it causes no dropped samples: the DMA
+engine keeps running with or without the CPU's attention.
+
+**Why RMT timing survives preemption but bit-banging doesn't**: bit-banging
+WS2812 timing (~0.3-0.9 µs pulses) from ordinary GPIO writes requires the CPU
+to execute precisely-timed instruction sequences with interrupts disabled for
+the whole frame — any interrupt (even a 10 µs ISR) landing mid-pulse
+stretches that pulse past WS2812's tolerance and corrupts the whole LED
+string, because each LED's shift register only knows how to distinguish `0`
+from `1` by pulse *duration*. RMT instead pre-loads its `rmt_symbol_word_t`
+sequence into on-chip memory and lets a dedicated hardware clock divider (set
+by `resolution_hz`) generate every edge from a counter, completely outside
+the CPU's instruction stream — `rmt_transmit()` just arms it and returns, so
+a scheduler switching the CPU to another task mid-transmission has zero
+effect on the pulse train already running in RMT's own hardware.
+
+**Why CAN arbitration works without collisions**: every CAN transceiver
+drives the bus using **wired-AND** logic — a `0` bit ("dominant") is actively
+driven and always wins on the shared differential pair, while a `1`
+("recessive") is only weakly pulled and yields if anyone else is driving
+dominant at the same instant. During arbitration, every transmitting node
+sends its message ID bit-by-bit while simultaneously reading back what's
+actually on the bus; the instant a node sees a dominant bit on the wire when
+it tried to send recessive, it knows a higher-priority (numerically lower ID)
+node is also transmitting and it immediately stops driving and becomes a
+receiver — no collision occurs and no data is lost, because the winning
+node's transmission was never actually corrupted on the wire. **Bus-off**
+happens because every node maintains a transmit error counter purely in
+hardware/firmware state machine logic (per the CAN spec) that increments on
+each unacknowledged frame and resets on success; hitting 256 is a
+protocol-mandated threshold at which the controller disconnects itself from
+the bus entirely, precisely to stop a malfunctioning node from flooding a
+shared bus other nodes depend on.
+
 ## Cheat sheet
 
 | Concept | Detail |

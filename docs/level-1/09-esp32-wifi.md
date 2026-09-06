@@ -166,6 +166,46 @@ Serving `text/html` for humans and `application/json` for programs — that
 tiny `/api` route is the seed of every device dashboard and REST-controlled
 gadget you'll build.
 
+## How It Actually Works
+
+**What `WiFi.begin()` triggers under the API**: the ESP32's WiFi is a
+separate radio subsystem with its own MAC/PHY hardware, driven by a binary
+blob running on the chip's internal architecture that the Arduino `WiFi`
+class talks to via a thin driver layer (in ESP-IDF terms, `esp_wifi_*`
+calls). `WiFi.begin()` kicks off, in hardware and firmware below your
+sketch: an 802.11 **probe/scan** to find the SSID's access point, then
+**authentication and association** frames, then (for WPA2) a **4-way
+handshake** that derives session encryption keys, and finally **DHCP**
+(a UDP broadcast exchange) to obtain an IP address — all of that is what
+`WiFi.status() != WL_CONNECTED` is silently polling underneath the `.` dots.
+2.4 GHz-only is a hardware fact, not a software limitation: the ESP32's radio
+front-end (antenna matching network, RF filters, and the transceiver's
+tunable oscillator range) is physically built only to transmit/receive in the
+2.400–2.4835 GHz ISM band; a 5 GHz signal is simply outside the frequency
+range its analog RF circuitry can amplify or demodulate at all.
+
+**Why the connect loop blocks on purpose, but `handleClient()` doesn't**:
+underneath both, network I/O ultimately rides on a TCP/IP stack (lwIP) that
+itself depends on the WiFi driver delivering received frames via — again —
+interrupts from the radio hardware, dispatched into a background FreeRTOS
+task the ESP32's WiFi driver spins up for you invisibly (module 21 covers
+FreeRTOS and tasks properly). `WebServer::handleClient()` is a non-blocking
+poll of that stack's listening socket: it checks whether a TCP SYN or request
+has arrived in the socket's receive buffer and returns immediately if not —
+which is exactly why it belongs in a tight, undelayed `loop()`: every pass
+you skip is a pass where an already-connected client's request sits queued,
+adding latency, and where a new SYN could sit unacknowledged, since nothing
+else in this sketch drives that socket forward.
+
+**Why heap matters here specifically**: every `HTTPClient`/`WebServer`
+request causes lwIP to allocate socket buffers and TLS/TCP control structures
+from the same general-purpose heap `ESP.getFreeHeap()` reports — string
+formatting into `char page[400]` avoids per-request `String` heap churn on
+your side, but the underlying TCP stack still allocates and frees its own
+buffers per connection, which is precisely why the exercise asks you to watch
+free heap across "many page loads": a slow leak there would be the network
+stack failing to release a buffer, not your own code.
+
 ## Cheat sheet
 
 | Concept | Detail |

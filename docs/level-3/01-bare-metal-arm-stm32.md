@@ -156,6 +156,52 @@ from the reference manual for that exact chip.
   fields (MODER, AFR); a shift computed with the wrong field width silently
   corrupts an adjacent pin's configuration.
 
+## How It Actually Works
+
+**Why the CPU reads exactly two words from address `0x0`**: this isn't
+convention, it's wired into the Cortex-M core's reset logic itself. On
+Cortex-M, address `0x0` is architecturally defined to alias the start of the
+vector table (STM32 further lets you remap this via the `SYSCFG_MEMRMP`
+register, so it can point at flash, system boot ROM, or SRAM depending on
+boot pin state), and the core's hardware reset sequence — before fetching a
+single instruction — performs two fixed memory reads at that address and
+`0x4`, loads them directly into the `MSP` (Main Stack Pointer) and `PC`
+registers, and only then begins normal instruction fetch/decode/execute at
+whatever `PC` now points to. There is no instruction that performs this load
+— it's dedicated reset-sequencing hardware, which is exactly why a wrong
+value at word 0 (a bad `_estack`) or word 1 (a misaligned `Reset_Handler`
+address, which must have its Thumb bit set) hangs the chip before any code,
+even a debugger breakpoint set in `main()`, has a chance to run.
+
+**Why `BSRR` is genuinely atomic and `ODR |=` genuinely isn't**: `ODR |= bit`
+compiles to a load instruction, a bitwise OR, and a store instruction — three
+separate bus transactions, any of which an interrupt can land between. If an
+ISR's own `ODR` write happens after this code's load but before its store,
+the store overwrites the ISR's change with stale data the instant it
+executes — a classic read-modify-write race, identical in kind to the
+`volatile uint32_t` torn-read problem from module 1-07, just on a write
+instead of a read. `BSRR` sidesteps this entirely at the hardware level: it
+isn't a mirror of `ODR` you read back — writing a `1` to its low 16 bits
+sets the corresponding output bit and writing a `1` to its high 16 bits
+clears it, and writing `0` anywhere does nothing, all inside the GPIO
+peripheral's own combinational logic in a single bus write with no
+read step at all. Two different contexts (main code and an ISR) can each
+write `BSRR` for a different pin in the same register with zero
+possibility of one clobbering the other's intended effect, because neither
+write ever depends on first observing the register's current value.
+
+**Why the wrong base address "compiles cleanly"**: `0x40020000` is just an
+integer literal to the compiler and linker — nothing in the C type system or
+build toolchain has any notion of "this number denotes GPIOA" versus "this
+number denotes GPIOB." That knowledge exists only in the reference manual's
+memory map table (a document, not a machine-checkable artifact) and in the
+programmer's head when writing the `#define`. This is the fundamental reason
+bare-metal register work has no compiler safety net that Arduino's
+`digitalWrite(pin, ...)` API provides — the Arduino core's pin-to-register
+lookup table *is* machine-checkable (a bad pin number is caught or ignored at
+runtime), whereas a raw address typo is, to the compiler, indistinguishable
+from a correct one.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -135,6 +135,55 @@ int main(void) {
   "it compiles and produces a plausible-looking number") is part of the
   job, not optional.
 
+## How It Actually Works
+
+**Why int8 multiply-accumulate is genuinely faster, at the instruction
+level, not just "smaller"**: a Cortex-M0/M3 core with no floating-point unit
+(FPU) executes a `float` multiply or add by calling a software floating-point
+emulation routine — decomposing each operand into sign/exponent/mantissa,
+normalizing, rounding — dozens of integer instructions to emulate one
+floating-point operation. An `int8 × int8` multiply, by contrast, is
+directly supported by the core's integer ALU as a single-cycle (or
+few-cycle) hardware multiply instruction — no emulation needed at all, and
+many Cortex-M cores additionally have SIMD-style instructions (like
+`SMLAD` on Cortex-M4/M7) that perform two 16-bit or four 8-bit
+multiply-accumulates in one instruction specifically to accelerate exactly
+this kind of workload. The speed difference isn't primarily about "fewer
+bytes to move" — it's that the arithmetic itself maps directly onto hardware
+that floating point on these specific cores does not.
+
+**Why `scale` and `zero_point` are computed offline and never invented by
+firmware**: the whole point of quantization is to map the *actual range of
+values a tensor takes in practice* onto the 256 discrete levels an `int8`
+can represent, and that range is a statistical property of the trained
+model's weights (fixed after training) and of typical activation values
+(which depend on the data the model actually sees) — neither of which
+firmware has any way to determine at runtime without literally running a
+calibration dataset through the float model first, exactly the workstation
+step this module describes. Choosing `scale` too large wastes precision
+(most values cluster in a narrow band, using only a handful of the 256
+levels); choosing it too small causes the earlier `quantize()` clamp logic
+to saturate frequently, silently truncating real signal. This is why
+quantization parameters are baked into the model's metadata at
+conversion time rather than computed heuristically on-device — the
+information needed to choose them well simply isn't available inside the
+firmware's own execution.
+
+**Why mismatched scale/zero_point between layers produces "plausible-looking
+but wrong" output instead of a crash**: `dense_layer_int8`'s rescale step
+(`acc * in_q.scale * w_q.scale`) trusts that `in_q` accurately describes what
+the actual int8 values in `input[]` represent in real terms. If a later
+layer's input tensor was quantized with different calibration data than what
+this layer's weights were calibrated against, the arithmetic still executes
+without any error — every multiply, add, and clamp completes normally,
+because nothing in the int8 representation itself carries information about
+which calibration produced it. The result is a numerically valid int8 value
+that simply represents the wrong real-world quantity, propagating that error
+through every subsequent layer — a silent semantic bug rather than a crash,
+precisely because the type system (plain `int8_t`) can't distinguish "int8
+correctly calibrated for this pipeline" from "int8 calibrated for a
+different one."
+
 ## Cheat sheet
 
 | Concept | Detail |

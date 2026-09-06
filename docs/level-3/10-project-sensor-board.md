@@ -157,6 +157,52 @@ int main(void) {
   fine for a debug console, not sufficient for a field data-integrity
   guarantee.
 
+## How It Actually Works
+
+**Why the ring buffer needs exactly `RING_LEN - 1` usable slots, not
+`RING_LEN`**: with only two index variables (`head`/`tail`) and no separate
+count field, `head == tail` has to mean something unambiguous — this design
+picks "empty." If the ring were allowed to fill all `RING_LEN` slots, the
+full condition would *also* produce `head == tail` (the head having wrapped
+all the way around to meet the tail), making full and empty
+indistinguishable from the indices alone. Reserving one slot — treating
+`next == tail` as "about to collide" and evicting the oldest entry there —
+is what keeps the two states distinguishable using only two variables and no
+lock; the alternative (a separate `count` field) works too, but then that
+count itself becomes a third piece of state the ISR and main loop both touch,
+reintroducing exactly the shared-state hazard this design avoids by using
+only single, independently-modified indices.
+
+**Why `head`/`tail` being individually `volatile` is enough here, without a
+`noInterrupts()`-style critical section**: `ring_push` (ISR context) only
+ever writes `head` (and `tail`, but only in the specific case where it's also
+the one advancing it due to overrun) while `ring_pop` (main-loop context)
+only ever writes `tail` in the normal case — each index has effectively one
+writer under the common (non-overrun) path, with the other side only
+*reading* it to decide whether it's allowed to proceed. A single-writer,
+single-reader relationship on an aligned, naturally-atomic-width variable
+(a `uint8_t` here) needs no additional locking beyond `volatile` guaranteeing
+the reader always re-fetches from memory — this is the standard "SPSC
+(single-producer single-consumer) lock-free ring buffer" pattern, and it's
+precisely why the overrun path (where the ISR *also* advances `tail`, the
+variable the main loop normally owns) is worth flagging as the one place
+this simple reasoning gets more delicate: the ISR briefly writes a variable
+the main loop also reads to make its own popping decision, which is safe
+only because a `uint8_t` read/write is a single bus transaction on this core
+and there's no read-modify-write happening on either side.
+
+**Why the checksum framing catches accidental corruption but the exercise is
+right to flag it as weak**: an additive checksum (`sum += byte` for every
+byte) is only sensitive to the *numeric total* of the bytes — it cannot
+detect two bytes swapping position (their sum is identical either way), nor
+a byte incremented while another is decremented by the same amount (the
+total is unchanged). A real CRC avoids this by making each bit of input
+affect the checksum through a position-dependent polynomial division rather
+than simple addition, so bytes contribute differently depending on *where*
+they sit in the message — which is exactly why swapping two bytes (a common
+real-world corruption pattern from a dropped-and-reinserted byte in a
+buffered UART) is caught by CRC-16/32 but invisible to the sum used here.
+
 ## Cheat sheet
 
 | Module combined | Role in this project |

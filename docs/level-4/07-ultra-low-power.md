@@ -136,6 +136,59 @@ int main(void) {
   supercapacitors self-discharge measurably over time — a design budget that
   omits this loses real energy the arithmetic didn't account for.
 
+## How It Actually Works
+
+**Why a supercapacitor's voltage falls linearly with charge while a
+battery's doesn't**: a supercapacitor stores energy as electrostatic charge
+directly on two closely-spaced conductive plates separated by a dielectric —
+its governing relationship `Q = C×V` is a fixed, linear proportionality
+between stored charge and terminal voltage, because capacitance is a
+constant determined purely by the physical geometry and dielectric of the
+device, unaffected by how much charge is currently stored. A Li-ion cell
+instead stores energy through a reversible electrochemical reaction (lithium
+ions intercalating into an electrode's crystal structure), and the cell's
+terminal voltage is set by that reaction's electrochemical potential, which
+stays nearly constant across a wide range of remaining charge because the
+reaction's thermodynamics don't change appreciably until the electrode
+material is nearly fully charged or discharged — this is a chemistry fact,
+not a design choice, and it's exactly why `V = Q/C` gives firmware direct,
+computable insight into remaining energy from a supercapacitor (`E =
+0.5×C×V²` requires only a voltage ADC reading) that a flat-discharge-curve
+battery chemistry cannot offer without a dedicated coulomb-counting fuel
+gauge IC.
+
+**Why regulator quiescent current can dominate a microwatt budget,
+specifically at this scale**: quiescent current is the current a voltage
+regulator itself consumes just to keep its internal reference, error
+amplifier, and control loop running, independent of whatever load current it
+delivers to your circuit — a figure fixed by the regulator's own internal
+design, essentially constant regardless of how little your MCU draws. At
+milliamp-scale battery budgets, a regulator's typical 1-5 µA quiescent draw
+is a rounding error against the load; at the microwatt-scale budgets this
+module targets (single-digit microwatts of average harvested power is
+genuinely realistic for small solar or thermal harvesters), that same fixed
+quiescent current can be a double-digit percentage of the *entire* power
+budget — the regulator wasn't chosen wrong in any absolute sense, its
+constant overhead simply stopped being negligible once the numerator it's
+being compared against shrank by three orders of magnitude.
+
+**Why hysteresis is necessary and not just a nice-to-have near a threshold**:
+an ADC voltage reading carries real measurement noise — thermal noise in the
+reference, quantization error, ripple from a switching regulator upstream —
+so a `stored_uj` value hovering near a single fixed threshold will, across
+successive samples, land on both sides of that threshold purely from noise,
+with no actual change in the underlying energy level. A single-threshold
+classifier reacts to every one of those noise-driven crossings as a genuine
+state change, causing `sleep_interval_ms_for_state` to oscillate between two
+duty cycles many times faster than the actual stored energy is changing —
+which is not merely a cosmetic annoyance but a real energy cost, since
+switching operating modes (reconfiguring peripherals, radio) typically
+consumes more energy than staying in either steady state. Requiring a wider
+margin to move to a *worse* state than to move to a *better* one (asymmetric
+hysteresis) means noise alone, without a real sustained trend in either
+direction, can no longer cross both the exit and re-entry thresholds
+required to flip the classification back and forth.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -161,6 +161,44 @@ input produces a helpful error instead of silence. (Yes, this uses `String` —
 acceptable for a console fed by a human. The allocation-free `char[]`
 version is a good challenge after module 2.)
 
+## How It Actually Works
+
+A UART has no shared clock wire — unlike SPI (module 6), it's *asynchronous*,
+which is exactly what the "A" stands for, and that's why baud rate has to
+match on both ends. Both sides agree in advance on a bit duration (baud rate
+= bits/second, so `115200` baud = 1 bit every ~8.68 µs). The transmitter's
+UART hardware idles the TX line HIGH, then for each byte sends: one **start
+bit** (forces the line LOW, which is the receiver's cue to begin sampling),
+8 data bits at the agreed bit rate, and one **stop bit** (line returns HIGH).
+The receiving UART's own internal clock — typically oversampling at 16× the
+bit rate — detects the falling edge of the start bit and then samples the
+middle of each subsequent bit-time using its own independent clock, not a
+shared one. If the two sides' baud rates don't match, the receiver's sample
+points drift away from the middle of each bit as the byte progresses, and by
+around the 5th–8th bit it's sampling too early or too late — producing
+exactly the garbled/garbage characters you see when baud rates mismatch.
+
+**Where "bytes waiting" actually live**: incoming bits assembled by the UART
+hardware are pushed into a small **hardware FIFO** inside the UART peripheral
+(a handful of bytes) and, in Arduino's runtime, immediately drained by a
+**receive interrupt** — the peripheral generates a hardware interrupt each
+time it finishes reading a byte, its interrupt service routine copies that
+byte into a larger software ring buffer (64 bytes classically), and returns.
+`Serial.available()` is just reading the difference between that ring
+buffer's write and read indices; `Serial.read()` pops one byte off it. This
+is why serial reception works even while your `loop()` is busy elsewhere —
+the actual bit-by-bit reception happens in hardware and interrupt context,
+asynchronously to whatever `loop()` is doing, right up until the 64-byte
+buffer fills and further incoming bytes are silently dropped.
+
+**Why the USB connection still works without dedicated UART pins on newer
+boards**: on an ESP32 dev board (and Uno via its onboard USB-to-serial chip),
+what you plug into your computer is a **USB-to-UART bridge** chip (e.g.
+CP2102 or CH340, or the ESP32's native USB-CDC on newer variants) — the
+microcontroller itself only ever speaks true asynchronous UART on its own TX0
+/ RX0 pins internally; the bridge chip translates that to/from USB packets
+your OS driver presents as a virtual COM port.
+
 ## Cheat sheet
 
 | Function | Purpose |

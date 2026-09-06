@@ -139,6 +139,53 @@ int main(void) {
   margins, actual current draw — under-using the rig for only "does it boot"
   wastes its most useful property.
 
+## How It Actually Works
+
+**Why a fake-HAL unit test structurally cannot catch a timing bug**: the
+fake HAL's `fake_i2c_read` returns a canned byte pattern the instant it's
+called, in whatever order the test's own C code happens to execute — there
+is no real bus, no real clock stretching (module 3-08), no real interrupt
+latency, and no real electrical noise anywhere in that call path. A bug that
+only manifests because a real sensor asserts clock-stretching for longer than
+a bit-banged driver's fixed timeout, or because a DMA transfer completes
+while an ISR of equal priority is mid-execution, depends on a physical timing
+relationship that literally does not exist in a test built from function
+calls executing at whatever speed the host CPU runs them — the fake HAL
+isn't a lower-fidelity simulation of that timing, it's the *absence* of
+timing as a concept at all. This is the exact reason the testing pyramid
+above puts real timing/electrical validation at the HIL tier and nowhere
+else: no amount of additional host-side unit tests can substitute for
+observing actual signal edges on actual silicon.
+
+**Why the current-draw HIL test measures something the module 3-05
+arithmetic genuinely cannot verify**: `estimate_battery_hours`-style
+calculations take current figures as *inputs* — they compute what battery
+life would be *given* that the design correctly reaches its intended sleep
+state and stays there for the intended duration. But whether the compiled
+firmware actually enters that low-power mode (all the right registers set,
+no left-enabled peripheral clock or un-masked periodic interrupt from module
+3-05's "any pending interrupt wakes it" trap) is a fact about the running
+binary on real silicon, not about the arithmetic model — a programmable power
+supply's ammeter measures the chip's actual physical current draw, which is
+the only way to distinguish "the design is correct and the implementation
+matches it" from "the arithmetic is correct but a forgotten `SysTick`
+disable means the real board never sleeps at all."
+
+**Why gating HIL to merge-to-main rather than every commit is a genuine
+engineering tradeoff, not corner-cutting**: a HIL rig is a shared, physical,
+strictly rate-limited resource — one set of boards, one power supply, one
+relay bank can typically run one test sequence at a time, and each sequence
+takes real wall-clock time (flashing firmware, waiting for a sleep cycle to
+stabilize, letting a current reading settle) measured in seconds to minutes
+per test, versus host-side unit tests that can run thousands of assertions
+in well under a second because there's no physical process to wait on at
+all. If every commit across a team blocked on exclusive access to a single
+physical rig, the rig's finite throughput becomes the whole team's velocity
+ceiling — running the cheap, parallelizable, physically-instantaneous unit
+tests on every push while reserving the scarce physical resource for
+lower-frequency, higher-value gates is the same batching logic that governs
+any bottlenecked shared resource, not a compromise on what gets tested.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -194,6 +194,59 @@ int main(void) {
 | 4-08 | DFM-reviewed layout and factory test firmware at manufacturing time |
 | 4-09 | Telemetry aggregation and device identity for fleet reporting |
 
+## How It Actually Works
+
+**Why the fake-based orchestration test can prove something the individual
+module tests (4-01 through 4-09) structurally cannot**: each earlier
+module's test verifies one function against its own directly-controlled
+inputs — `validate_config` given a crafted struct, `reading_is_plausible`
+given two chosen floats. None of those tests can catch a bug in the *glue*
+that decides which functions get called, in what order, with which of each
+other's outputs — for instance, a real bug where a sensor failure's `-1`
+return is accidentally ignored and the (uninitialized or stale) `reading`
+variable gets passed into `telemetry_summary_add` anyway. That specific
+class of bug only exists in `app_cycle`'s control flow itself, not in any
+one function's internals, so it can only be caught by a test that exercises
+the actual call sequence — which is exactly what replacing every dependency
+with a fake and driving the *orchestrating* function achieves: the fakes
+make the test fast and hardware-free while the real, unmodified orchestration
+logic (the actual bug surface) still executes exactly as it would in
+production.
+
+**Why the assertion `g_summary_count == 1` after the implausible-reading
+case is the single most load-bearing line in that test**: it isn't checking
+that `app_cycle` returned the right error code (a much weaker property that
+could pass even if the function's internal ordering were subtly wrong) — it
+verifies a specific *causal* fact: that `telemetry_summary_add` was not
+called between the two assertions, i.e., that the plausibility check's early
+return genuinely prevented the aggregation call from executing at all,
+rather than the aggregation happening first and the error being reported
+afterward as an inconsequential afterthought. This distinction matters
+mechanically because C has no language-level guarantee that an early
+`return -2;` couldn't be reordered relative to a side-effecting call by a
+future refactor — the counter check gives the test a concrete, checkable
+signature of the *ordering* invariant ("validate before aggregate") that a
+mere return-code check would silently let regress.
+
+**Why "layering discipline breaking down under integration pressure" is
+where the architecture's soundness is actually tested, not merely a
+management platitude**: module 4-01's HAL/driver/application layering is
+only as real as the discipline that keeps the application layer's compiled
+code free of any direct register or chip-specific dependency — and the
+mechanical fact underlying that claim is the same one from module 4-01's own
+"how it actually works": as long as `app_cycle` calls only through
+declared function signatures (`temp_sensor_read_celsius`, etc.), the linker
+resolves those calls to whatever implementation — real driver or test fake —
+is linked into a given build, and the compiled application-layer object code
+never encodes a dependency on which one. The moment a developer, under
+deadline pressure, adds one direct hardware register read into `app_cycle`
+"just for this one urgent fix," that object file now has a hardware-specific
+symbol or address baked in, and the orchestration test above can no longer
+link against fakes without that one register access either failing to
+resolve or reading nonsense on a host CPU — the integration test failing to
+build or run cleanly is the concrete, mechanical symptom of exactly the
+layering violation the traps section warns about in prose.
+
 ## Stretch goals
 
 - Wire the discarded `power` state from `app_cycle` into an actual

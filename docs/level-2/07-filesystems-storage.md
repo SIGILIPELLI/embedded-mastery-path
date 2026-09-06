@@ -215,6 +215,47 @@ guarantees — yanking power mid-write can cost you the whole directory
 entry. For a logger that must not lose data, write to LittleFS and *copy* to
 SD; for bulk capture where a lost chunk is acceptable, write to SD directly.
 
+## How It Actually Works
+
+**Why NOR flash can only erase in whole sectors**: each flash cell stores a
+bit as trapped charge on a floating gate (module 1-08); *programming* a bit
+(`1`→`0`) only needs to inject charge into one cell's gate, which the flash
+controller can do individually, byte by byte. But *erasing* (`0`→`1`)
+requires pulling charge back out with a high-voltage tunneling pulse applied
+across an entire block of cells at once, because the erase voltage is wired
+to a shared bulk/substrate connection shared by the whole sector — there is
+no way to erase a single byte in isolation. This asymmetry (fine-grained
+program, coarse-grained erase) is precisely why "you cannot rewrite one byte"
+without a read-modify-erase-write of the containing 4 KB sector, and why
+every wear-levelling filesystem is built around avoiding repeated erases of
+the same sector.
+
+**How LittleFS survives power loss at any instruction**: rather than one
+mutable metadata table, LittleFS stores directory and file metadata as
+**copy-on-write linked-list "metadata pairs"** — two blocks that alternately
+hold the current and previous version of a given metadata region, each
+tagged with a monotonically increasing revision count and a CRC. A write
+never edits an existing block in place; it writes a *new* block containing
+the updated data, then atomically flips a single pointer (itself protected
+the same way) to make the new block the current one. If power is lost
+mid-write, the new block's CRC fails validation on next mount, and LittleFS's
+mount routine simply falls back to the old, still-intact, still-pointed-at
+block — this is the literal mechanism behind "a half-finished write leaves
+the previous version intact," not a general design goal but a specific
+consequence of never overwriting committed data.
+
+**Why `fclose()` — not the `fprintf()` call — is where data becomes durable**:
+C's stdio layer buffers writes in a userspace RAM buffer purely to batch
+small `fprintf` calls into fewer, larger underlying `write()` syscalls (which
+themselves eventually become flash-controller operations) — this buffering
+exists specifically to avoid the overhead of a real flash write per
+`fprintf`. `fclose()` (or an explicit `fflush()`) is the point where that RAM
+buffer is actually handed to the VFS layer and, ultimately, becomes flash
+controller commands; anything still sitting in that RAM buffer when the chip
+loses power is simply gone, because RAM (unlike flash) doesn't survive a
+power cycle at all — exactly the SRAM-vs-flash distinction from module 1-08,
+now determining a very concrete correctness property of your logger.
+
 ## Cheat sheet
 
 | Concept | Detail |

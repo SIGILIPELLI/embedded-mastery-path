@@ -144,6 +144,50 @@ int main(void) {
   — the DMA transfer count is *not* evidence that every conversion was
   captured.
 
+## How It Actually Works
+
+**Why DMA can act "without CPU load/store instructions" at all**: a DMA
+controller is a **bus master** in its own right — on Cortex-M chips it sits
+on the same AHB/AXI bus matrix as the CPU core, with its own address
+generator, and the bus matrix arbitrates which master (CPU or DMA) gets a
+given bus cycle when both want the same memory/peripheral at once. Once
+armed, the DMA channel's state machine independently issues read cycles to
+the peripheral's data register and write cycles to your RAM buffer, entirely
+through that bus fabric — the CPU's own instruction pipeline is doing
+something else (or is clock-gated in sleep) throughout, since the DMA
+transfer's timing is driven by the peripheral's own request-line signal
+(the ADC or UART asserting "I have data" to the DMA controller directly),
+not by any code polling it.
+
+**Why a cache creates a coherency problem that flat memory never has**: a
+data cache sits physically between the CPU core and the bus, transparently
+keeping a copy of recently-accessed RAM lines in fast on-chip SRAM so
+repeated CPU reads/writes to the same address don't hit slower external
+memory each time. The cache has no visibility into DMA traffic — DMA writes
+go straight to RAM over the bus, bypassing the CPU's cache entirely, so if a
+cache line for `dest[]` was already resident (from before the DMA transfer,
+or from cache prefetching), the CPU's next read is satisfied straight out of
+that stale line without ever noticing RAM changed underneath it.
+`SCB_InvalidateDCache_by_Addr` doesn't fetch new data — it simply marks those
+cache lines as invalid, forcing the *next* CPU read of that address to miss
+the cache and fetch fresh bytes from RAM, which is why it must run after the
+DMA write completes and before the CPU reads: invalidating before the DMA
+finishes would just let the cache repopulate with the same stale data on a
+premature read.
+
+**Why the polling race on `DMA1_S0NDTR` is real and not paranoia**: the
+count-down register is decremented by the DMA controller's own hardware
+state machine asynchronously to whatever the CPU is doing — reading it gets
+you a snapshot at one instant, and the actual "transfer complete" event is a
+specific hardware condition (count reaches zero, a completion flag sets, an
+interrupt is raised) that happens on its own clock edge, potentially between
+two of your polling reads. There is no way for software polling a count
+register to observe the *exact* transition atomically the way a
+hardware-generated interrupt guarantees — the interrupt is literally wired to
+fire from the same internal "count reached zero" signal, with no window for
+software to race against it, which is exactly why the completion interrupt,
+not a polled register, is the only reliable signal for "is it done."
+
 ## Cheat sheet
 
 | Concept | Detail |

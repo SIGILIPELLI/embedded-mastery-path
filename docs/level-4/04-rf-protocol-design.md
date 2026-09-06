@@ -147,6 +147,56 @@ int main(void) {
   — collision/backoff behavior needs to be designed for the target fleet
   size, not just validated at prototype scale.
 
+## How It Actually Works
+
+**Why path loss grows with the square of distance (the `20*log10(d)` term)**:
+a transmitting antenna radiates power outward across an expanding spherical
+wavefront (in the idealized free-space case), and by simple geometry the
+surface area of that sphere grows with the *square* of its radius — so the
+same total radiated power is spread over four times the area every time
+distance doubles, meaning the power density any fixed-size receiving antenna
+can capture falls by a factor of four (6 dB, since dB is a log scale and
+`10*log10(4) ≈ 6`) per doubling. This is precisely the "doubling distance
+costs ~6 dB" sanity check the module's own test asserts — it's not an
+empirical rule of thumb, it's the direct consequence of energy conservation
+spread over an expanding spherical surface, which is also exactly why real
+indoor environments (where the wave reflects, diffracts around obstacles,
+and combines constructively/destructively via multipath) lose *more* than
+this ideal, never less — free space is the best case physically achievable.
+
+**Why lower data rate genuinely extends range (processing gain), not just as
+a marketing claim**: a receiver's ability to distinguish a wanted signal from
+noise depends on the **signal-to-noise ratio (SNR)** within the specific
+bandwidth it's listening in. Techniques like LoRa's chirp spread spectrum
+spread each bit's energy across a wider bandwidth and a longer time-on-air
+than a simple modulation would use for the same bit — critically, the
+receiver's correlator can coherently sum that spread-out energy back
+together over the full symbol duration before making a decision, while
+uncorrelated noise averages toward zero over the same integration window.
+Longer integration time for the same information content directly buys a
+higher effective SNR at the decision point, letting the receiver correctly
+decode signals below its noise floor that a faster (shorter integration
+window) scheme couldn't — this is a genuine information-theoretic trade
+(more time/bandwidth per bit buys noise immunity), not a proprietary trick.
+
+**Why sequence numbers matter more on RF than wired links, mechanically**:
+a wired bus like I2C or SPI has a shared, low-impedance, controlled-impedance
+physical medium with a defined ground reference on every device, so bit
+errors from electrical noise are rare and usually caught immediately by
+protocol-level ACK/NACK on the same transaction. An RF link has no
+guaranteed medium at all — the same channel is shared with any other
+transmitter in range (regulatory sharing is the whole premise of
+duty-cycling requirements), a competing transmission during your packet
+causes a real collision with no electrical mechanism preventing it (unlike
+CAN's dominant-bit arbitration, module 3-08, ISM-band radios generally have
+no such coordination), and fading from multipath can drop a signal below the
+noise floor for the packet's duration with no warning. A sequence number is
+cheap insurance against exactly this: the receiver can detect "packet 47
+never arrived" from the gap between 46 and 48, without needing every single
+transmission acknowledged — which would itself cost airtime and battery on a
+link where both are already the scarce resources this whole module's
+tradeoffs revolve around.
+
 ## Cheat sheet
 
 | Concept | Detail |

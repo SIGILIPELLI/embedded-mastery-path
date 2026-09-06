@@ -128,6 +128,55 @@ int main(void) {
   changes which interrupts can nest versus merely queue in order, in ways
   that don't show up until two specific interrupts race in the field.
 
+## How It Actually Works
+
+**What the NVIC physically does when a peripheral signals an event**: every
+interruptible peripheral has a dedicated wire (an internal signal, not a pin)
+running to the NVIC, which contains, per interrupt number, a pending-status
+flip-flop, an enable flip-flop, and a stored priority value in a small
+register file. The moment the peripheral's condition occurs (EXTI0 sees the
+configured edge), it sets that IRQ's pending bit in hardware, completely
+independent of what the CPU is doing at that instant. Separately, on every
+instruction boundary, the NVIC's priority-comparison logic checks whether any
+*enabled and pending* interrupt has a priority number lower than whatever the
+CPU is currently executing at (tracked via a small internal "current
+execution priority" concept) — if so, it asserts an exception request to the
+core, which then performs the same automatic register-stacking mechanism
+from module 3-03's PendSV discussion and vectors to that IRQ's handler
+address, read directly out of the vector table your `Reset_Handler`
+established. This entire chain — from a physical edge on a pin's electronics
+to your handler function executing — happens with no software polling loop
+anywhere in the path, which is the whole point of an interrupt versus
+checking a flag in `loop()`.
+
+**Why priority numbers are inverted, mechanically**: the NVIC's priority
+comparison is implemented as an unsigned integer comparator wired to treat
+*smaller* register values as "wins arbitration" — this is a deliberate ARM
+architectural choice (not an accident of naming) because it lets priority 0
+double as "the most privileged, cannot be preempted by anything else in the
+system" in a way that reads naturally as "top priority" once you know the
+convention, and it dovetails with the reset/NMI/HardFault exceptions
+occupying the most negative (and therefore always-highest) priority values,
+architecturally fixed below any priority a peripheral IRQ can be assigned —
+guaranteeing a fault handler can never be starved out by ordinary interrupt
+traffic regardless of how application code configures IRQ priorities.
+
+**Why clearing the pending bit must be ordered carefully**: `EXTI_PR` (or
+its chip-specific equivalent) is a genuinely shared piece of hardware state —
+the peripheral's edge-detect logic sets a pending bit asynchronously to your
+ISR's execution, and writing to clear it is a normal store instruction that
+takes a nonzero number of cycles to actually reach the peripheral's register
+over the bus. If a second qualifying edge arrives on the physical pin between
+your `read_pin_level()` call and the clear-bit write, the peripheral's edge
+detector has already latched that second event into the very same pending
+bit your write is about to clear — the hardware has no way to distinguish
+"this pending bit represents an event I haven't serviced yet" from "this
+pending bit represents a brand-new event that arrived during servicing,"
+because it's a single bit, not a counter. This is precisely why the ordering
+question is not a style preference — it maps directly onto whether a real,
+physically-latched hardware event can be silently discarded by a
+correctly-written-looking clear operation.
+
 ## Cheat sheet
 
 | Concept | Detail |

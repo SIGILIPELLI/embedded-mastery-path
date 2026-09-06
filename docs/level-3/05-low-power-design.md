@@ -132,6 +132,54 @@ independent of any specific chip.
   but not sufficient; the corresponding interrupt line must also be unmasked
   in the NVIC (module 3-06), or the event never reaches the CPU to end WFI.
 
+## How It Actually Works
+
+**What `WFI` actually does at the transistor level**: `WFI` is a real ARM
+instruction, but its effect is to signal the core's clock-and-power
+controller logic that the pipeline has nothing left to execute — that
+controller then physically gates (stops toggling) the clock signal feeding
+the CPU's sequential logic. Since dynamic power in CMOS digital circuits is
+dominated by switching activity (every clock edge charges and discharges
+gate capacitances), a stopped clock means the CPU core's dynamic power drops
+to near zero almost immediately — this is the actual physical mechanism
+behind "halts the CPU," not a software loop or a low-power firmware trick.
+`SLEEPDEEP` extends this same gating decision to additional clock domains
+and, in Stop/Standby, to the voltage regulator itself: the power controller
+can request the internal LDO or SMPS regulator supplying the core drop to a
+lower-current mode or shut off entirely, which is why deeper modes need
+longer wake latency — bringing a regulator or PLL-based clock back to a
+stable, usable state takes real settling time measured in microseconds to
+milliseconds, unlike simply re-enabling a gated clock signal.
+
+**Why losing RAM in Standby is a hardware retention decision, not a software
+one**: SRAM cells hold their state as long as they receive a minimum supply
+voltage — even a small continuous leakage current — through cross-coupled
+inverters that need to stay powered to keep reinforcing their stored bit.
+Sleep and Stop modes keep the RAM's supply rail active (at reduced voltage in
+Stop, to cut leakage while still meeting the SRAM's retention voltage
+minimum) specifically so those cells never lose their charge. Standby and
+Shutdown cut power to the RAM's supply domain entirely to reach their much
+lower current figures, and an unpowered SRAM cell has no mechanism to
+remember anything — which is precisely why waking from Standby is
+architecturally indistinguishable from a power-on reset: there is no saved
+state left to resume, only a small always-on "backup domain" (a separate,
+tiny, continuously-powered SRAM/register block with its own supply pin) that
+survives specifically because it's wired to a rail the power controller
+never gates.
+
+**Why any pending interrupt — not just the intended one — ends `WFI`**: `WFI`
+is architecturally defined to resume execution when the processor's
+interrupt-pending logic (the same NVIC pending-bit mechanism from module
+3-06) has any bit set that isn't masked by `PRIMASK`/`BASEPRI` — it's a
+single hardware condition check ("is anything pending that I'm allowed to
+service"), not a per-source semantic distinction between "the wake source"
+and "everything else." The CPU's wake logic has no concept of which
+interrupt you *intended* as the wake trigger; from the hardware's point of
+view, `SysTick` firing at 1 kHz and a deliberate GPIO wake pin look
+identical — both flip a pending bit the WFI condition is watching — which is
+exactly why every unrelated periodic interrupt has to be explicitly disabled
+before entering deep sleep, not merely deprioritized.
+
 ## Cheat sheet
 
 | Concept | Detail |

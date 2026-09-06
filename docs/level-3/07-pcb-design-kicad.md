@@ -102,6 +102,56 @@ necessary, not sufficient, condition for a working board.
   much harder debugging session than a few strategically placed 1 mm pads
   would have allowed.
 
+## How It Actually Works
+
+**Why decoupling capacitor placement is a physics problem, not a schematic
+one**: every trace, however short, has parasitic inductance (a rough rule of
+thumb: ~1 nH per mm for a typical PCB trace), and inductance opposes rapid
+changes in current (`V = L × di/dt`). A digital IC's internal logic can
+switch many gates simultaneously on a clock edge, demanding a current pulse
+that rises in a nanosecond or less — exactly the kind of rapid `di/dt` that
+even a few nanohenries of trace inductance turns into a real voltage sag at
+the chip's power pin, because the supply several centimeters away simply
+cannot deliver current fast enough through that inductance to keep up. A
+decoupling capacitor works by being a *local* charge reservoir: it supplies
+that instantaneous current from charge already stored close by, over a path
+short enough that its own loop inductance is negligible compared to the
+distance back to the regulator. Moving the same-value capacitor a few
+centimeters away doesn't change its capacitance, but it reintroduces exactly
+the trace inductance between the cap and the pin that the capacitor was
+placed there to bypass — which is why "the cap is on the board" is not the
+same claim as "the cap is doing its job."
+
+**Why splitting a ground plane hurts even when DRC passes**: a fast digital
+edge's return current doesn't take "a" path back to the source — it
+distributes itself along the path of *least impedance*, which for a trace
+routed over a solid ground plane is the strip of plane directly beneath it
+(mutual inductance between trace and plane makes that the lowest-impedance
+route by a wide margin at the frequencies present in a fast edge). If the
+plane has a slot or split under that trace, the return current is forced to
+detour around the gap — a physically longer path that encloses a much larger
+loop area. Loop area is the direct multiplier in the electromagnetic
+radiation from any current loop, so a plane split routed across doesn't
+create a DRC-visible defect (the net is still one contiguous electrical
+node) but does directly increase radiated emissions and crosstalk — a purely
+electromagnetic consequence of loop geometry, invisible to a tool that only
+checks clearances and connectivity.
+
+**Why trace width has a current limit at all**: copper has finite
+resistivity, so any current through a trace dissipates power as heat
+(`P = I²R`), and a narrower trace has higher resistance per unit length —
+more heat per amp. That heat has to escape through the PCB's fiberglass
+substrate (a poor thermal conductor) and the surrounding air/copper, and if
+generation outpaces dissipation, the trace's temperature keeps climbing
+until it approaches the copper-to-substrate bond's failure point or the
+solder mask's degradation temperature. IPC-2152's charts are empirically
+derived exactly from measuring this heat balance across many trace
+geometries, copper weights, and layer positions (internal traces run hotter
+for the same current because they're insulated by substrate on both sides
+instead of open to air) — which is why "0.25 mm per amp" is only ever a
+rough starting point: the real constraint is a thermal equilibrium, not a
+fixed ratio.
+
 ## Cheat sheet
 
 | Concept | Detail |

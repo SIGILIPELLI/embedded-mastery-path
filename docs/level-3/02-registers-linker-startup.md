@@ -149,6 +149,55 @@ startup simulation OK: data={5,7} bss={0,0}
   references it, producing a binary that boots without a vector table at
   address `0`.
 
+## How It Actually Works
+
+**Why the linker needs two separate addresses for one section at all**: a
+linker script's job is to assign every symbol and section a **virtual
+memory address (VMA)** — where it will be found while running — but for
+`.data` that isn't enough information to produce a working image, because
+flash is only capable of holding the *initial* bytes, never receiving writes
+from ordinary `str` instructions during normal execution. `AT> FLASH`
+introduces a second, independent address: the **load memory address (LMA)**
+— where the linker physically places those bytes in the output binary file
+that gets flashed. The linker emits both `LOADADDR(.data)` (the LMA, i.e.
+`_sidata`) and the section's own address (the VMA, `_sdata`) purely as
+numbers in the symbol table; nothing copies anything at link time — the
+gap between "where it's stored" and "where it's used" is real only until
+`Reset_Handler`'s copy loop closes it at runtime, which is exactly why
+skipping that loop leaves `.data`'s RAM location holding whatever was
+already there (uninitialized SRAM contents from the previous power cycle,
+or all-zero/all-one depending on the specific chip's power-on SRAM state) —
+the flash bytes are sitting right there in the image, just never moved.
+
+**Why `.bss` costs no flash space at all, unlike `.data`**: the linker script
+allocates `.bss` a VMA range in RAM but gives it no `AT>` load section and no
+corresponding bytes in the output file — it's pure address-space bookkeeping,
+because a run of zero bytes needs no actual storage in the binary the way
+non-zero initial values do (this is the same principle as a sparse file on a
+filesystem). This is precisely why zero-initializing a large global array is
+"free" in flash terms while a large non-zero-initialized one is not — the
+compiler and linker treat the two categories completely differently based on
+initializer value, and `Reset_Handler`'s job for `.bss` is simpler
+accordingly: it never reads from flash, it only writes zeros into a RAM range
+whose boundaries (`_sbss`/`_ebss`) the linker computed from how much RAM your
+zero-initialized globals actually need.
+
+**Why `KEEP()` matters mechanically**: linkers perform **dead code/data
+elimination** (usually invoked as `--gc-sections`) by starting from a set of
+known-referenced roots (typically the entry symbol, here effectively
+`Reset_Handler` since it's the vector table's second word) and transitively
+keeping only sections reachable through actual symbol references in the
+object code. The vector table is referenced only by *address* — hardware
+reads it directly from a fixed memory location, never via a C pointer
+dereference the linker's reachability analysis can see — so from the
+linker's perspective, nothing "uses" `.isr_vector` and it's a candidate for
+elimination exactly like genuinely unused code. `KEEP()` is a linker-script
+directive telling the garbage collector to retain a section unconditionally,
+regardless of whether its reachability analysis finds a reference to it —
+without it, an aggressive `-O2`/`--gc-sections` build can link successfully,
+produce a plausible-sized binary, and simply have no valid instructions at
+address `0` for the CPU's reset sequence to find.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -153,6 +153,49 @@ Wokwi's virtual button bounces realistically if you enable it: click the
 button, and in its properties set `"bounce": "1"` — then try the buggy counter
 version and watch it miscount, exactly like real hardware.
 
+## How It Actually Works
+
+`pinMode`/`digitalWrite`/`digitalRead` are library convenience wrappers
+around direct **memory-mapped I/O**: each GPIO pin is controlled by bits in
+special registers that live at fixed addresses in the chip's address space,
+alongside RAM. On AVR, pin 5 (Uno's `PD5`) is bit 5 of three registers —
+`DDRD` (Data Direction Register — 1 = output), `PORTD` (output level when
+configured as output, or pull-up enable when input), and `PIND` (the pin's
+actual sampled input level). `pinMode(5, OUTPUT)` compiles down to something
+equivalent to `DDRD |= (1 << 5);` — a single bitwise OR into that register's
+memory address — and `digitalWrite` is `PORTD |= (1 << 5)` or
+`PORTD &= ~(1 << 5)`. On the ESP32, the equivalent registers
+(`GPIO_ENABLE_REG`, `GPIO_OUT_REG`, `GPIO_IN_REG`) sit in its peripheral
+address space and are 32 bits wide, one bit per pin. This is why raw register
+access (`PORTD = 0b00100000;` on AVR) can toggle 8 pins in one clock cycle —
+useful when `digitalWrite`'s function-call overhead (pin-to-register lookup,
+argument checking) is too slow, as it will be by Level 3.
+
+**Why floating inputs read noise**: an unconnected pin is electrically
+"high impedance" — nothing is actively holding its voltage anywhere, so it
+acts like a tiny antenna, and its ADC/comparator input stage floats to
+whatever stray capacitive coupling (mains hum, neighboring switching signals,
+even your hand near the board) charges it to. A pull-up resistor solves this
+by giving the pin a well-defined, low-current path to VCC (or a pull-down to
+GND) so that the moment nothing else is driving it, it settles to a known
+logic level. `INPUT_PULLUP` doesn't add a physical part — it sets a bit in
+the same port register (on AVR, writing `PORTD` HIGH while `DDRD` for that
+bit is 0 internally routes ~20-50 kΩ from VCC to the pin) that turns on an
+internal resistor already built into the chip's I/O pad circuitry.
+
+**Why contacts bounce**: a mechanical switch is a spring-loaded metal contact;
+when it closes, the two surfaces physically strike each other and
+micro-bounce apart and together several times over microseconds to
+milliseconds before settling, due to contact elasticity — the same physics as
+a dropped ball bouncing to rest. Because the CPU's clock runs at millions of
+cycles per second, `digitalRead()` is fast enough to sample the switch mid-bounce
+and see each micro-contact as a separate transition. The debounce loop's
+`millis() - lastChangeMs > DEBOUNCE_MS` window works because it's comparing
+against the CPU's own free-running millisecond timer (driven by a hardware
+timer/counter peripheral incrementing on a fixed clock tick, covered in
+module 7) rather than blocking with `delay()`, so the chip keeps sampling
+during the bounce instead of ignoring it.
+
 ## Cheat sheet
 
 | Function / idiom | Purpose |

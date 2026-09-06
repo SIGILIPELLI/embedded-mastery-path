@@ -147,6 +147,49 @@ other interrupts are masked. The rules are strict:
 The standard division of labor, exactly as in the example: **ISR records the
 event, `loop()` does the work.**
 
+## How It Actually Works
+
+**Where `millis()` gets its number**: it isn't derived from any wall clock —
+a hardware **timer/counter peripheral** (Timer0 on AVR, one of the ESP32's
+64-bit hardware timers) is configured at startup to generate an interrupt at
+a fixed rate (roughly every 1.024 ms on AVR, tuned so software correction
+lands it on exact milliseconds), and each time that **timer overflow
+interrupt** fires, its ISR increments a global counter variable. `millis()`
+just reads that counter. This means `millis()`'s accuracy is only as good as
+the crystal/resonator clocking the timer — cheap ceramic resonators drift a
+bit with temperature, which is why long-uptime timing-critical systems
+(Level 3) eventually move to a proper RTC crystal.
+
+**What actually happens at an interrupt**: when the GPIO peripheral's edge
+detector (configured by `attachInterrupt`'s trigger mode) senses the
+requested transition, dedicated hardware signals the CPU core between
+instruction boundaries. The core then, entirely in hardware: pushes the
+current program counter (and on some architectures, status flags) onto the
+stack, looks up your ISR's address in the **interrupt vector table** — a
+fixed array of function-pointer-like entries near the start of flash, one
+slot per interrupt source — and jumps there. Your ISR runs to completion,
+then its generated epilogue (`reti` on AVR) pops the saved state back off the
+stack and execution resumes in `loop()` at the exact instruction it was
+about to execute, as if nothing happened — except any global state the ISR
+touched.
+
+**Why `volatile` is not optional**: the compiler's optimizer is allowed to
+assume that if your code never explicitly writes a variable between two
+reads, its value hasn't changed, and it will cache that value in a CPU
+register rather than re-reading memory. But an ISR modifies `pressCount`
+through a completely separate code path the optimizer doesn't model as
+occurring "between" statements in `loop()` — so without `volatile`, the
+compiler can (and does, at -O2) hoist `pressCount` into a register once and
+never look at RAM again, silently missing every ISR update. `volatile` forces
+an actual load/store instruction to the variable's memory address on every
+access, which is also *why* multi-byte volatile reads on an 8-bit AVR aren't
+atomic: reading a `volatile uint32_t` is four separate byte-wide `LD`
+instructions, and if the ISR fires and updates the value between the 2nd and
+3rd byte, `loop()` reads a torn, half-old-half-new value — exactly the
+scenario `noInterrupts()`/`interrupts()` (which set/clear the CPU's global
+interrupt-enable flag, blocking all interrupts for that critical section)
+exists to prevent.
+
 ## Cheat sheet
 
 | Concept | Detail |

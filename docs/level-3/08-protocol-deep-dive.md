@@ -173,6 +173,52 @@ int main(void) {
   bug arbitration doesn't protect against by design, only different-ID
   contention.
 
+## How It Actually Works
+
+**Why baud mismatch degrades gradually rather than failing outright**: a
+UART receiver has no shared clock to tell it exactly when a bit starts — it
+detects the start bit's falling edge, then waits a fixed number of its own
+internal clock ticks to land on what it calculates as the *middle* of each
+subsequent bit period (typically achieved by oversampling at 16x the nominal
+bit rate and counting 8 sub-ticks after detecting the edge, then every 16
+sub-ticks after that). If the two sides' bit periods differ by even 2-3%,
+each successive bit's ideal sampling point drifts slightly further from
+where the receiver actually samples — negligible for the first couple of
+bits, but by bit 7 or 8 of a byte the accumulated drift can be a significant
+fraction of a whole bit period, at which point the receiver samples during a
+transition instead of a stable level and reads a wrong bit. This is a purely
+arithmetic consequence of resynchronizing only once per byte (on the start
+bit) rather than continuously, which is exactly what a shared clock line
+(as in SPI) would eliminate.
+
+**Why I2C clock stretching works at the electrical level**: because SCL is
+open-drain, *any* device on the bus — not just the current bus master — can
+pull it low, and the wired-AND property means the line only returns high when
+every device connected to it releases it. A slave that needs more time
+before it can accept or produce the next bit simply holds SCL low after the
+master releases it at the end of a clock pulse; the master, before starting
+its next clock pulse, must itself read back SCL and wait for it to actually
+go high before proceeding — a bit-banged driver that instead just toggles a
+GPIO on a fixed timer, without ever reading the line back, has no way to
+detect this and forges ahead, generating clock edges the slave never
+actually saw as valid, corrupting the transaction from that point on.
+
+**Why CAN's bit-wise arbitration needs no coordination protocol at all**:
+every node samples the actual bus level after driving its own bit — this is
+simultaneous transmit-and-listen, built into every CAN transceiver's
+electrical design — and because dominant (`0`) physically overpowers
+recessive (`1`) on the wired-AND bus, a node driving recessive that reads
+back dominant knows *with certainty*, from pure electrical fact and not from
+any message exchange, that a higher-priority node is also transmitting right
+now. It can stop driving mid-frame with zero risk of corrupting the winning
+node's data, because it was never actually the sole driver of that bit in
+the first place — the winner's dominant bit was on the wire the whole time,
+unaffected by the loser's aborted recessive attempt. This is precisely why
+arbitration scales to any number of simultaneous transmitters without a
+pairwise comparison protocol: every node runs the identical, purely local
+"did I just see something other than what I drove?" check against the same
+shared electrical signal.
+
 ## Cheat sheet
 
 | Concept | Detail |

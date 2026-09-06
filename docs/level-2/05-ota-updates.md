@@ -200,6 +200,48 @@ burns a monotonic security version into eFuses; note it is permanent and
 irreversible, so treat it as a production decision rather than a
 development-time toggle.
 
+## How It Actually Works
+
+**Why the *bootloader*, not the app, decides which slot to boot**: every
+ESP32 flash image starts with a tiny **second-stage bootloader** (itself
+written to a fixed offset, 0x1000, by `idf.py flash`) that runs before any of
+your `app_main()` code exists in memory. On every power-on or reset, the
+ROM bootloader (burned permanently into the chip at manufacture) loads and
+jumps to this second-stage bootloader, which reads the `otadata` partition —
+two mirrored 4 KB copies of a sequence counter and CRC, so a power loss
+mid-write to one copy can never corrupt both — determines which of `ota_0`/
+`ota_1` has the higher valid sequence number, and only then loads *that*
+partition's image into RAM/flash-mapped cache and jumps to it. This is why
+OTA is safe against interruption: your running app can only ever influence
+which slot gets chosen *next boot*, never what's currently executing, and a
+power loss mid-download simply leaves `otadata` unchanged, so the bootloader
+falls back to booting the still-intact previous slot.
+
+**Why `esp_ota_write()` can append instead of erasing everything first**:
+`OTA_WITH_SEQUENTIAL_WRITES` takes advantage of a fundamental property of
+NOR flash — you can only flip bits from `1`→`0` when writing, and flipping
+`0`→`1` requires a full sector **erase** first. Sequential-write mode erases
+only the flash sectors it's about to write into, just ahead of the write
+pointer, rather than erasing the whole multi-hundred-KB partition up front —
+which is both why it's faster to start and why interrupting it mid-transfer
+simply leaves a partially-written, CRC-invalid image in the *inactive* slot:
+harmless, because `esp_ota_end()`'s validation (image header magic byte,
+segment checksums, and — with secure boot — a cryptographic signature check)
+is the only thing standing between that partition's contents and
+`esp_ota_set_boot_partition()` ever pointing at it.
+
+**What the rollback probation state actually is**: `ESP_OTA_IMG_PENDING_VERIFY`
+is a value stored in that same `otadata` structure, checked by the bootloader
+*before* jumping to the app — with `CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE`
+on, the bootloader also arms a check: if a boot from a pending-verify slot is
+immediately followed by another reset before that slot's app clears the
+pending flag, the bootloader treats that as evidence the new image is broken
+and reverts to the previous slot on its own, with no cooperation needed from
+the (possibly crash-looping) new firmware at all. This is the mechanism
+behind "a crash during probation is automatically undone" — the safety net
+lives in the bootloader's own logic, not in anything your application code
+has to detect or handle.
+
 ## Cheat sheet
 
 | Concept | Detail |

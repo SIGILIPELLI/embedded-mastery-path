@@ -184,6 +184,56 @@ That's a working thermometer with a screen — the heart of the capstone, in
 which the `delay(2000)` will be replaced by proper non-blocking scheduling
 (module 7).
 
+## How It Actually Works
+
+**What "shared wires" really means electrically**: I2C pins are wired as
+**open-drain** — a device can only pull SDA/SCL LOW (by switching on an
+internal transistor to ground) or let go (release it high-impedance); it can
+never actively drive HIGH. The pull-up resistors are what pull the line back
+to logic HIGH when nobody is pulling it low. This is precisely what lets many
+devices coexist on two wires without one damaging another: if two devices
+tried to actively drive opposite logic levels on a normal push-pull line
+simultaneously, you'd get a short circuit, but open-drain means the worst
+case is just "everyone releases and the resistor wins." The bus scanner's
+`Wire.endTransmission() == 0` works because after the controller clocks out
+the 7-bit address plus a read/write bit, it releases SDA for one more clock
+and checks whether the addressed device pulled it LOW — that pulse is the
+**ACK bit**, and a `0` return means some device recognized its address and
+asserted it.
+
+**Why SPI is faster**: it's push-pull, not open-drain — MOSI, MISO, and SCK
+are each driven HIGH or LOW directly by dedicated output transistors on both
+ends, so there's no resistor/parasitic-capacitance RC time constant limiting
+how fast the line can be slewed, unlike I2C's pull-up-charged rise time.
+Every SCK edge shifts exactly one bit into a hardware shift register on each
+end simultaneously (SPI is full-duplex — data moves both directions on the
+same clock edge), which is also why SPI needs no addressing scheme: the
+transaction is fully deterministic once you've electrically selected exactly
+one device by pulling its CS line low, so the shift registers on controller
+and peripheral are talking to nobody else.
+
+**The DHT22's one-wire protocol, and why timing is "fiddly"**: with only one
+data line for both directions, the DHT22 encodes each bit as a fixed-length
+LOW pulse followed by a HIGH pulse whose *duration* the receiver measures —
+roughly 26-28 µs of HIGH for a `0` bit and ~70 µs for a `1` bit. The library
+does this by disabling interrupts around a tight polling loop that reads the
+GPIO's raw input register (bypassing `digitalRead()`'s overhead) and calls
+`micros()` to time each transition — timing this precise is exactly why it
+can't tolerate an ISR or another peripheral operation interrupting it
+mid-read, and why a `2000 ms` gap is enforced between reads (the sensor's own
+internal capacitive humidity element needs that long to stabilize a new
+reading).
+
+**Where the OLED's pixels actually live**: `Adafruit_GFX`'s drawing calls
+(`setCursor`, `println`, etc.) only flip bits in a plain RAM array you own —
+the framebuffer, 1 bit per pixel for a monochrome 128×64 panel (1024 bytes).
+`display.display()` is the only call that touches the bus: it streams that
+entire buffer over I2C into the SSD1306's own internal **GDDRAM** (graphics
+display data RAM) inside the display controller chip, which is what
+continuously refreshes the physical pixels regardless of what your MCU does
+afterward — which is exactly why the screen keeps showing the last image you
+pushed even if your sketch stalls.
+
 ## Cheat sheet
 
 | Concept | Detail |

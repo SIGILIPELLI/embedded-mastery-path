@@ -152,6 +152,59 @@ int main(void) {
   build — signed or not — into a fleet-wide outage instead of a caught
   canary.
 
+## How It Actually Works
+
+**Why a signature can't be forged even though the verification algorithm
+and the signature itself are both public**: Ed25519/ECDSA rest on
+**elliptic-curve** math where deriving a public key from a private key is
+computationally cheap (a fixed number of point-multiplication operations),
+but the reverse — recovering the private key from the public key, or forging
+a valid signature without it — requires solving the elliptic-curve discrete
+logarithm problem, believed to take computation on the order of the square
+root of the curve's group size, astronomically infeasible for
+well-chosen curve parameters (on the order of 2^128 operations for the
+curves used here). A signature is produced by a mathematical operation that
+combines the message hash with the *private* key in a way that only someone
+holding that private key can reproduce for a *new* message, while the
+verification operation combines the signature, the message hash, and only
+the *public* key, and the elliptic-curve algebra is constructed so this
+verification succeeds if and only if the private key matching that public
+key actually produced the signature. This is fundamentally different from a
+CRC or checksum, which is fully and cheaply invertible/recomputable by
+anyone with the algorithm — the asymmetry here isn't obscurity, it's a
+specific hard mathematical problem underlying the whole design.
+
+**Why the root of trust must live in OTP fuses or mask ROM, mechanically**:
+ordinary flash memory is, by physical design, rewritable — any code with
+sufficient privilege (or a bug letting an attacker gain it) can issue
+erase/program commands to it, which is precisely the mechanism module 2-05's
+OTA relies on for legitimate updates. **One-time-programmable (OTP) fuses**
+are physically different cells — typically an antifuse or a fusible link
+that, once electrically "blown" during manufacturing, cannot be un-blown by
+any subsequent software command, because there's no erase mechanism wired to
+that circuit at all; reading them back is possible, writing them again
+generally is not. Burning a hash of the trusted public key (or the immutable
+first-stage bootloader's own code) into that hardware means no software
+exploit, however privileged, can rewrite what the chip checks against on the
+very first instruction it executes after reset — the guarantee comes from a
+physical asymmetry (can-erase vs. cannot-erase circuitry), not from a
+software permission check that a sufficiently clever exploit could
+theoretically bypass.
+
+**Why decrypt-then-verify (not verify-then-decrypt) is the correct order**:
+signature verification operates over the actual bytes the vendor's build
+pipeline hashed and signed — which is the *plaintext* firmware image, since
+that's what was built and released. If the OTA payload is encrypted for
+transport, the bytes arriving over the network are ciphertext, and computing
+a hash of ciphertext (even correctly) checks a signature against something
+that was never actually signed by the vendor — the signature was computed
+over plaintext bytes at release time, so verification can only succeed once
+those exact plaintext bytes are reconstructed via decryption. This ordering
+constraint isn't a convention, it's forced by what the signature
+mathematically commits to: the specific byte sequence that was hashed and
+signed in the release pipeline, which is the decrypted image, not its
+in-transit encrypted representation.
+
 ## Cheat sheet
 
 | Concept | Detail |

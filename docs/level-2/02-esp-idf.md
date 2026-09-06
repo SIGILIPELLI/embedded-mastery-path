@@ -158,6 +158,48 @@ Run `idf.py reconfigure` after editing it; the manager fetches and builds
 the dependency alongside your own code, no manual library installation
 step.
 
+## How It Actually Works
+
+**Why `sdkconfig` is a real build input, not a cache**: `menuconfig`'s tree
+is generated from `Kconfig` files that every component ships alongside its
+source — each option compiles down to a C preprocessor `#define`
+(`CONFIG_FREERTOS_HZ`, `CONFIG_PARTITION_TABLE_CUSTOM`, etc.) written into a
+generated `sdkconfig.h` that every component's source includes. Changing
+"FreeRTOS Tick rate" in menuconfig literally changes the value substituted
+for `configTICK_RATE_HZ` when the kernel itself is recompiled — it's not a
+runtime flag read at boot, it's a compile-time constant baked into the
+FreeRTOS binary you flash, which is exactly why `idf.py fullclean` is
+sometimes needed: a header-only config change doesn't always retrigger every
+object file's dependency check correctly, and a genuinely stale `.o` linked
+against the old value produces "weird" behavior that isn't a bug in your
+code at all.
+
+**What `idf.py build` is actually orchestrating**: unlike Arduino IDE's
+single hidden `.ino`-to-binary pipeline, ESP-IDF's build is a real
+multi-stage CMake + Ninja graph: `project.cmake` (included by your top-level
+`CMakeLists.txt`) walks every component directory looking for
+`idf_component_register()` calls, builds a dependency graph from each
+component's `REQUIRES`, compiles each component as its own **static
+library**, then links all of them plus ESP-IDF's own FreeRTOS, lwIP, and
+driver components against a fixed linker script for your target chip — the
+same conceptual link stage from module 1-01, just with dozens of components
+rather than one Arduino core blob. `idf.py size` reading out per-component
+flash/RAM usage is possible specifically because each component compiles to
+a separately-named `.a` archive the linker keeps addressable in its map
+output.
+
+**Why `app_main()` "is allowed to return"**: it isn't special-cased boot
+code — it's registered as the entry function of an ordinary FreeRTOS task
+(created by ESP-IDF's own startup code, `esp_startup.c`, after the boot ROM
+loads your app image from flash, sets up the MMU to map flash into the
+instruction cache address space, and initializes the C runtime). A FreeRTOS
+task function returning is a defined, ordinary event — the kernel calls
+`vTaskDelete(NULL)` on it automatically, tears down its TCB and stack, and
+the scheduler simply never runs it again — nothing special happens to the
+rest of the system, which is why `app_main()` is free to just do one-time
+setup then exit if you don't need it looping forever, unlike Arduino's
+`loop()` contract, which the runtime calls repeatedly regardless.
+
 ## Cheat sheet
 
 | Concept | Detail |

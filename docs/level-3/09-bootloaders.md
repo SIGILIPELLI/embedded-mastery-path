@@ -166,6 +166,61 @@ int main(void) {
   malicious images — module 4-02 covers cryptographic signing for update
   authenticity, a materially different and stronger guarantee.
 
+## How It Actually Works
+
+**Why `VTOR` exists as a separate, settable register at all**: on the
+simplest Cortex-M implementations, the vector table is architecturally fixed
+at address `0x0` with no way to relocate it — but the moment you need
+position-independent code regions (a bootloader plus a separately-linked
+application, exactly this module's scenario), the CPU needs some way to know
+where the *currently running* code's exception handlers live, since
+`HardFault_Handler`, `SysTick_Handler`, and every peripheral IRQ handler in
+the application are linked at different flash addresses than the
+bootloader's own copies of those same handler names. `SCB_VTOR` is a
+memory-mapped register the exception-entry hardware itself reads on every
+single exception dispatch — not just at startup — to compute "vector table
+base + (exception number × 4)" as the address to fetch the handler pointer
+from. This is exactly why forgetting to set it is silent until the first
+interrupt: `main()` executing is just straight-line instruction fetch from
+wherever `PC` was set, entirely independent of `VTOR` — only the moment an
+exception actually fires does the hardware consult `VTOR`, and if it still
+holds the bootloader's base address, it fetches a handler pointer from the
+bootloader's table, jumping into code that has no idea it's running in the
+application's context (wrong stack contents, wrong global variable
+addresses relative to what that handler expects).
+
+**Why dual-bank writing genuinely can't brick a device, mechanically**: the
+CPU's boot-time read of SP/PC (module 3-01) happens from one fixed,
+unconditional address — for this scheme, that means the *bootloader's own*
+fixed location, which this update logic never touches. `flash_erase` and
+`flash_write` in `apply_update` only ever target `inactive_bank_addr` — a
+completely separate range of flash sectors from whatever the CPU would jump
+into on the next reset before `set_active_bank()` runs. Because a flash
+sector's contents at one address have no physical relationship to a sector's
+contents at a different address (they're independent blocks of floating-gate
+cells, module 2-07), corrupting or partially writing the inactive bank
+literally cannot alter a single bit of the active bank sitting elsewhere in
+the same flash chip — the "safety" here isn't a clever software guarantee,
+it's the simple physical fact that erase/program operations are scoped to
+the specific sector addresses given to them.
+
+**Why CRC catches corruption but not tampering**: a CRC (or the simplified
+multiplicative checksum used in the portable test above) is designed purely
+to detect *random* bit errors — the kind introduced by a dropped byte during
+a UART transfer or a power glitch mid-flash-write — because for any single
+random bit flip, the probability that the CRC recomputed over the corrupted
+data happens to still match the stored value is vanishingly small by
+construction of the polynomial/algorithm. But a CRC has no secret component
+at all: anyone who can write an arbitrary payload can trivially recompute the
+matching CRC for their own modified payload and store it alongside — the
+check would pass, because nothing about a CRC depends on knowledge only the
+legitimate firmware author has. A cryptographic signature (module 4-02)
+instead is verified using a public key whose matching private key only the
+legitimate signer holds, so recomputing a valid signature for tampered data
+is (assuming sound cryptography) computationally infeasible — a fundamentally
+different guarantee (authenticity) from a CRC's guarantee (accidental
+corruption detection), not merely a "stronger CRC."
+
 ## Cheat sheet
 
 | Concept | Detail |

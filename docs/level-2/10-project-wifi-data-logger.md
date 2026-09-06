@@ -308,6 +308,50 @@ void app_main(void)
     corrupt whatever sits next to it, and you will spend a day debugging the
     innocent neighbour.
 
+## How It Actually Works
+
+**Why `vTaskDelayUntil` is drift-free and `vTaskDelay` isn't**: `vTaskDelay`
+computes its wake time as "now (whenever the call happens to execute) plus N
+ticks" — so if `sensor_read()` takes 40 ms one cycle and 5 ms the next, the
+actual period between samples varies by that same 35 ms, and those
+variations accumulate over thousands of cycles into real clock drift.
+`vTaskDelayUntil(&last, period)` instead computes the *absolute* next wake
+tick from the *previous target* wake tick (stored in `last`), not from
+whenever the code actually resumed — so it always requests "period ticks
+after the last scheduled wake," and any one cycle's extra work simply eats
+into that cycle's own slack rather than shifting every future wake time. The
+kernel implements this by comparing the requested absolute tick against its
+own free-running tick counter (the same hardware timer interrupt from module
+2-01) and computing the correct delay from that, which is also why it can
+detect and immediately return if you've already missed the deadline, instead
+of computing a nonsensical negative delay.
+
+**Why "samples copied by value through queues" is what makes three tasks on
+two CPU cores safe without a single mutex on the sample data itself**: a
+`sample_t` struct passed to `xQueueSend` is `memcpy`'d into the queue's
+internal buffer (module 2-01) — after that call returns, the sampler task's
+local `s` and the copy inside the queue are two entirely independent regions
+of memory, on potentially different cores' cache lines. There is no
+shared mutable state for a second task to race against, which is precisely
+why this design needs a mutex only where it's genuinely reintroduced (the
+filesystem, touched by both `logger_task` and any future reader) — the
+architecture doesn't eliminate race conditions in general, it eliminates
+them specifically for the data that flows sampler→logger→uplink by never
+letting two tasks hold a live reference to the same bytes at once.
+
+**Why a stalled uplink can't back up into a stalled logger, mechanically**:
+`xQueueSend(g_uplink_q, &s, 0)` with a zero timeout means: if the queue's
+internal buffer has no free slot *right now*, return immediately with
+`errQUEUE_FULL` rather than blocking the calling task — the logger task
+never enters the queue's internal "blocked, waiting for space" list at all.
+Contrast this with `sample_q`'s 50 ms timeout, which does let the sampler
+briefly join that blocked-task list if the logger is momentarily behind —
+still bounded, but a real wait. This difference in timeout value is the
+entire mechanism enforcing the project's central invariant ("the network is
+never allowed to stall the sensor or the disk"): it's not a policy enforced
+by discipline, it's a specific integer argument to a kernel API call, per
+queue, chosen deliberately.
+
 ## Cheat sheet
 
 | Piece | Choice made here | Why |

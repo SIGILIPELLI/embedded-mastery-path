@@ -195,6 +195,61 @@ local buffer on one code path) is eating more stack over time. Module 2-08
 covers the complementary safety net — watchdogs — for when a task stops
 checking in at all.
 
+## How It Actually Works
+
+**What a "task" physically is**: each `xTaskCreatePinnedToCore()` call
+allocates a **Task Control Block (TCB)** — a struct holding the task's saved
+CPU register state, priority, and a pointer to its own private stack, which
+FreeRTOS carves out of the heap at the byte size you requested. A context
+switch (the scheduler moving from one task to another) is the same mechanism
+as an interrupt-driven register save/restore from module 1-07's ISR
+discussion, just triggered by the FreeRTOS tick interrupt (a hardware timer
+firing at the configured tick rate) or by a task voluntarily yielding via
+`vTaskDelay`: the current task's registers get pushed onto *its own* stack,
+the scheduler picks the next ready task by priority, and that task's
+previously-saved registers are popped back off *its* stack — which is
+exactly why each task needs an independent stack region in the first place,
+and why undersizing one (the 768-byte exercise) causes it to write past its
+allocated region into whatever memory sits next, corrupting another task's
+TCB or stack with no hardware memory protection to catch it (these chips have
+no MMU-enforced per-task stack guard by default).
+
+**Why `vTaskDelay` costs nothing while `while(1){}` costs everything**:
+`vTaskDelay` removes the calling task from the scheduler's ready list and
+places it in a **delayed list** ordered by wake time, then immediately
+triggers a context switch to whatever task is next; the CPU is doing real
+work for some *other* task (or, if none is ready, the idle task, which can
+trigger light-sleep) rather than spinning. A blocking `while` loop, by
+contrast, keeps the task in the running state, consuming every cycle the
+scheduler gives it and starving any equal-or-lower priority task — which is
+the mechanism behind "a task at priority 2 can starve `loop()` (priority 1)
+entirely."
+
+**The queue's actual data-copy mechanism**: `xQueueCreate(len, itemSize)`
+allocates one contiguous buffer of `len × itemSize` bytes plus internal
+head/tail indices. `xQueueSend` does a `memcpy` of your struct's bytes into
+the next free slot — not a pointer store — which is precisely why the
+producer can safely reuse or destroy its local `Reading r` immediately after
+the call returns: the queue owns an independent copy. `xQueueReceive` copies
+those same bytes back out into the caller's variable. Internally, both calls
+manipulate the queue's list of tasks blocked waiting on it (a task calling
+`xQueueReceive` with `portMAX_DELAY` on an empty queue is removed from the
+ready list and put on the queue's own wait list — again, zero CPU spent
+polling — and the scheduler wakes it the instant `xQueueSend` completes a
+matching item).
+
+**Priority inheritance, mechanically**: `xSemaphoreCreateMutex()` returns a
+handle that, unlike a plain semaphore, carries an explicit "current owner"
+field. When a higher-priority task calls `xSemaphoreTake` and blocks because
+a lower-priority task holds it, FreeRTOS's mutex implementation directly
+raises that lower-priority holder's *effective* priority (a field on its TCB,
+temporarily) to match the highest-priority task waiting on it — so the
+scheduler now picks the holder to run ahead of whatever medium-priority task
+was previously preempting it, letting it finish and call `xSemaphoreGive`
+sooner. The instant it gives the mutex back, its effective priority reverts.
+A plain binary semaphore's TCB carries no such "owner" concept — there is
+nothing to boost — which is exactly why it can't solve priority inversion.
+
 ## Cheat sheet
 
 | Concept | Detail |

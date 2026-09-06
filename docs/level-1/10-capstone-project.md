@@ -239,6 +239,46 @@ WebServer server(80);
 
 That composability is the real lesson of the capstone.
 
+## How It Actually Works
+
+This capstone's real engineering lesson is what happens when four
+independent timing regimes share one CPU core with no operating system —
+worth tracing precisely:
+
+**The scheduler is the `if` chain itself.** There is no task switcher, no
+priorities, no preemption: `loop()` is a single flat function that the
+hidden Arduino `main()` calls forever, and "four tasks" is a naming fiction
+over four `if` statements evaluated in the same sequential pass. This is why
+task order and worst-case duration both matter — if `taskSensor()`'s DHT22
+read (a blocking, interrupt-disabled bit-timing loop, per module 6) ever ran
+long, `taskConsole()` right after it in the same pass would be delayed by
+exactly that long, silently breaking the "commands answered instantly"
+guarantee the test plan checks for.
+
+**Why the struct, and not four global variables per task, is the correct
+shared-state design**: every task reads and writes plain (non-`volatile`)
+memory here, and that's safe *specifically because* nothing in this sketch
+runs in an ISR context — all four tasks execute in the same single thread of
+control on the same call stack, so there's no possibility of a task being
+interrupted mid-update by another task the way an ISR interrupts `loop()` in
+module 7. The moment any of this state needs to be touched from an
+`attachInterrupt` handler or (Level 2) a second FreeRTOS task on the other
+core, every field touched from both contexts would need to become `volatile`
+and some fields would need mutex protection — the struct's single-owner
+design is what makes that migration path add fields, not rearchitect
+everything.
+
+**Why `display.display()`'s ~10-20 ms I2C transfer doesn't stall the alarm
+or console**: it's called from `taskDisplay()`, gated to run once per second
+— that occasional longer blocking call is a deliberate, bounded trade-off
+(the OLED library has no non-blocking/DMA-driven variant here), sized so that
+even in the worst case it only delays the 250 ms alarm task and the
+every-pass console by a small fraction of their own periods, not enough for
+a human to perceive as unresponsive. This is the central lesson cooperative
+scheduling teaches: every blocking call anywhere in `loop()` taxes *every*
+other task's real-world responsiveness, so the design job is bounding each
+one's worst case, not eliminating them all.
+
 ## Cheat sheet — the Level 1 patterns in one table
 
 | Pattern | Where it came from |

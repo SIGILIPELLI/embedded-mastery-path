@@ -143,6 +143,53 @@ int main(void) {
   pointer must itself be protected from interrupts, or a timer tick during
   the update can hand the CPU to a task mid-switch.
 
+## How It Actually Works
+
+**Why PendSV, specifically, and not SysTick itself, does the switch**: on
+Cortex-M, exceptions can preempt each other by priority, and the hardware
+exception-entry sequence (auto-saving R0-R3/R12/LR/PC/xPSR) can itself be
+interrupted and resumed if a higher-priority exception arrives mid-entry —
+this is called "tail-chaining" and it's a real hardware optimization. If the
+context-switch logic ran directly inside `SysTick_Handler` (which typically
+runs at a fairly high priority so the tick itself is reliable), a
+higher-priority peripheral interrupt arriving during the switch could
+observe an inconsistent stack — half old task, half new task — with no clean
+way to unwind. By instead having `SysTick_Handler` merely set
+`PendSV`'s pending bit (a single register write to `ICSR`) and return, the
+actual register-juggling only ever executes when the CPU has no higher-priority
+exception pending — because `PendSV` is configured at the numerically
+lowest priority, meaning it will *always* be interrupted first and only
+resumed once every genuinely urgent handler has finished, guaranteeing the
+switch itself is never seen half-done by anything else in the system.
+
+**Why only R4-R11 need explicit saving**: this is a direct consequence of
+the Cortex-M **exception entry/exit hardware contract**. When any exception
+fires — including the one that triggered `PendSV` — the core automatically
+pushes R0-R3, R12, LR, PC, and xPSR onto whatever stack was active (this is
+called "stacking," and it happens in hardware before the handler's first
+instruction even executes), and automatically pops the same set back off on
+return via the special `EXC_RETURN` value loaded into `LR`. The
+`PendSV_Handler` code is running *after* that automatic stacking already
+happened for the outgoing task and *before* the automatic unstacking happens
+for the incoming task — so the eight already-stacked registers are already
+exactly where they need to be on each task's own stack; the handler's only
+remaining job is the eight registers the hardware contract doesn't cover.
+This split isn't an implementation shortcut — it's what makes a context
+switch on Cortex-M cheap enough to run on every scheduler tick without
+meaningfully affecting throughput.
+
+**Why the ready-bitmap scan is O(1) and not O(32)**: real FreeRTOS
+implementations don't loop from bit 31 down to 0 as the teaching model above
+does — they issue a single **CLZ (count leading zeros)** instruction, present
+in the Cortex-M instruction set specifically for exactly this kind of
+priority-encoding use case, which returns the bit position of the
+highest set bit in one CPU cycle regardless of which bit it is. This is what
+makes "which task should run next" a constant-time operation independent of
+`configMAX_PRIORITIES` — a scheduler that had to loop through priority
+levels one at a time would make context-switch cost scale with how many
+priority levels your project happens to define, which is exactly the kind of
+non-deterministic overhead a real-time kernel is built to avoid.
+
 ## Cheat sheet
 
 | Concept | Detail |

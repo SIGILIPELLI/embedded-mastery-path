@@ -159,6 +159,53 @@ correctly on day one than to fix later.
   timing/electrical behavior — host-side tests catch logic bugs, they do not
   replace hardware-in-the-loop testing (module 4-05).
 
+## How It Actually Works
+
+**Why a function-pointer HAL interface is what makes the layering real
+rather than aspirational**: `hal_i2c_t`'s `i2c_read` field is a plain C
+function pointer, and at the machine level, calling `s->hal->i2c_read(...)`
+compiles to loading that pointer from memory and performing an *indirect*
+call — jumping to whatever address the pointer currently holds, resolved at
+runtime, not at link time. This is the exact mechanism (not a testing
+convenience layered on top, but the underlying compiled behavior) that lets
+`fake_i2c_read` and a real hardware implementation be genuinely
+interchangeable: the driver code's compiled instructions never encode a
+specific target address for that call, only "whatever `s->hal->i2c_read`
+currently points to." A direct call to a real register-access function,
+by contrast, is resolved by the linker to one fixed address baked into the
+binary — which is precisely why layering through function pointers (or,
+equivalently in C++, virtual dispatch through a vtable, itself just a
+compiler-managed array of the same kind of function pointers) is what
+actually enables host-side testing, not merely a stylistic choice.
+
+**Why "leaky abstraction" is a real, mechanical failure and not just a code
+smell**: when a HAL function returns a chip-specific error code (say, an
+STM32 HAL's `HAL_I2C_ERROR_AF`) directly instead of translating it into a
+portable `err_t`, every caller up the stack that wants to branch on the
+*meaning* of that error (transient vs. permanent, retry vs. give up) has to
+either duplicate the chip-specific knowledge of what that constant means, or
+`#include` the chip's own HAL headers just to get the constant's definition
+— at which point the "portable" driver layer now has a compile-time
+dependency on one specific vendor's headers, and porting to a different MCU
+means every one of those call sites needs to change, not just the HAL
+implementation underneath. The translation at the HAL boundary is what
+actually contains that dependency to one place; skipping it doesn't remove
+the coupling, it just spreads it silently through every layer that touches
+the return value.
+
+**Why compile-time board selection (`#if defined(BOARD_REV_A)`) avoids a
+class of bug runtime detection can't**: with compile-time selection, code for
+a board variant that was never built simply isn't present in that build's
+binary at all — there's no code path to accidentally execute, because the
+preprocessor removed it before the compiler ever saw it. Runtime board
+detection (reading an ID pin, branching on its value) keeps *all* variants'
+code linked into every build, and the correctness of the branch depends on
+that ID pin being read correctly at the right point in boot, on every unit,
+forever — a hardware assembly defect or a bit of noise on that pin at the
+wrong moment silently selects the wrong code path in a binary that "compiled
+fine" for every variant, a failure mode that simply cannot occur when the
+choice was resolved by the preprocessor before the binary was even linked.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -147,6 +147,48 @@ write a value back (watch it print over serial), and enable notifications
   on top of whatever WiFi already reserved. On memory-constrained builds
   this is a genuine design constraint, not a rounding error.
 
+## How It Actually Works
+
+**What an "advertisement" is at the radio level**: BLE dedicates three fixed
+2.4 GHz channels (37, 38, 39 — deliberately chosen to sit between WiFi's
+crowded 1/6/11 channels) purely for advertising. `pAdvertising->start()`
+programs the radio's link-layer hardware to transmit a small packet
+(≤31 bytes of payload: flags, name, service UUIDs) on all three channels in
+sequence, repeated at an **advertising interval** (tens to hundreds of
+milliseconds), entirely without needing any connection state — this is what
+lets a phone's scanner see and list your device before tapping it. When a
+central sends a `CONNECT_REQ` in response, both radios switch to a private,
+frequency-hopping **connection**, which is precisely why "advertising stops
+on connection": the link-layer hardware can only be in one mode
+(advertising-on-3-channels or connected-and-hopping) at a time, and the
+library's `onDisconnect` callback restarting `pAdvertising->start()` is
+telling that same hardware to go back to broadcasting once the connection
+tears down.
+
+**Why the MTU is 23 bytes by default**: the BLE **Attribute Protocol (ATT)**
+that carries GATT reads/writes/notifications rides directly on top of the
+Link Layer's fixed-size packets, and the original Bluetooth 4.0 spec fixed
+the default ATT MTU at 23 bytes total — 3 bytes of ATT opcode/handle
+overhead, leaving 20 usable payload bytes — chosen to fit inside a single
+Link Layer PDU without fragmentation, keeping every BLE stack interoperable
+even on the cheapest hardware. An MTU negotiation exchange (`ATT_MTU_REQ`/
+`RSP`) can raise this up to 517 bytes if both sides support it, but code that
+assumes the larger size without checking will silently truncate on stacks
+that don't — which is exactly the trap the module's warning is pointing at.
+
+**Why `notify()` silently no-ops without a subscriber**: `BLECharacteristic`
+tracks its CCCD (`0x2902`) as an ordinary GATT descriptor value — 2 bits
+meaning "notifications off/on" — that lives in the stack's attribute table,
+separate from the characteristic's own value. `notify()` checks that bit
+before doing any radio work; it isn't "sending and nobody's listening," it's
+"checking a flag and declining to transmit at all" — no packet is even
+constructed, hence no error path exists to report. This is also why
+subscribing is itself a GATT **write** the central performs (writing `0x0001`
+to that descriptor) — from the peripheral's firmware perspective, a central
+subscribing and a central writing ordinary characteristic data go through
+literally the same ATT write-handling code path in the stack, just targeting
+a different attribute handle.
+
 ## Cheat sheet
 
 | Concept | Detail |

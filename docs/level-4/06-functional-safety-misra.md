@@ -174,6 +174,56 @@ int main(void) {
   requires documenting *why* a deviation is acceptable, not just suppressing
   the warning silently.
 
+## How It Actually Works
+
+**Why MISRA's essential-type rules (the Rule 10.x family) target a real,
+mechanical compiler behavior**: C performs **implicit integer conversions**
+(the "usual arithmetic conversions") automatically whenever an expression
+mixes types — a signed `int` compared against an `unsigned int`, for
+instance, has the signed operand silently converted to unsigned before the
+comparison, per the language standard's promotion rules, with no warning at
+default compiler settings. This is precisely the mechanism behind the
+"before" example's `unsigned int i` looping against a signed `int len`: if
+`len` were ever negative, comparing `i < len` first converts `len` to
+unsigned via exactly this rule, turning a small negative number into a huge
+positive one (the same two's-complement bit-pattern reinterpretation from
+module 1-02's overflow discussion) — the loop condition that looks like "stop
+when `i` reaches `len`" silently becomes "loop billions of times," walking far
+past the end of `buf`. Rule 10.x doesn't invent new semantics; it constrains
+which type combinations are permitted specifically so this always-happening
+compiler behavior can never silently apply somewhere the programmer didn't
+intend it.
+
+**Why single-exit-point structuring (Rule 15.5) genuinely aids verification,
+mechanically**: static analysis and manual safety review both work by
+constructing a **control-flow graph** of a function — every branch, loop,
+and return statement is a node or edge in that graph, and a reviewer (or
+tool) reasoning about "what must be true when this function finishes" has to
+account for every path that reaches an exit. A function with returns
+scattered through nested conditionals multiplies the number of distinct exit
+paths that must each be checked for the same postcondition (did we release
+this resource, did we leave state consistent) — a single, unconditional exit
+point collapses that to one path whose precondition is simply "control
+reached the end," making the set of states a reviewer or tool must verify
+strictly smaller and enumerable by inspection rather than by tracing every
+branch combination.
+
+**Why a plausibility check catches a class of fault a range check
+architecturally cannot**: a range check (`0°C <= value <= 100°C`) evaluates
+one reading in isolation — it has no memory of anything that came before,
+so any single value inside the valid envelope passes regardless of how it
+got there. A real sensor fault (a loose connector momentarily open-circuiting,
+an EMI transient coupling into the ADC's input, a corrupted single sample)
+frequently produces a value that is individually plausible but represents a
+rate of change no physical process the sensor measures could actually
+achieve — a thermal mass takes real time to change temperature, bounded by
+its thermal conductivity and mass, so a genuine 40°C swing in 10 milliseconds
+is physically excluded regardless of what the raw ADC count says. Encoding
+that physical constraint (`max_rate_per_sec`) as an explicit check against
+the *previous* reading and elapsed time gives the software a piece of domain
+knowledge no purely statistical range check can express, because a range
+check by construction only ever looks at one sample at a time.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -209,6 +209,47 @@ makes no progress until the stack has an IP — and watch the result with
   certificate in `.broker.verification.certificate` for anything that leaves
   your LAN.
 
+## How It Actually Works
+
+**Why MQTT survives a router with no port forwarding**: the device's
+`esp_mqtt_client_start()` opens an ordinary outbound TCP socket (a SYN from
+the device to the broker's IP:port) — from the router's NAT table's
+perspective this is indistinguishable from a laptop opening a web page, so it
+creates a port-mapping entry automatically and keeps it alive as long as the
+socket stays open (helped by MQTT's own **PINGREQ/PINGRESP** keepalive
+traffic, sent at the `session.keepalive` interval specifically to stop
+routers and firewalls from silently expiring an idle NAT mapping). The broker
+can then push data down that already-established socket at any time —
+there's no need for anyone to open an inbound connection to the device,
+which is precisely the property that makes IoT devices behind consumer
+routers reachable at all.
+
+**How the LWT is actually delivered**: when the device's `CONNECT` packet
+registers a last-will topic/payload, the broker stores it attached to that
+specific TCP connection's session state — not as a scheduled message, but as
+a promise conditioned on how the connection ends. A clean `DISCONNECT` packet
+tells the broker to discard the will unsent. But a connection that vanishes
+without one — power loss, WiFi drop, cable pull — is detected by the broker
+purely through **TCP's own failure signalling**: either the OS eventually
+reports the socket as reset/timed-out, or, more reliably, MQTT's keepalive
+means the broker expects a PINGREQ (or any packet) within 1.5× the keepalive
+interval and treats silence past that as a dead connection — at that exact
+moment the broker publishes the stored will. This is why the exercise's
+"pull the power and wait ~1.5× keepalive" check is precisely calibrated: it's
+testing the broker's keepalive timeout logic, not some fixed constant.
+
+**Why the event handler must not block**: `esp-mqtt`'s client runs its socket
+read/write/reconnect state machine on one dedicated FreeRTOS task, and it
+calls your registered handler function *synchronously, from that same task*,
+for every event — there's no separate dispatcher thread. A blocking call
+inside your handler (a 5-second I2C read, a `vTaskDelay`) means that same
+task cannot service its own socket in the meantime: no PINGREQs go out, no
+incoming publishes get read from the TCP buffer, and if that buffer fills
+because the OS-level TCP receive window isn't being drained, the broker's own
+writes eventually block or the connection times out from its side — the
+"stalls the whole client" behavior is a direct, single-threaded consequence
+of one task doing two jobs (your logic and the network) at once.
+
 ## Cheat sheet
 
 | Concept | Detail |

@@ -318,6 +318,52 @@ Test the ugly cases, not the happy path: empty input, one element, exactly
 full, one past full, null pointers, integer wraparound. That is where the
 field failures actually live.
 
+## How It Actually Works
+
+**Where a Guru Meditation panic's fields actually come from**: Xtensa (the
+ESP32's CPU architecture) raises a hardware **exception** the instant an
+instruction tries to access memory through an invalid address or execute an
+undecodable opcode — the CPU's memory management/protection logic detects
+this in the same cycle it would otherwise complete the access, and instead of
+completing it, jumps to a fixed exception-vector address (conceptually the
+same interrupt-vector-table mechanism from module 1-07, just for CPU faults
+instead of peripheral events). ESP-IDF's exception handler runs at that
+vector, and everything in the printout is simply what it finds already
+sitting in CPU registers at the moment of the fault: `PC` is literally the
+program counter register (where execution was), `EXCVADDR` is a
+hardware-latched register holding the exact address the faulting instruction
+tried to touch, and the backtrace is produced by walking the call stack the
+same way `esp_backtrace_print()` does deliberately — following each frame's
+saved return address, which is why a stack that's already been corrupted (a
+buffer overrun, module 2-01) can make the backtrace itself unreliable or
+garbled.
+
+**Why `IllegalInstruction` follows a task that `return`s**: a FreeRTOS task
+function is called by the kernel's task-startup trampoline with the
+expectation that it never returns — its "return address" slot is
+deliberately left pointing at a small stub that calls `vTaskDelete(NULL)` if
+somehow reached, but on ESP-IDF this can also be flash memory containing
+whatever bytes happen to follow the function in the binary rather than valid
+code, particularly if the code layout or a corrupted stack diverts the
+return elsewhere. The CPU fetches those bytes and tries to decode them as
+Xtensa instructions; the near-certain result is a byte pattern the decoder
+can't interpret, which is exactly an `IllegalInstruction` exception, and
+this is why the fix is a rule, not a workaround: a task must never fall off
+the end of its function.
+
+**How the heap corruption detector's canaries work**: with
+`CONFIG_HEAP_CORRUPTION_DETECTION` set to Comprehensive, the allocator pads
+every block it hands out with extra "guard" words containing a known bit
+pattern, both before and after the usable region — a write past the end of
+your buffer overwrites the trailing guard word first, before it reaches the
+next real allocation's header. Every subsequent `malloc`/`free` call checks
+neighboring guard words for that expected pattern as a side effect, so
+corruption is detected at the *next* allocator operation after the overrun,
+not when the overrun itself happens — which is exactly why
+`heap_caps_check_integrity_all(true)` moved around your code narrows the
+window: you're manually forcing that check at additional points to shrink
+the gap between "the overrun happened" and "the allocator noticed."
+
 ## Cheat sheet
 
 | Concept | Detail |

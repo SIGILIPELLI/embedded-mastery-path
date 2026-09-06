@@ -147,6 +147,49 @@ Timer wakeup is one of several sources: `esp_sleep_enable_ext0_wakeup(pin,
 level)` wakes on a GPIO (a button, a sensor's alarm output), and sources can
 be combined — `esp_sleep_get_wakeup_cause()` tells you which one fired.
 
+## How It Actually Works
+
+**Why SRAM corruption causes "impossible" bugs**: on both AVR and ESP32, the
+**stack** (function call frames, local variables, return addresses) and the
+**heap** (dynamic allocations, including every hidden `String` allocation)
+grow toward each other from opposite ends of the same physical SRAM address
+range — the stack grows downward from high addresses, the heap grows upward
+from just above your global variables. There is no hardware guard page in
+between on these small chips (unlike an MMU-equipped application processor).
+When they collide, a function call's return address or a local variable
+literally gets overwritten by heap data (or vice versa) — the CPU doesn't
+detect this as an error at all, it just executes whatever garbage address it
+finds when the function returns, which is why the symptom is a spontaneous
+reset (jumping to an invalid address trips the watchdog or triggers a fault)
+rather than a clean error message.
+
+**Why flash "wears out"**: flash memory stores bits by trapping electrical
+charge on a floating gate inside each memory cell, insulated by a thin oxide
+layer. Writing a `1`→`0` bit requires an erase-then-program cycle that forces
+charge across that oxide layer via quantum tunneling; each cycle
+physically stresses and gradually degrades the oxide's insulating ability
+until, after tens of thousands of cycles, it can no longer reliably hold
+charge — a hardware failure mode, not a software one. This is exactly why
+this module is careful to say "write on change, not per loop": every
+`prefs.putUInt()`/`EEPROM.put()` call that changes the underlying flash sector
+consumes part of its finite lifetime, and code that saves every second
+instead of every hour can wear out a sector in weeks.
+
+**What actually happens in deep sleep**: an ESP32 in deep sleep powers down
+the CPU cores, most SRAM, and most peripherals entirely — literally cutting
+their supply rails — leaving only a small, separately-powered **RTC domain**
+containing a low-power timer, a handful of RTC GPIOs, and a tiny slice of RTC
+memory alive. `RTC_DATA_ATTR` places a variable's storage in that surviving
+RTC memory region instead of ordinary SRAM, specifically so it isn't wiped
+when the rest of SRAM loses power. Waking is indistinguishable from a power-on
+reset from the CPU's point of view — the boot ROM runs, `app_main`/`setup()`
+runs from scratch — except the boot ROM first checks
+`esp_sleep_get_wakeup_cause()` (a status register the RTC domain sets before
+waking the rest of the chip) so your code can tell "fresh power-on" from
+"woke from a timer/GPIO." This full power-down of the CPU is exactly what
+gets deep sleep down to ~10 µA — there is simply no clocked digital logic
+left running to consume current, only quiescent leakage in the RTC domain.
+
 ## Cheat sheet
 
 | Concept | Detail |
