@@ -1194,6 +1194,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2250,6 +2261,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2448,6 +2470,44 @@ the firmware.</p>
   on top of whatever WiFi already reserved. On memory-constrained builds
   this is a genuine design constraint, not a rounding error.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>What an "advertisement" is at the radio level</strong>: BLE dedicates three fixed
+2.4 GHz channels (37, 38, 39 — deliberately chosen to sit between WiFi's
+crowded 1/6/11 channels) purely for advertising. <code>pAdvertising-&gt;start()</code>
+programs the radio's link-layer hardware to transmit a small packet
+(≤31 bytes of payload: flags, name, service UUIDs) on all three channels in
+sequence, repeated at an <strong>advertising interval</strong> (tens to hundreds of
+milliseconds), entirely without needing any connection state — this is what
+lets a phone's scanner see and list your device before tapping it. When a
+central sends a <code>CONNECT_REQ</code> in response, both radios switch to a private,
+frequency-hopping <strong>connection</strong>, which is precisely why "advertising stops
+on connection": the link-layer hardware can only be in one mode
+(advertising-on-3-channels or connected-and-hopping) at a time, and the
+library's <code>onDisconnect</code> callback restarting <code>pAdvertising-&gt;start()</code> is
+telling that same hardware to go back to broadcasting once the connection
+tears down.</p>
+<p><strong>Why the MTU is 23 bytes by default</strong>: the BLE <strong>Attribute Protocol (ATT)</strong>
+that carries GATT reads/writes/notifications rides directly on top of the
+Link Layer's fixed-size packets, and the original Bluetooth 4.0 spec fixed
+the default ATT MTU at 23 bytes total — 3 bytes of ATT opcode/handle
+overhead, leaving 20 usable payload bytes — chosen to fit inside a single
+Link Layer PDU without fragmentation, keeping every BLE stack interoperable
+even on the cheapest hardware. An MTU negotiation exchange (<code>ATT_MTU_REQ</code>/
+<code>RSP</code>) can raise this up to 517 bytes if both sides support it, but code that
+assumes the larger size without checking will silently truncate on stacks
+that don't — which is exactly the trap the module's warning is pointing at.</p>
+<p><strong>Why <code>notify()</code> silently no-ops without a subscriber</strong>: <code>BLECharacteristic</code>
+tracks its CCCD (<code>0x2902</code>) as an ordinary GATT descriptor value — 2 bits
+meaning "notifications off/on" — that lives in the stack's attribute table,
+separate from the characteristic's own value. <code>notify()</code> checks that bit
+before doing any radio work; it isn't "sending and nobody's listening," it's
+"checking a flag and declining to transmit at all" — no packet is even
+constructed, hence no error path exists to report. This is also why
+subscribing is itself a GATT <strong>write</strong> the central performs (writing <code>0x0001</code>
+to that descriptor) — from the peripheral's firmware perspective, a central
+subscribing and a central writing ordinary characteristic data go through
+literally the same ATT write-handling code path in the stack, just targeting
+a different attribute handle.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

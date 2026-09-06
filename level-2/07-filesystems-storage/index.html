@@ -1317,6 +1317,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2526,6 +2548,43 @@ completing writes, and FAT gives you none of LittleFS's power-fail
 guarantees — yanking power mid-write can cost you the whole directory
 entry. For a logger that must not lose data, write to LittleFS and <em>copy</em> to
 SD; for bulk capture where a lost chunk is acceptable, write to SD directly.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why NOR flash can only erase in whole sectors</strong>: each flash cell stores a
+bit as trapped charge on a floating gate (module 1-08); <em>programming</em> a bit
+(<code>1</code>→<code>0</code>) only needs to inject charge into one cell's gate, which the flash
+controller can do individually, byte by byte. But <em>erasing</em> (<code>0</code>→<code>1</code>)
+requires pulling charge back out with a high-voltage tunneling pulse applied
+across an entire block of cells at once, because the erase voltage is wired
+to a shared bulk/substrate connection shared by the whole sector — there is
+no way to erase a single byte in isolation. This asymmetry (fine-grained
+program, coarse-grained erase) is precisely why "you cannot rewrite one byte"
+without a read-modify-erase-write of the containing 4 KB sector, and why
+every wear-levelling filesystem is built around avoiding repeated erases of
+the same sector.</p>
+<p><strong>How LittleFS survives power loss at any instruction</strong>: rather than one
+mutable metadata table, LittleFS stores directory and file metadata as
+<strong>copy-on-write linked-list "metadata pairs"</strong> — two blocks that alternately
+hold the current and previous version of a given metadata region, each
+tagged with a monotonically increasing revision count and a CRC. A write
+never edits an existing block in place; it writes a <em>new</em> block containing
+the updated data, then atomically flips a single pointer (itself protected
+the same way) to make the new block the current one. If power is lost
+mid-write, the new block's CRC fails validation on next mount, and LittleFS's
+mount routine simply falls back to the old, still-intact, still-pointed-at
+block — this is the literal mechanism behind "a half-finished write leaves
+the previous version intact," not a general design goal but a specific
+consequence of never overwriting committed data.</p>
+<p><strong>Why <code>fclose()</code> — not the <code>fprintf()</code> call — is where data becomes durable</strong>:
+C's stdio layer buffers writes in a userspace RAM buffer purely to batch
+small <code>fprintf</code> calls into fewer, larger underlying <code>write()</code> syscalls (which
+themselves eventually become flash-controller operations) — this buffering
+exists specifically to avoid the overhead of a real flash write per
+<code>fprintf</code>. <code>fclose()</code> (or an explicit <code>fflush()</code>) is the point where that RAM
+buffer is actually handed to the VFS layer and, ultimately, becomes flash
+controller commands; anything still sitting in that RAM buffer when the chip
+loses power is simply gone, because RAM (unlike flash) doesn't survive a
+power cycle at all — exactly the SRAM-vs-flash distinction from module 1-08,
+now determining a very concrete correctness property of your logger.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

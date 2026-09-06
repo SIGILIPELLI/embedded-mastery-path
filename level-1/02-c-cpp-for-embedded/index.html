@@ -818,6 +818,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2306,6 +2317,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2479,6 +2501,48 @@ demand:</p>
 <p>On ESP32 literals effectively stay in flash anyway and <code>F()</code> is a harmless
 no-op — so using <code>F()</code> for fixed message strings is a good portable habit.
 Module 8 covers the memory map in detail.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why <code>int</code> changes size</strong>: the compiler picks <code>int</code>'s width to match the
+target CPU's natural register/ALU width, because that's the size the chip can
+operate on in one instruction. AVR (Uno) is an 8-bit core with 16-bit
+addressing conventions and <code>int</code> set to 16 bits by the AVR ABI; the ESP32's
+Xtensa core is a full 32-bit machine, so 32-bit arithmetic is exactly as cheap
+as 16-bit and the ABI sets <code>int</code> to 32 bits. <code>sizeof</code> isn't querying some
+table — it's a compile-time constant baked in by the exact toolchain module 1
+installed for that board.</p>
+<p><strong>Why overflow is silent</strong>: integer types in C/C++ are literally a fixed
+number of bits with no out-of-band "overflow" flag exposed to your code — the
+CPU's ALU does have a hardware carry/overflow flag internally (used by
+multi-word arithmetic instructions), but ordinary <code>+</code>/<code>++</code> never checks it.
+<code>uint8_t counter = 255; counter++;</code> performs <code>11111111 + 1</code> in binary, which
+is <code>1 00000000</code> — the carry out of bit 7 is simply discarded, leaving <code>0</code>.
+Same mechanism, different name, for signed overflow (<code>int16_t</code> wrapping
+negative): the bit pattern doesn't care about signedness, only how you
+<em>interpret</em> it, which is what two's-complement representation is for.</p>
+<p><strong>Why <code>String</code> fragments the heap</strong>: <code>String</code>'s internal <code>char*</code> buffer is
+allocated with the same allocator as C's <code>malloc</code> — on Arduino/AVR that's a
+simple bump-and-freelist allocator with no compaction. Every concatenation
+that outgrows the current buffer calls <code>realloc</code>, which — when it can't grow
+in place — allocates a new, bigger block and frees the old one. On a heap of
+only ~1.5 KB usable, dozens of these free/alloc cycles per minute leave the
+freelist full of small, non-adjacent holes; eventually a request needs a
+contiguous run bigger than any single hole, <code>malloc</code> returns <code>NULL</code>, and code
+that doesn't check for that (most doesn't) writes through a null/garbage
+pointer — the "runs fine for hours then crashes" signature. <code>char buf[32]</code> on
+the stack sidesteps the heap entirely: its address is fixed by the compiler at
+build time and reclaimed automatically when the function returns.</p>
+<p><strong>Why <code>F()</code> works</strong>: normally, a <code>"string literal"</code> is emitted into the
+<code>.data</code>/<code>.rodata</code> section of the ELF file, and on AVR the startup code (<code>crt0</code>)
+<em>copies</em> <code>.data</code> from flash into RAM before <code>main()</code> runs, specifically so
+ordinary pointers can dereference it directly (AVR's Harvard architecture keeps
+program and data memory in separate address spaces — a plain pointer can't
+read flash). <code>F("...")</code> instead places the string in <code>.progmem</code> — flash that's
+<em>not</em> copied to RAM at startup — and returns a special <code>__FlashStringHelper*</code>
+that <code>Serial.print</code> recognizes, at which point it calls <code>pgm_read_byte()</code>
+per character to read directly out of flash through AVR's separate <code>LPM</code>
+instruction. This is also why it's a no-op on ESP32: Xtensa is a more unified
+memory architecture where flash is memory-mapped and directly addressable, so
+there was never a RAM copy to eliminate.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

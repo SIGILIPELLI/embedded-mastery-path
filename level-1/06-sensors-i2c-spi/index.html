@@ -930,6 +930,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2306,6 +2317,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2523,6 +2545,51 @@ blank screen — is a rite of passage.</p>
 <p>That's a working thermometer with a screen — the heart of the capstone, in
 which the <code>delay(2000)</code> will be replaced by proper non-blocking scheduling
 (module 7).</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>What "shared wires" really means electrically</strong>: I2C pins are wired as
+<strong>open-drain</strong> — a device can only pull SDA/SCL LOW (by switching on an
+internal transistor to ground) or let go (release it high-impedance); it can
+never actively drive HIGH. The pull-up resistors are what pull the line back
+to logic HIGH when nobody is pulling it low. This is precisely what lets many
+devices coexist on two wires without one damaging another: if two devices
+tried to actively drive opposite logic levels on a normal push-pull line
+simultaneously, you'd get a short circuit, but open-drain means the worst
+case is just "everyone releases and the resistor wins." The bus scanner's
+<code>Wire.endTransmission() == 0</code> works because after the controller clocks out
+the 7-bit address plus a read/write bit, it releases SDA for one more clock
+and checks whether the addressed device pulled it LOW — that pulse is the
+<strong>ACK bit</strong>, and a <code>0</code> return means some device recognized its address and
+asserted it.</p>
+<p><strong>Why SPI is faster</strong>: it's push-pull, not open-drain — MOSI, MISO, and SCK
+are each driven HIGH or LOW directly by dedicated output transistors on both
+ends, so there's no resistor/parasitic-capacitance RC time constant limiting
+how fast the line can be slewed, unlike I2C's pull-up-charged rise time.
+Every SCK edge shifts exactly one bit into a hardware shift register on each
+end simultaneously (SPI is full-duplex — data moves both directions on the
+same clock edge), which is also why SPI needs no addressing scheme: the
+transaction is fully deterministic once you've electrically selected exactly
+one device by pulling its CS line low, so the shift registers on controller
+and peripheral are talking to nobody else.</p>
+<p><strong>The DHT22's one-wire protocol, and why timing is "fiddly"</strong>: with only one
+data line for both directions, the DHT22 encodes each bit as a fixed-length
+LOW pulse followed by a HIGH pulse whose <em>duration</em> the receiver measures —
+roughly 26-28 µs of HIGH for a <code>0</code> bit and ~70 µs for a <code>1</code> bit. The library
+does this by disabling interrupts around a tight polling loop that reads the
+GPIO's raw input register (bypassing <code>digitalRead()</code>'s overhead) and calls
+<code>micros()</code> to time each transition — timing this precise is exactly why it
+can't tolerate an ISR or another peripheral operation interrupting it
+mid-read, and why a <code>2000 ms</code> gap is enforced between reads (the sensor's own
+internal capacitive humidity element needs that long to stabilize a new
+reading).</p>
+<p><strong>Where the OLED's pixels actually live</strong>: <code>Adafruit_GFX</code>'s drawing calls
+(<code>setCursor</code>, <code>println</code>, etc.) only flip bits in a plain RAM array you own —
+the framebuffer, 1 bit per pixel for a monochrome 128×64 panel (1024 bytes).
+<code>display.display()</code> is the only call that touches the bus: it streams that
+entire buffer over I2C into the SSD1306's own internal <strong>GDDRAM</strong> (graphics
+display data RAM) inside the display controller chip, which is what
+continuously refreshes the physical pixels regardless of what your MCU does
+afterward — which is exactly why the screen keeps showing the last image you
+pushed even if your sketch stalls.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

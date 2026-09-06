@@ -1233,6 +1233,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2544,6 +2566,43 @@ for later gives you garbage. Use <code>%.*s</code>, <code>strncmp()</code> bound
   certificate in <code>.broker.verification.certificate</code> for anything that leaves
   your LAN.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why MQTT survives a router with no port forwarding</strong>: the device's
+<code>esp_mqtt_client_start()</code> opens an ordinary outbound TCP socket (a SYN from
+the device to the broker's IP:port) — from the router's NAT table's
+perspective this is indistinguishable from a laptop opening a web page, so it
+creates a port-mapping entry automatically and keeps it alive as long as the
+socket stays open (helped by MQTT's own <strong>PINGREQ/PINGRESP</strong> keepalive
+traffic, sent at the <code>session.keepalive</code> interval specifically to stop
+routers and firewalls from silently expiring an idle NAT mapping). The broker
+can then push data down that already-established socket at any time —
+there's no need for anyone to open an inbound connection to the device,
+which is precisely the property that makes IoT devices behind consumer
+routers reachable at all.</p>
+<p><strong>How the LWT is actually delivered</strong>: when the device's <code>CONNECT</code> packet
+registers a last-will topic/payload, the broker stores it attached to that
+specific TCP connection's session state — not as a scheduled message, but as
+a promise conditioned on how the connection ends. A clean <code>DISCONNECT</code> packet
+tells the broker to discard the will unsent. But a connection that vanishes
+without one — power loss, WiFi drop, cable pull — is detected by the broker
+purely through <strong>TCP's own failure signalling</strong>: either the OS eventually
+reports the socket as reset/timed-out, or, more reliably, MQTT's keepalive
+means the broker expects a PINGREQ (or any packet) within 1.5× the keepalive
+interval and treats silence past that as a dead connection — at that exact
+moment the broker publishes the stored will. This is why the exercise's
+"pull the power and wait ~1.5× keepalive" check is precisely calibrated: it's
+testing the broker's keepalive timeout logic, not some fixed constant.</p>
+<p><strong>Why the event handler must not block</strong>: <code>esp-mqtt</code>'s client runs its socket
+read/write/reconnect state machine on one dedicated FreeRTOS task, and it
+calls your registered handler function <em>synchronously, from that same task</em>,
+for every event — there's no separate dispatcher thread. A blocking call
+inside your handler (a 5-second I2C read, a <code>vTaskDelay</code>) means that same
+task cannot service its own socket in the meantime: no PINGREQs go out, no
+incoming publishes get read from the TCP buffer, and if that buffer fills
+because the OS-level TCP receive window isn't being drained, the broker's own
+writes eventually block or the connection times out from its side — the
+"stalls the whole client" behavior is a direct, single-threaded consequence
+of one task doing two jobs (your logic and the network) at once.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

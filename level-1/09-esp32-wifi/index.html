@@ -975,6 +975,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2228,6 +2239,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2418,6 +2440,42 @@ just visits <code>http://&lt;the-ip&gt;/</code>.</p>
 <p>Serving <code>text/html</code> for humans and <code>application/json</code> for programs — that
 tiny <code>/api</code> route is the seed of every device dashboard and REST-controlled
 gadget you'll build.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>What <code>WiFi.begin()</code> triggers under the API</strong>: the ESP32's WiFi is a
+separate radio subsystem with its own MAC/PHY hardware, driven by a binary
+blob running on the chip's internal architecture that the Arduino <code>WiFi</code>
+class talks to via a thin driver layer (in ESP-IDF terms, <code>esp_wifi_*</code>
+calls). <code>WiFi.begin()</code> kicks off, in hardware and firmware below your
+sketch: an 802.11 <strong>probe/scan</strong> to find the SSID's access point, then
+<strong>authentication and association</strong> frames, then (for WPA2) a <strong>4-way
+handshake</strong> that derives session encryption keys, and finally <strong>DHCP</strong>
+(a UDP broadcast exchange) to obtain an IP address — all of that is what
+<code>WiFi.status() != WL_CONNECTED</code> is silently polling underneath the <code>.</code> dots.
+2.4 GHz-only is a hardware fact, not a software limitation: the ESP32's radio
+front-end (antenna matching network, RF filters, and the transceiver's
+tunable oscillator range) is physically built only to transmit/receive in the
+2.400–2.4835 GHz ISM band; a 5 GHz signal is simply outside the frequency
+range its analog RF circuitry can amplify or demodulate at all.</p>
+<p><strong>Why the connect loop blocks on purpose, but <code>handleClient()</code> doesn't</strong>:
+underneath both, network I/O ultimately rides on a TCP/IP stack (lwIP) that
+itself depends on the WiFi driver delivering received frames via — again —
+interrupts from the radio hardware, dispatched into a background FreeRTOS
+task the ESP32's WiFi driver spins up for you invisibly (module 21 covers
+FreeRTOS and tasks properly). <code>WebServer::handleClient()</code> is a non-blocking
+poll of that stack's listening socket: it checks whether a TCP SYN or request
+has arrived in the socket's receive buffer and returns immediately if not —
+which is exactly why it belongs in a tight, undelayed <code>loop()</code>: every pass
+you skip is a pass where an already-connected client's request sits queued,
+adding latency, and where a new SYN could sit unacknowledged, since nothing
+else in this sketch drives that socket forward.</p>
+<p><strong>Why heap matters here specifically</strong>: every <code>HTTPClient</code>/<code>WebServer</code>
+request causes lwIP to allocate socket buffers and TLS/TCP control structures
+from the same general-purpose heap <code>ESP.getFreeHeap()</code> reports — string
+formatting into <code>char page[400]</code> avoids per-request <code>String</code> heap churn on
+your side, but the underlying TCP stack still allocates and frees its own
+buffers per connection, which is precisely why the exercise asks you to watch
+free heap across "many page loads": a slow leak there would be the network
+stack failing to release a buffer, not your own code.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

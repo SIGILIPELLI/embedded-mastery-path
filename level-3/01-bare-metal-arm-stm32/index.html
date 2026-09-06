@@ -1525,6 +1525,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2449,6 +2471,48 @@ from the reference manual for that exact chip.</p>
   fields (MODER, AFR); a shift computed with the wrong field width silently
   corrupts an adjacent pin's configuration.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why the CPU reads exactly two words from address <code>0x0</code></strong>: this isn't
+convention, it's wired into the Cortex-M core's reset logic itself. On
+Cortex-M, address <code>0x0</code> is architecturally defined to alias the start of the
+vector table (STM32 further lets you remap this via the <code>SYSCFG_MEMRMP</code>
+register, so it can point at flash, system boot ROM, or SRAM depending on
+boot pin state), and the core's hardware reset sequence — before fetching a
+single instruction — performs two fixed memory reads at that address and
+<code>0x4</code>, loads them directly into the <code>MSP</code> (Main Stack Pointer) and <code>PC</code>
+registers, and only then begins normal instruction fetch/decode/execute at
+whatever <code>PC</code> now points to. There is no instruction that performs this load
+— it's dedicated reset-sequencing hardware, which is exactly why a wrong
+value at word 0 (a bad <code>_estack</code>) or word 1 (a misaligned <code>Reset_Handler</code>
+address, which must have its Thumb bit set) hangs the chip before any code,
+even a debugger breakpoint set in <code>main()</code>, has a chance to run.</p>
+<p><strong>Why <code>BSRR</code> is genuinely atomic and <code>ODR |=</code> genuinely isn't</strong>: <code>ODR |= bit</code>
+compiles to a load instruction, a bitwise OR, and a store instruction — three
+separate bus transactions, any of which an interrupt can land between. If an
+ISR's own <code>ODR</code> write happens after this code's load but before its store,
+the store overwrites the ISR's change with stale data the instant it
+executes — a classic read-modify-write race, identical in kind to the
+<code>volatile uint32_t</code> torn-read problem from module 1-07, just on a write
+instead of a read. <code>BSRR</code> sidesteps this entirely at the hardware level: it
+isn't a mirror of <code>ODR</code> you read back — writing a <code>1</code> to its low 16 bits
+sets the corresponding output bit and writing a <code>1</code> to its high 16 bits
+clears it, and writing <code>0</code> anywhere does nothing, all inside the GPIO
+peripheral's own combinational logic in a single bus write with no
+read step at all. Two different contexts (main code and an ISR) can each
+write <code>BSRR</code> for a different pin in the same register with zero
+possibility of one clobbering the other's intended effect, because neither
+write ever depends on first observing the register's current value.</p>
+<p><strong>Why the wrong base address "compiles cleanly"</strong>: <code>0x40020000</code> is just an
+integer literal to the compiler and linker — nothing in the C type system or
+build toolchain has any notion of "this number denotes GPIOA" versus "this
+number denotes GPIOB." That knowledge exists only in the reference manual's
+memory map table (a document, not a machine-checkable artifact) and in the
+programmer's head when writing the <code>#define</code>. This is the fundamental reason
+bare-metal register work has no compiler safety net that Arduino's
+<code>digitalWrite(pin, ...)</code> API provides — the Arduino core's pin-to-register
+lookup table <em>is</em> machine-checkable (a bad pin number is caught or ignored at
+runtime), whereas a raw address typo is, to the compiler, indistinguishable
+from a correct one.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

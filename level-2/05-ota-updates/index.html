@@ -1261,6 +1261,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2487,6 +2509,44 @@ mechanism, anti-rollback (<code>CONFIG_BOOTLOADER_APP_ANTI_ROLLBACK</code>), whi
 burns a monotonic security version into eFuses; note it is permanent and
 irreversible, so treat it as a production decision rather than a
 development-time toggle.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why the <em>bootloader</em>, not the app, decides which slot to boot</strong>: every
+ESP32 flash image starts with a tiny <strong>second-stage bootloader</strong> (itself
+written to a fixed offset, 0x1000, by <code>idf.py flash</code>) that runs before any of
+your <code>app_main()</code> code exists in memory. On every power-on or reset, the
+ROM bootloader (burned permanently into the chip at manufacture) loads and
+jumps to this second-stage bootloader, which reads the <code>otadata</code> partition —
+two mirrored 4 KB copies of a sequence counter and CRC, so a power loss
+mid-write to one copy can never corrupt both — determines which of <code>ota_0</code>/
+<code>ota_1</code> has the higher valid sequence number, and only then loads <em>that</em>
+partition's image into RAM/flash-mapped cache and jumps to it. This is why
+OTA is safe against interruption: your running app can only ever influence
+which slot gets chosen <em>next boot</em>, never what's currently executing, and a
+power loss mid-download simply leaves <code>otadata</code> unchanged, so the bootloader
+falls back to booting the still-intact previous slot.</p>
+<p><strong>Why <code>esp_ota_write()</code> can append instead of erasing everything first</strong>:
+<code>OTA_WITH_SEQUENTIAL_WRITES</code> takes advantage of a fundamental property of
+NOR flash — you can only flip bits from <code>1</code>→<code>0</code> when writing, and flipping
+<code>0</code>→<code>1</code> requires a full sector <strong>erase</strong> first. Sequential-write mode erases
+only the flash sectors it's about to write into, just ahead of the write
+pointer, rather than erasing the whole multi-hundred-KB partition up front —
+which is both why it's faster to start and why interrupting it mid-transfer
+simply leaves a partially-written, CRC-invalid image in the <em>inactive</em> slot:
+harmless, because <code>esp_ota_end()</code>'s validation (image header magic byte,
+segment checksums, and — with secure boot — a cryptographic signature check)
+is the only thing standing between that partition's contents and
+<code>esp_ota_set_boot_partition()</code> ever pointing at it.</p>
+<p><strong>What the rollback probation state actually is</strong>: <code>ESP_OTA_IMG_PENDING_VERIFY</code>
+is a value stored in that same <code>otadata</code> structure, checked by the bootloader
+<em>before</em> jumping to the app — with <code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE</code>
+on, the bootloader also arms a check: if a boot from a pending-verify slot is
+immediately followed by another reset before that slot's app clears the
+pending flag, the bootloader treats that as evidence the new image is broken
+and reverts to the previous slot on its own, with no cooperation needed from
+the (possibly crash-looping) new firmware at all. This is the mechanism
+behind "a crash during probation is automatically undone" — the safety net
+lives in the bootloader's own logic, not in anything your application code
+has to detect or handle.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

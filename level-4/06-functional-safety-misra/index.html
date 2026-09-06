@@ -2052,6 +2052,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2294,6 +2305,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2492,6 +2514,52 @@ range check cannot.</p>
   requires documenting <em>why</em> a deviation is acceptable, not just suppressing
   the warning silently.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why MISRA's essential-type rules (the Rule 10.x family) target a real,
+mechanical compiler behavior</strong>: C performs <strong>implicit integer conversions</strong>
+(the "usual arithmetic conversions") automatically whenever an expression
+mixes types — a signed <code>int</code> compared against an <code>unsigned int</code>, for
+instance, has the signed operand silently converted to unsigned before the
+comparison, per the language standard's promotion rules, with no warning at
+default compiler settings. This is precisely the mechanism behind the
+"before" example's <code>unsigned int i</code> looping against a signed <code>int len</code>: if
+<code>len</code> were ever negative, comparing <code>i &lt; len</code> first converts <code>len</code> to
+unsigned via exactly this rule, turning a small negative number into a huge
+positive one (the same two's-complement bit-pattern reinterpretation from
+module 1-02's overflow discussion) — the loop condition that looks like "stop
+when <code>i</code> reaches <code>len</code>" silently becomes "loop billions of times," walking far
+past the end of <code>buf</code>. Rule 10.x doesn't invent new semantics; it constrains
+which type combinations are permitted specifically so this always-happening
+compiler behavior can never silently apply somewhere the programmer didn't
+intend it.</p>
+<p><strong>Why single-exit-point structuring (Rule 15.5) genuinely aids verification,
+mechanically</strong>: static analysis and manual safety review both work by
+constructing a <strong>control-flow graph</strong> of a function — every branch, loop,
+and return statement is a node or edge in that graph, and a reviewer (or
+tool) reasoning about "what must be true when this function finishes" has to
+account for every path that reaches an exit. A function with returns
+scattered through nested conditionals multiplies the number of distinct exit
+paths that must each be checked for the same postcondition (did we release
+this resource, did we leave state consistent) — a single, unconditional exit
+point collapses that to one path whose precondition is simply "control
+reached the end," making the set of states a reviewer or tool must verify
+strictly smaller and enumerable by inspection rather than by tracing every
+branch combination.</p>
+<p><strong>Why a plausibility check catches a class of fault a range check
+architecturally cannot</strong>: a range check (<code>0°C &lt;= value &lt;= 100°C</code>) evaluates
+one reading in isolation — it has no memory of anything that came before,
+so any single value inside the valid envelope passes regardless of how it
+got there. A real sensor fault (a loose connector momentarily open-circuiting,
+an EMI transient coupling into the ADC's input, a corrupted single sample)
+frequently produces a value that is individually plausible but represents a
+rate of change no physical process the sensor measures could actually
+achieve — a thermal mass takes real time to change temperature, bounded by
+its thermal conductivity and mass, so a genuine 40°C swing in 10 milliseconds
+is physically excluded regardless of what the raw ADC count says. Encoding
+that physical constraint (<code>max_rate_per_sec</code>) as an explicit check against
+the <em>previous</em> reading and elapsed time gives the software a piece of domain
+knowledge no purely statistical range check can express, because a range
+check by construction only ever looks at one sample at a time.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

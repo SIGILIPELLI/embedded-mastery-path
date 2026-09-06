@@ -936,6 +936,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2262,6 +2273,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2436,6 +2458,45 @@ other interrupts are masked. The rules are strict:</p>
 </ol>
 <p>The standard division of labor, exactly as in the example: <strong>ISR records the
 event, <code>loop()</code> does the work.</strong></p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Where <code>millis()</code> gets its number</strong>: it isn't derived from any wall clock —
+a hardware <strong>timer/counter peripheral</strong> (Timer0 on AVR, one of the ESP32's
+64-bit hardware timers) is configured at startup to generate an interrupt at
+a fixed rate (roughly every 1.024 ms on AVR, tuned so software correction
+lands it on exact milliseconds), and each time that <strong>timer overflow
+interrupt</strong> fires, its ISR increments a global counter variable. <code>millis()</code>
+just reads that counter. This means <code>millis()</code>'s accuracy is only as good as
+the crystal/resonator clocking the timer — cheap ceramic resonators drift a
+bit with temperature, which is why long-uptime timing-critical systems
+(Level 3) eventually move to a proper RTC crystal.</p>
+<p><strong>What actually happens at an interrupt</strong>: when the GPIO peripheral's edge
+detector (configured by <code>attachInterrupt</code>'s trigger mode) senses the
+requested transition, dedicated hardware signals the CPU core between
+instruction boundaries. The core then, entirely in hardware: pushes the
+current program counter (and on some architectures, status flags) onto the
+stack, looks up your ISR's address in the <strong>interrupt vector table</strong> — a
+fixed array of function-pointer-like entries near the start of flash, one
+slot per interrupt source — and jumps there. Your ISR runs to completion,
+then its generated epilogue (<code>reti</code> on AVR) pops the saved state back off the
+stack and execution resumes in <code>loop()</code> at the exact instruction it was
+about to execute, as if nothing happened — except any global state the ISR
+touched.</p>
+<p><strong>Why <code>volatile</code> is not optional</strong>: the compiler's optimizer is allowed to
+assume that if your code never explicitly writes a variable between two
+reads, its value hasn't changed, and it will cache that value in a CPU
+register rather than re-reading memory. But an ISR modifies <code>pressCount</code>
+through a completely separate code path the optimizer doesn't model as
+occurring "between" statements in <code>loop()</code> — so without <code>volatile</code>, the
+compiler can (and does, at -O2) hoist <code>pressCount</code> into a register once and
+never look at RAM again, silently missing every ISR update. <code>volatile</code> forces
+an actual load/store instruction to the variable's memory address on every
+access, which is also <em>why</em> multi-byte volatile reads on an 8-bit AVR aren't
+atomic: reading a <code>volatile uint32_t</code> is four separate byte-wide <code>LD</code>
+instructions, and if the ISR fires and updates the value between the 2nd and
+3rd byte, <code>loop()</code> reads a torn, half-old-half-new value — exactly the
+scenario <code>noInterrupts()</code>/<code>interrupts()</code> (which set/clear the CPU's global
+interrupt-enable flag, blocking all interrupts for that critical section)
+exists to prevent.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

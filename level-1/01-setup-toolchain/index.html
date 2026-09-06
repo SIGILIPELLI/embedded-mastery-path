@@ -779,6 +779,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2284,6 +2295,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2426,6 +2448,46 @@ prints <code>Connecting....</code> during upload. If uploads fail with a timeout
 that's the first thing to try. (Simulator users: this problem doesn't
 exist in Wokwi — one of several reasons it's great for learning.)</p>
 </div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>"Verify" and "Upload" are not one step wearing two names — they're a whole
+toolchain pipeline, and it's worth knowing the stages because every error
+message you'll ever see names one of them:</p>
+<ol>
+<li><strong>Preprocessor</strong> expands <code>#include</code>s and macros, and the Arduino build
+   system additionally scans your <code>.ino</code> for function definitions and
+   auto-generates forward declarations (so you can call <code>blink()</code> from
+   <code>loop()</code> even though it's defined below it — an Arduino-specific
+   convenience real C++ doesn't give you).</li>
+<li><strong>Compiler</strong> (<code>avr-gcc</code> for Uno, <code>xtensa-esp32-elf-gcc</code> for ESP32 — the
+   board package installed exactly these) turns your C++ into target-specific
+   <strong>assembly</strong>, then an <strong>object file</strong> (<code>.o</code>) of machine code plus
+   unresolved symbol references.</li>
+<li><strong>Linker</strong> resolves those references against the Arduino core library and
+   your sketch's other object files, and — critically — lays out where every
+   function and global variable will physically live in flash and RAM
+   according to a <strong>linker script</strong> for that exact chip. This is where the
+   "Sketch uses 924 bytes" report comes from: it's literally the size of the
+   <code>.text</code> (code) and <code>.data</code>/<code>.bss</code> (variable) sections the linker produced.</li>
+<li><strong>Objcopy</strong> converts the linked ELF file into a raw binary image
+   (<code>.hex</code> for AVR, <code>.bin</code> for ESP32) — the exact byte stream that will sit in
+   flash.</li>
+<li><strong>Upload tool</strong> (<code>avrdude</code> for Uno, <code>esptool.py</code> for ESP32) opens the
+   serial port, and — this is the mechanism behind the BOOT-button warning
+   above — talks a bootloader protocol to a tiny piece of firmware already
+   burned into the chip. On Uno, the bootloader watches for a reset pulse
+   asserted by the IDE toggling the DTR serial line through a capacitor
+   ("auto-reset"); on many ESP32 boards, DTR/RTS aren't wired the same way, so
+   the chip has to be forced into its ROM bootloader manually by holding BOOT
+   (pulls the <code>GPIO0</code> strapping pin low) while EN (reset) is toggled — which
+   is exactly what holding BOOT during <code>Connecting....</code> does.</li>
+<li>The bootloader then writes your binary into flash at a fixed address, and
+   on the next reset the chip's boot ROM jumps to it and your <code>setup()</code>/<code>loop()</code>
+   loop begins.</li>
+</ol>
+<p>None of this happens on your machine once uploaded — flash is
+non-volatile (it keeps its contents with power off, unlike RAM), which is why
+the program "runs there forever, restarting every time the board gets
+power": the reset vector always points at the same flashed code.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

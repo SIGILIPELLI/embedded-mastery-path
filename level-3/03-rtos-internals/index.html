@@ -1581,6 +1581,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2437,6 +2459,49 @@ just bit-scanning. Compiled and run with <code>gcc</code>:</p>
   pointer must itself be protected from interrupts, or a timer tick during
   the update can hand the CPU to a task mid-switch.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why PendSV, specifically, and not SysTick itself, does the switch</strong>: on
+Cortex-M, exceptions can preempt each other by priority, and the hardware
+exception-entry sequence (auto-saving R0-R3/R12/LR/PC/xPSR) can itself be
+interrupted and resumed if a higher-priority exception arrives mid-entry —
+this is called "tail-chaining" and it's a real hardware optimization. If the
+context-switch logic ran directly inside <code>SysTick_Handler</code> (which typically
+runs at a fairly high priority so the tick itself is reliable), a
+higher-priority peripheral interrupt arriving during the switch could
+observe an inconsistent stack — half old task, half new task — with no clean
+way to unwind. By instead having <code>SysTick_Handler</code> merely set
+<code>PendSV</code>'s pending bit (a single register write to <code>ICSR</code>) and return, the
+actual register-juggling only ever executes when the CPU has no higher-priority
+exception pending — because <code>PendSV</code> is configured at the numerically
+lowest priority, meaning it will <em>always</em> be interrupted first and only
+resumed once every genuinely urgent handler has finished, guaranteeing the
+switch itself is never seen half-done by anything else in the system.</p>
+<p><strong>Why only R4-R11 need explicit saving</strong>: this is a direct consequence of
+the Cortex-M <strong>exception entry/exit hardware contract</strong>. When any exception
+fires — including the one that triggered <code>PendSV</code> — the core automatically
+pushes R0-R3, R12, LR, PC, and xPSR onto whatever stack was active (this is
+called "stacking," and it happens in hardware before the handler's first
+instruction even executes), and automatically pops the same set back off on
+return via the special <code>EXC_RETURN</code> value loaded into <code>LR</code>. The
+<code>PendSV_Handler</code> code is running <em>after</em> that automatic stacking already
+happened for the outgoing task and <em>before</em> the automatic unstacking happens
+for the incoming task — so the eight already-stacked registers are already
+exactly where they need to be on each task's own stack; the handler's only
+remaining job is the eight registers the hardware contract doesn't cover.
+This split isn't an implementation shortcut — it's what makes a context
+switch on Cortex-M cheap enough to run on every scheduler tick without
+meaningfully affecting throughput.</p>
+<p><strong>Why the ready-bitmap scan is O(1) and not O(32)</strong>: real FreeRTOS
+implementations don't loop from bit 31 down to 0 as the teaching model above
+does — they issue a single <strong>CLZ (count leading zeros)</strong> instruction, present
+in the Cortex-M instruction set specifically for exactly this kind of
+priority-encoding use case, which returns the bit position of the
+highest set bit in one CPU cycle regardless of which bit it is. This is what
+makes "which task should run next" a constant-time operation independent of
+<code>configMAX_PRIORITIES</code> — a scheduler that had to loop through priority
+levels one at a time would make context-switch cost scale with how many
+priority levels your project happens to define, which is exactly the kind of
+non-deterministic overhead a real-time kernel is built to avoid.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

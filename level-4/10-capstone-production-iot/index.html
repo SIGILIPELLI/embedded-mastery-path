@@ -2151,6 +2151,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2252,6 +2263,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2506,6 +2528,55 @@ fakes that let the <em>logic</em> (not the hardware) be verified with <code>gcc<
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why the fake-based orchestration test can prove something the individual
+module tests (4-01 through 4-09) structurally cannot</strong>: each earlier
+module's test verifies one function against its own directly-controlled
+inputs — <code>validate_config</code> given a crafted struct, <code>reading_is_plausible</code>
+given two chosen floats. None of those tests can catch a bug in the <em>glue</em>
+that decides which functions get called, in what order, with which of each
+other's outputs — for instance, a real bug where a sensor failure's <code>-1</code>
+return is accidentally ignored and the (uninitialized or stale) <code>reading</code>
+variable gets passed into <code>telemetry_summary_add</code> anyway. That specific
+class of bug only exists in <code>app_cycle</code>'s control flow itself, not in any
+one function's internals, so it can only be caught by a test that exercises
+the actual call sequence — which is exactly what replacing every dependency
+with a fake and driving the <em>orchestrating</em> function achieves: the fakes
+make the test fast and hardware-free while the real, unmodified orchestration
+logic (the actual bug surface) still executes exactly as it would in
+production.</p>
+<p><strong>Why the assertion <code>g_summary_count == 1</code> after the implausible-reading
+case is the single most load-bearing line in that test</strong>: it isn't checking
+that <code>app_cycle</code> returned the right error code (a much weaker property that
+could pass even if the function's internal ordering were subtly wrong) — it
+verifies a specific <em>causal</em> fact: that <code>telemetry_summary_add</code> was not
+called between the two assertions, i.e., that the plausibility check's early
+return genuinely prevented the aggregation call from executing at all,
+rather than the aggregation happening first and the error being reported
+afterward as an inconsequential afterthought. This distinction matters
+mechanically because C has no language-level guarantee that an early
+<code>return -2;</code> couldn't be reordered relative to a side-effecting call by a
+future refactor — the counter check gives the test a concrete, checkable
+signature of the <em>ordering</em> invariant ("validate before aggregate") that a
+mere return-code check would silently let regress.</p>
+<p><strong>Why "layering discipline breaking down under integration pressure" is
+where the architecture's soundness is actually tested, not merely a
+management platitude</strong>: module 4-01's HAL/driver/application layering is
+only as real as the discipline that keeps the application layer's compiled
+code free of any direct register or chip-specific dependency — and the
+mechanical fact underlying that claim is the same one from module 4-01's own
+"how it actually works": as long as <code>app_cycle</code> calls only through
+declared function signatures (<code>temp_sensor_read_celsius</code>, etc.), the linker
+resolves those calls to whatever implementation — real driver or test fake —
+is linked into a given build, and the compiled application-layer object code
+never encodes a dependency on which one. The moment a developer, under
+deadline pressure, adds one direct hardware register read into <code>app_cycle</code>
+"just for this one urgent fix," that object file now has a hardware-specific
+symbol or address baked in, and the orchestration test above can no longer
+link against fakes without that one register access either failing to
+resolve or reading nonsense on a host CPU — the integration test failing to
+build or run cleanly is the concrete, mechanical symptom of exactly the
+layering violation the traps section warns about in prose.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Wire the discarded <code>power</code> state from <code>app_cycle</code> into an actual

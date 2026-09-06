@@ -807,6 +807,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2228,6 +2239,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2421,6 +2443,45 @@ does more than one thing (module 7 builds this into a general technique).</p>
 <p>Wokwi's virtual button bounces realistically if you enable it: click the
 button, and in its properties set <code>"bounce": "1"</code> — then try the buggy counter
 version and watch it miscount, exactly like real hardware.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>pinMode</code>/<code>digitalWrite</code>/<code>digitalRead</code> are library convenience wrappers
+around direct <strong>memory-mapped I/O</strong>: each GPIO pin is controlled by bits in
+special registers that live at fixed addresses in the chip's address space,
+alongside RAM. On AVR, pin 5 (Uno's <code>PD5</code>) is bit 5 of three registers —
+<code>DDRD</code> (Data Direction Register — 1 = output), <code>PORTD</code> (output level when
+configured as output, or pull-up enable when input), and <code>PIND</code> (the pin's
+actual sampled input level). <code>pinMode(5, OUTPUT)</code> compiles down to something
+equivalent to <code>DDRD |= (1 &lt;&lt; 5);</code> — a single bitwise OR into that register's
+memory address — and <code>digitalWrite</code> is <code>PORTD |= (1 &lt;&lt; 5)</code> or
+<code>PORTD &amp;= ~(1 &lt;&lt; 5)</code>. On the ESP32, the equivalent registers
+(<code>GPIO_ENABLE_REG</code>, <code>GPIO_OUT_REG</code>, <code>GPIO_IN_REG</code>) sit in its peripheral
+address space and are 32 bits wide, one bit per pin. This is why raw register
+access (<code>PORTD = 0b00100000;</code> on AVR) can toggle 8 pins in one clock cycle —
+useful when <code>digitalWrite</code>'s function-call overhead (pin-to-register lookup,
+argument checking) is too slow, as it will be by Level 3.</p>
+<p><strong>Why floating inputs read noise</strong>: an unconnected pin is electrically
+"high impedance" — nothing is actively holding its voltage anywhere, so it
+acts like a tiny antenna, and its ADC/comparator input stage floats to
+whatever stray capacitive coupling (mains hum, neighboring switching signals,
+even your hand near the board) charges it to. A pull-up resistor solves this
+by giving the pin a well-defined, low-current path to VCC (or a pull-down to
+GND) so that the moment nothing else is driving it, it settles to a known
+logic level. <code>INPUT_PULLUP</code> doesn't add a physical part — it sets a bit in
+the same port register (on AVR, writing <code>PORTD</code> HIGH while <code>DDRD</code> for that
+bit is 0 internally routes ~20-50 kΩ from VCC to the pin) that turns on an
+internal resistor already built into the chip's I/O pad circuitry.</p>
+<p><strong>Why contacts bounce</strong>: a mechanical switch is a spring-loaded metal contact;
+when it closes, the two surfaces physically strike each other and
+micro-bounce apart and together several times over microseconds to
+milliseconds before settling, due to contact elasticity — the same physics as
+a dropped ball bouncing to rest. Because the CPU's clock runs at millions of
+cycles per second, <code>digitalRead()</code> is fast enough to sample the switch mid-bounce
+and see each micro-contact as a separate transition. The debounce loop's
+<code>millis() - lastChangeMs &gt; DEBOUNCE_MS</code> window works because it's comparing
+against the CPU's own free-running millisecond timer (driven by a hardware
+timer/counter peripheral incrementing on a fixed clock tick, covered in
+module 7) rather than blocking with <code>delay()</code>, so the chip keeps sampling
+during the bounce instead of ignoring it.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

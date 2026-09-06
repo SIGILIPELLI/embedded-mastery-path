@@ -969,6 +969,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2477,6 +2499,45 @@ because every wake is a fresh boot.</p>
 <p>Timer wakeup is one of several sources: <code>esp_sleep_enable_ext0_wakeup(pin,
 level)</code> wakes on a GPIO (a button, a sensor's alarm output), and sources can
 be combined — <code>esp_sleep_get_wakeup_cause()</code> tells you which one fired.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why SRAM corruption causes "impossible" bugs</strong>: on both AVR and ESP32, the
+<strong>stack</strong> (function call frames, local variables, return addresses) and the
+<strong>heap</strong> (dynamic allocations, including every hidden <code>String</code> allocation)
+grow toward each other from opposite ends of the same physical SRAM address
+range — the stack grows downward from high addresses, the heap grows upward
+from just above your global variables. There is no hardware guard page in
+between on these small chips (unlike an MMU-equipped application processor).
+When they collide, a function call's return address or a local variable
+literally gets overwritten by heap data (or vice versa) — the CPU doesn't
+detect this as an error at all, it just executes whatever garbage address it
+finds when the function returns, which is why the symptom is a spontaneous
+reset (jumping to an invalid address trips the watchdog or triggers a fault)
+rather than a clean error message.</p>
+<p><strong>Why flash "wears out"</strong>: flash memory stores bits by trapping electrical
+charge on a floating gate inside each memory cell, insulated by a thin oxide
+layer. Writing a <code>1</code>→<code>0</code> bit requires an erase-then-program cycle that forces
+charge across that oxide layer via quantum tunneling; each cycle
+physically stresses and gradually degrades the oxide's insulating ability
+until, after tens of thousands of cycles, it can no longer reliably hold
+charge — a hardware failure mode, not a software one. This is exactly why
+this module is careful to say "write on change, not per loop": every
+<code>prefs.putUInt()</code>/<code>EEPROM.put()</code> call that changes the underlying flash sector
+consumes part of its finite lifetime, and code that saves every second
+instead of every hour can wear out a sector in weeks.</p>
+<p><strong>What actually happens in deep sleep</strong>: an ESP32 in deep sleep powers down
+the CPU cores, most SRAM, and most peripherals entirely — literally cutting
+their supply rails — leaving only a small, separately-powered <strong>RTC domain</strong>
+containing a low-power timer, a handful of RTC GPIOs, and a tiny slice of RTC
+memory alive. <code>RTC_DATA_ATTR</code> places a variable's storage in that surviving
+RTC memory region instead of ordinary SRAM, specifically so it isn't wiped
+when the rest of SRAM loses power. Waking is indistinguishable from a power-on
+reset from the CPU's point of view — the boot ROM runs, <code>app_main</code>/<code>setup()</code>
+runs from scratch — except the boot ROM first checks
+<code>esp_sleep_get_wakeup_cause()</code> (a status register the RTC domain sets before
+waking the rest of the chip) so your code can tell "fresh power-on" from
+"woke from a timer/GPIO." This full power-down of the CPU is exactly what
+gets deep sleep down to ~10 µA — there is simply no clocked digital logic
+left running to consume current, only quiescent leakage in the RTC domain.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

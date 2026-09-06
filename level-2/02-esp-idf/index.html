@@ -1188,6 +1188,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2294,6 +2305,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2494,6 +2516,44 @@ via <code>idf_component.yml</code>:</p>
 <p>Run <code>idf.py reconfigure</code> after editing it; the manager fetches and builds
 the dependency alongside your own code, no manual library installation
 step.</p>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why <code>sdkconfig</code> is a real build input, not a cache</strong>: <code>menuconfig</code>'s tree
+is generated from <code>Kconfig</code> files that every component ships alongside its
+source — each option compiles down to a C preprocessor <code>#define</code>
+(<code>CONFIG_FREERTOS_HZ</code>, <code>CONFIG_PARTITION_TABLE_CUSTOM</code>, etc.) written into a
+generated <code>sdkconfig.h</code> that every component's source includes. Changing
+"FreeRTOS Tick rate" in menuconfig literally changes the value substituted
+for <code>configTICK_RATE_HZ</code> when the kernel itself is recompiled — it's not a
+runtime flag read at boot, it's a compile-time constant baked into the
+FreeRTOS binary you flash, which is exactly why <code>idf.py fullclean</code> is
+sometimes needed: a header-only config change doesn't always retrigger every
+object file's dependency check correctly, and a genuinely stale <code>.o</code> linked
+against the old value produces "weird" behavior that isn't a bug in your
+code at all.</p>
+<p><strong>What <code>idf.py build</code> is actually orchestrating</strong>: unlike Arduino IDE's
+single hidden <code>.ino</code>-to-binary pipeline, ESP-IDF's build is a real
+multi-stage CMake + Ninja graph: <code>project.cmake</code> (included by your top-level
+<code>CMakeLists.txt</code>) walks every component directory looking for
+<code>idf_component_register()</code> calls, builds a dependency graph from each
+component's <code>REQUIRES</code>, compiles each component as its own <strong>static
+library</strong>, then links all of them plus ESP-IDF's own FreeRTOS, lwIP, and
+driver components against a fixed linker script for your target chip — the
+same conceptual link stage from module 1-01, just with dozens of components
+rather than one Arduino core blob. <code>idf.py size</code> reading out per-component
+flash/RAM usage is possible specifically because each component compiles to
+a separately-named <code>.a</code> archive the linker keeps addressable in its map
+output.</p>
+<p><strong>Why <code>app_main()</code> "is allowed to return"</strong>: it isn't special-cased boot
+code — it's registered as the entry function of an ordinary FreeRTOS task
+(created by ESP-IDF's own startup code, <code>esp_startup.c</code>, after the boot ROM
+loads your app image from flash, sets up the MMU to map flash into the
+instruction cache address space, and initializes the C runtime). A FreeRTOS
+task function returning is a defined, ordinary event — the kernel calls
+<code>vTaskDelete(NULL)</code> on it automatically, tears down its TCB and stack, and
+the scheduler simply never runs it again — nothing special happens to the
+rest of the system, which is why <code>app_main()</code> is free to just do one-time
+setup then exit if you don't need it looping forever, unlike Arduino's
+<code>loop()</code> contract, which the runtime calls repeatedly regardless.</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>

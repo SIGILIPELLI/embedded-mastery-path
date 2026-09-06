@@ -1749,6 +1749,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2272,6 +2283,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#cheat-sheet" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2462,6 +2484,57 @@ hardware — is pure computation and was compiled and run with <code>gcc</code>:
   malicious images — module 4-02 covers cryptographic signing for update
   authenticity, a materially different and stronger guarantee.</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><strong>Why <code>VTOR</code> exists as a separate, settable register at all</strong>: on the
+simplest Cortex-M implementations, the vector table is architecturally fixed
+at address <code>0x0</code> with no way to relocate it — but the moment you need
+position-independent code regions (a bootloader plus a separately-linked
+application, exactly this module's scenario), the CPU needs some way to know
+where the <em>currently running</em> code's exception handlers live, since
+<code>HardFault_Handler</code>, <code>SysTick_Handler</code>, and every peripheral IRQ handler in
+the application are linked at different flash addresses than the
+bootloader's own copies of those same handler names. <code>SCB_VTOR</code> is a
+memory-mapped register the exception-entry hardware itself reads on every
+single exception dispatch — not just at startup — to compute "vector table
+base + (exception number × 4)" as the address to fetch the handler pointer
+from. This is exactly why forgetting to set it is silent until the first
+interrupt: <code>main()</code> executing is just straight-line instruction fetch from
+wherever <code>PC</code> was set, entirely independent of <code>VTOR</code> — only the moment an
+exception actually fires does the hardware consult <code>VTOR</code>, and if it still
+holds the bootloader's base address, it fetches a handler pointer from the
+bootloader's table, jumping into code that has no idea it's running in the
+application's context (wrong stack contents, wrong global variable
+addresses relative to what that handler expects).</p>
+<p><strong>Why dual-bank writing genuinely can't brick a device, mechanically</strong>: the
+CPU's boot-time read of SP/PC (module 3-01) happens from one fixed,
+unconditional address — for this scheme, that means the <em>bootloader's own</em>
+fixed location, which this update logic never touches. <code>flash_erase</code> and
+<code>flash_write</code> in <code>apply_update</code> only ever target <code>inactive_bank_addr</code> — a
+completely separate range of flash sectors from whatever the CPU would jump
+into on the next reset before <code>set_active_bank()</code> runs. Because a flash
+sector's contents at one address have no physical relationship to a sector's
+contents at a different address (they're independent blocks of floating-gate
+cells, module 2-07), corrupting or partially writing the inactive bank
+literally cannot alter a single bit of the active bank sitting elsewhere in
+the same flash chip — the "safety" here isn't a clever software guarantee,
+it's the simple physical fact that erase/program operations are scoped to
+the specific sector addresses given to them.</p>
+<p><strong>Why CRC catches corruption but not tampering</strong>: a CRC (or the simplified
+multiplicative checksum used in the portable test above) is designed purely
+to detect <em>random</em> bit errors — the kind introduced by a dropped byte during
+a UART transfer or a power glitch mid-flash-write — because for any single
+random bit flip, the probability that the CRC recomputed over the corrupted
+data happens to still match the stored value is vanishingly small by
+construction of the polynomial/algorithm. But a CRC has no secret component
+at all: anyone who can write an arbitrary payload can trivially recompute the
+matching CRC for their own modified payload and store it alongside — the
+check would pass, because nothing about a CRC depends on knowledge only the
+legitimate firmware author has. A cryptographic signature (module 4-02)
+instead is verified using a public key whose matching private key only the
+legitimate signer holds, so recomputing a valid signature for tampered data
+is (assuming sound cryptography) computationally infeasible — a fundamentally
+different guarantee (authenticity) from a CRC's guarantee (accidental
+corruption detection), not merely a "stronger CRC."</p>
 <h2 id="cheat-sheet">Cheat sheet<a class="headerlink" href="#cheat-sheet" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
