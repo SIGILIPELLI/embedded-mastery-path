@@ -222,6 +222,11 @@ choice was resolved by the preprocessor before the binary was even linked.
 | Consistent error enum | Decide once, project-wide — expensive to retrofit later |
 | Verification here | Driver-against-fake-HAL logic compiled/run with `gcc`; real hardware timing not represented |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — Production Firmware Architecture](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/01-production-architecture/)
+- [Freertos — Production Firmware Architecture](https://sigilipelli.github.io/freertos-mastery-path/level-4/03-production-architecture/)
+
 ## Exercise
 
 Extend the fake-HAL test harness with a `fake_i2c_read` that can be

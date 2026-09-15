@@ -205,6 +205,12 @@ required to flip the classification back and forth.
 | Worst-case sizing | Storage capacity and critical-state behavior must survive worst case, not average, harvest conditions |
 | Verification here | Power-balance and state-classification logic compiled/run with `gcc`; real harvester/regulator behavior needs lab measurement |
 
+## 🔀 Related lessons on other tracks
+
+- [Edge AI — Ultra-Low-Power Inference](https://sigilipelli.github.io/edge-ai-mastery-path/level-4/07-ultra-low-power-inference/)
+- [Freertos — Tickless Idle & Low Power](https://sigilipelli.github.io/freertos-mastery-path/level-2/03-tickless-idle-low-power/)
+- [S32K Automotive — Low-Power Modes & Wakeup Sources](https://sigilipelli.github.io/s32k-mastery-path/level-2/05-low-power-modes/)
+
 ## Exercise
 
 Add hysteresis to `classify_power_state`: rewrite it as a stateful function

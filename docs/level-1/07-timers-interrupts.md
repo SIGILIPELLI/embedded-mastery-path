@@ -209,6 +209,10 @@ exists to prevent.
 | `IRAM_ATTR` | ESP32: keeps the ISR in RAM — required |
 | Critical section | `noInterrupts()` / `interrupts()` around multi-byte shared reads |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — 05 · Timers & Interrupts](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/05-timers-interrupts/)
+
 ## Exercise
 
 Rebuild module 3's two-button counter (Wokwi, ESP32) the professional way:

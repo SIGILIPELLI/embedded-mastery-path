@@ -222,6 +222,11 @@ in-transit encrypted representation.
 | Canary/staged rollout | Procedural mitigation for a legitimately signed but regressive build |
 | Verification here | Verify-then-trust decision logic compiled/run with `gcc`; real crypto primitives reviewed, not implemented/executed here |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Linux — 02 · Secure Boot Chain (HAB/AHAB)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-4/02-secure-boot-hab-ahab/)
+- [S32K Automotive — Secure Boot & the HSE Security Engine](https://sigilipelli.github.io/s32k-mastery-path/level-3/07-secure-boot-hse/)
+
 ## Exercise
 
 Extend `should_install` to enforce downgrade protection: add a

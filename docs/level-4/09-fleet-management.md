@@ -215,6 +215,12 @@ input becomes live device behavior.
 | Offline behavior | Devices must buffer and retry, not block, during connectivity loss |
 | Verification here | Aggregation/validation logic compiled/run with `gcc`; real fleet backend/network behavior not represented |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Linux — 04 · udev & Device Management](https://sigilipelli.github.io/embedded-linux-mastery-path/level-2/04-udev-device-management/)
+- [Embedded Python — Device Provisioning & Secrets Management](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/03-provisioning-secrets/)
+- [NodeMCU/IoT — Fleet Management Concepts](https://sigilipelli.github.io/nodemcu-mastery-path/level-4/03-fleet-management-concepts/)
+
 ## Exercise
 
 Extend the telemetry summary with an `alert_triggered` flag set when any

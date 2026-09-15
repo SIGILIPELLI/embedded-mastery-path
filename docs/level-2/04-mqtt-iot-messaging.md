@@ -271,6 +271,11 @@ of one task doing two jobs (your logic and the network) at once.
 | `esp_mqtt_client_enqueue()` | Non-blocking publish — the safe call from inside a handler |
 | Reconnection | Automatic — don't write your own retry loop |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — MQTT & IoT Messaging](https://sigilipelli.github.io/embedded-python-mastery-path/level-2/01-mqtt-iot-messaging/)
+- [NodeMCU/IoT — 01 · MQTT Basics for IoT Messaging](https://sigilipelli.github.io/nodemcu-mastery-path/level-2/01-mqtt-basics/)
+
 ## Exercise
 
 Build a two-topic device on top of the code above. Publish a simulated

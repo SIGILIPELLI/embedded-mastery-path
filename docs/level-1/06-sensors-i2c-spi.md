@@ -251,6 +251,10 @@ pushed even if your sketch stalls.
 | SSD1306 pattern | draw to buffer → `display.display()` pushes it to the panel |
 | Library Manager | IDE: Sketch menu — Wokwi: Library Manager tab |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — 06 · I2C & SPI Sensors](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/06-i2c-spi-sensors/)
+
 ## Exercise
 
 Build the thermometer above in Wokwi (ESP32 + DHT22 + SSD1306), then upgrade

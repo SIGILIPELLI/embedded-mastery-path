@@ -396,6 +396,10 @@ the gap between "the overrun happened" and "the allocator noticed."
 | Test CMake | `idf_component_register(SRC_DIRS "." INCLUDE_DIRS "." REQUIRES unity <comp>)` |
 | Running tests | Flash, press Enter for the menu; `*` runs all; `pytest-embedded` for CI |
 
+## 🔀 Related lessons on other tracks
+
+- [Cpp Testing — 07 · Unit Testing with GoogleTest](https://sigilipelli.github.io/cpp-testing-mastery-path/level-1/07-unit-testing-googletest/)
+
 ## Exercise
 
 Take one piece of pure logic out of an earlier project — a ring buffer, a

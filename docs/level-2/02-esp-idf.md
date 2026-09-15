@@ -218,6 +218,10 @@ setup then exit if you don't need it looping forever, unlike Arduino's
 | `idf_component.yml` | Declares dependencies from the ESP Component Registry |
 | `idf.py size` | Flash/RAM usage breakdown per component |
 
+## 🔀 Related lessons on other tracks
+
+- [Freertos — ESP-IDF FreeRTOS Specifics](https://sigilipelli.github.io/freertos-mastery-path/level-2/04-esp-idf-freertos/)
+
 ## Exercise
 
 Create a new ESP-IDF project (`idf.py create-project blinky`), set the

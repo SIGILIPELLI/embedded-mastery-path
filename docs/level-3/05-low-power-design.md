@@ -197,6 +197,12 @@ before entering deep sleep, not merely deprioritized.
 | Wake source setup | Must be enabled in **both** the power controller and the NVIC/EXTI |
 | Verification here | Battery-life arithmetic compiled/run with `gcc`; actual sleep-mode current is hardware-measured, not testable here |
 
+## 🔀 Related lessons on other tracks
+
+- [Edge AI — Ultra-Low-Power Inference](https://sigilipelli.github.io/edge-ai-mastery-path/level-4/07-ultra-low-power-inference/)
+- [Freertos — Tickless Idle & Low Power](https://sigilipelli.github.io/freertos-mastery-path/level-2/03-tickless-idle-low-power/)
+- [S32K Automotive — Low-Power Modes & Wakeup Sources](https://sigilipelli.github.io/s32k-mastery-path/level-2/05-low-power-modes/)
+
 ## Exercise
 
 Extend `estimate_battery_hours` to accept a list of N duty-cycle phases

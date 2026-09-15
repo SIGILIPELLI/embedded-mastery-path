@@ -241,6 +241,10 @@ check by construction only ever looks at one sample at a time.
 | Plausibility check | Validates a reading against recent history/rate limits, not just its static range |
 | Verification here | Validation/plausibility logic compiled/run with `gcc`; MISRA rule text and safety-process claims reviewed against real, citable published material only |
 
+## 🔀 Related lessons on other tracks
+
+- [Automotive Testing — 04 · Functional Safety Testing (ISO 26262)](https://sigilipelli.github.io/automotive-testing-mastery-path/level-3/04-functional-safety-testing/)
+
 ## Exercise
 
 Take the "before" `validate_reading` function above and rewrite it a second

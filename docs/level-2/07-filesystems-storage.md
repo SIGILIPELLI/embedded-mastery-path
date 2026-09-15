@@ -278,6 +278,10 @@ now determining a very concrete correctness property of your logger.
 | `format_if_mount_failed` on SD | Leave `false` — `true` silently wipes a user's card |
 | Durability | `fclose()` (or `fflush` + `fsync`) is where the data actually lands |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Linux — 06 · Storage & Filesystems (UBI, overlayfs)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-2/06-storage-filesystems/)
+
 ## Exercise
 
 Build a logger with a two-tier storage design. Mount a 1 MB LittleFS

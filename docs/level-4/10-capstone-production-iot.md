@@ -270,3 +270,8 @@ layering violation the traps section warns about in prose.
   checklist (module 4-08 style) for the physical board this firmware would
   run on, listing every test point the factory test firmware above would
   need physical access to.
+
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — Capstone — Production IoT Product](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/10-capstone-production-iot/)
+- [NodeMCU/IoT — Capstone — Production IoT Product Design](https://sigilipelli.github.io/nodemcu-mastery-path/level-4/10-capstone-production-iot-product/)

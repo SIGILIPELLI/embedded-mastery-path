@@ -264,6 +264,12 @@ has to detect or handle.
 | Crash during probation | Bootloader falls back to the previous slot automatically |
 | `esp_app_get_description()` | Version, build date, IDF version from the image header |
 
+## 🔀 Related lessons on other tracks
+
+- [Freertos — OTA Updates for RTOS Firmware](https://sigilipelli.github.io/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
+- [Edge AI — OTA Model Updates](https://sigilipelli.github.io/edge-ai-mastery-path/level-4/02-ota-model-updates/)
+- [Embedded Linux — 03 · OTA Updates (RAUC, SWUpdate, OSTree)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-4/03-ota-updates/)
+
 ## Exercise
 
 Convert your module 2-02 project to a two-OTA-slot layout: write

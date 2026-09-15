@@ -424,3 +424,7 @@ Steps 4 through 7 are the project. Step 3 is just a demo.
 - **Signed updates.** Turn on secure boot and flash encryption before you
   put this anywhere real. An OTA endpoint without signature verification is
   a remote code execution feature you shipped on purpose.
+
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — 10 · Capstone — WiFi Sensor Logger](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/10-capstone-wifi-sensor-logger/)

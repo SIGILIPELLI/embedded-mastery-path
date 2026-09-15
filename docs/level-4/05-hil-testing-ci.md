@@ -201,6 +201,11 @@ any bottlenecked shared resource, not a compromise on what gets tested.
 | HIL scope | Timing margins, real power measurement, end-to-end — not a replacement for fast unit tests |
 | Verification here | Size-budget policy logic compiled/run with `gcc`; HIL rig automation is architecture reviewed, not executed (no rig available) |
 
+## 🔀 Related lessons on other tracks
+
+- [S32K Automotive — HIL Testing & CI for ECU Firmware](https://sigilipelli.github.io/s32k-mastery-path/level-4/07-hil-testing-ci/)
+- [Automotive Testing — 07 · Introduction to HIL Testing](https://sigilipelli.github.io/automotive-testing-mastery-path/level-1/07-introduction-to-hil-testing/)
+
 ## Exercise
 
 Extend `check_budget` to accept a *history* of builds (an array of

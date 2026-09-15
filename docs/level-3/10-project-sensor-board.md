@@ -233,3 +233,7 @@ buffered UART) is caught by CRC-16/32 but invisible to the sum used here.
 - Port the DMA read path to a hypothetical Cortex-M7 target and add the
   `SCB_InvalidateDCache_by_Addr` call from module 3-04 with a comment
   explaining exactly which buffer needs it and why the M4 version doesn't.
+
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — Custom Firmware Builds & Board Definitions](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/05-custom-firmware-builds/)

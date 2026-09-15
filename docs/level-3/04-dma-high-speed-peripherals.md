@@ -204,6 +204,10 @@ not a polled register, is the only reliable signal for "is it done."
 | `volatile` on shared flags | Required wherever an ISR sets a flag `main_loop` polls |
 | Verification here | Buffer-swap bookkeeping compiled/run with `gcc`; cache/DMA hardware behavior reviewed, not executed |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — Project — High-Speed Data Acquisition](https://sigilipelli.github.io/embedded-python-mastery-path/level-3/10-project-high-speed-daq/)
+
 ## Exercise
 
 Extend the double-buffer model into a three-buffer ring (to tolerate the

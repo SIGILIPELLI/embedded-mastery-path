@@ -237,6 +237,11 @@ ship/no-ship gate.
 | Serial-number traceability | Permanent record linking each unit to its exact factory test results |
 | Verification here | Test-aggregation/logging logic compiled/run with `gcc`; real DFM/assembly-line behavior reviewed against manufacturing practice only |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — Manufacturing & Factory Test](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/09-manufacturing-factory-test/)
+- [S32K Automotive — Manufacturing, EOL Test & Traceability](https://sigilipelli.github.io/s32k-mastery-path/level-4/09-manufacturing-eol-test/)
+
 ## Exercise
 
 Extend the factory test harness with a `test_result_t` that includes a

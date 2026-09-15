@@ -237,6 +237,10 @@ corruption detection), not merely a "stronger CRC."
 | CRC vs signature | CRC catches corruption; only cryptographic signing catches tampering (module 4-02) |
 | Verification here | Header/CRC validation logic compiled/run with `gcc`; real flash erase/write needs actual hardware |
 
+## 🔀 Related lessons on other tracks
+
+- [Freertos — OTA Updates for RTOS Firmware](https://sigilipelli.github.io/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
+
 ## Exercise
 
 Extend `validate_image` into a small state machine usable by a real

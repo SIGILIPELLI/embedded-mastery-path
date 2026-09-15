@@ -234,6 +234,10 @@ shared electrical signal.
 | CAN arbitration | Dominant bit (`0`) always wins; lower numeric ID = higher priority, by design |
 | Verification here | UART/CAN logic compiled/run with `gcc`; real bus electrical behavior reviewed against spec only |
 
+## 🔀 Related lessons on other tracks
+
+- [Embedded Python — 06 · I2C & SPI Sensors](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/06-i2c-spi-sensors/)
+
 ## Exercise
 
 Extend `can_arbitrate` to a `can_arbitrate_n(uint32_t *ids, int n, int id_bits)`

@@ -217,6 +217,10 @@ your OS driver presents as a virtual COM port.
 | `str.trim()` / `startsWith()` / `substring()` / `toInt()` | Basic parsing toolkit |
 | `millis()` in logs | Timestamp events, measure durations |
 
+## 🔀 Related lessons on other tracks
+
+- [S32K Automotive — 05 · UART Communication](https://sigilipelli.github.io/s32k-mastery-path/level-1/05-uart-communication/)
+
 ## Exercise
 
 Extend the command interpreter with a potentiometer on an ADC pin (Wokwi
