@@ -1,3 +1,7 @@
+---
+description: "Manufacturing, DFM & Factory Test — Module 3-07 designed a single, hand-assembled board. This module is about what changes when a design has to be built…"
+---
+
 # Manufacturing, DFM & Factory Test
 
 Module 3-07 designed a single, hand-assembled board. This module is about

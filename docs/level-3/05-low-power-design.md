@@ -1,3 +1,7 @@
+---
+description: "Low-Power Design Deep Dive — Module 1-08 covered ESP32 sleep modes at the API level: call esp_deep_sleep_start(), wake on a timer or GPIO. This module…"
+---
+
 # Low-Power Design Deep Dive
 
 Module 1-08 covered ESP32 sleep modes at the API level: call

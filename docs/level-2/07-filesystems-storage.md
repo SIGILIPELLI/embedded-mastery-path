@@ -1,3 +1,7 @@
+---
+description: "Filesystems & Storage (LittleFS, SD) — Module 1-08 introduced NVS for keeping a setting across a reboot. That covers configuration, but not 'log a reading…"
+---
+
 # Filesystems & Storage (LittleFS, SD)
 
 Module 1-08 introduced NVS for keeping a setting across a reboot. That

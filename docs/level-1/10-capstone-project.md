@@ -1,3 +1,7 @@
+---
+description: "Capstone — Environment Monitor — Time to combine every module into one real device: an environment monitor that measures temperature and humidity (DHT22)…"
+---
+
 # 10 · Capstone — Environment Monitor
 
 Time to combine every module into one real device: an **environment

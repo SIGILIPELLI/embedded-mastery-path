@@ -1,3 +1,7 @@
+---
+description: "Secure Boot & Encrypted OTA at Scale — Module 3-09 built a bootloader that verifies a firmware image with a CRC — enough to catch corruption, nothing to…"
+---
+
 # Secure Boot & Encrypted OTA at Scale
 
 Module 3-09 built a bootloader that verifies a firmware image with a CRC —

@@ -1,3 +1,7 @@
+---
+description: "Ultra-Low-Power & Energy Harvesting — A battery-powered design optimizes for total energy — minimize consumption, maximize a fixed budget's lifetime. A…"
+---
+
 # Ultra-Low-Power & Energy Harvesting
 
 Module 3-05 covered sleep modes and duty-cycle arithmetic for a

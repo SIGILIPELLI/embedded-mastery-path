@@ -1,3 +1,7 @@
+---
+description: "Timers & Interrupts — Every sketch so far had one job, so delay() was fine. Real devices do many things at once — blink a status LED, poll a sensor every…"
+---
+
 # 07 · Timers & Interrupts
 
 Every sketch so far had one job, so `delay()` was fine. Real devices do many

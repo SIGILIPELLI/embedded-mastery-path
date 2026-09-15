@@ -1,3 +1,7 @@
+---
+description: "RTOS Internals — Level 2 used FreeRTOS as a tool: create a task, send it through a queue, protect a resource with a mutex. This module opens the box. On…"
+---
+
 # RTOS Internals
 
 Level 2 used FreeRTOS as a tool: create a task, send it through a queue,

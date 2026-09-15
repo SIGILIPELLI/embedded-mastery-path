@@ -1,3 +1,7 @@
+---
+description: "Sensors, I2C & SPI — Real devices are built from parts that talk to each other: sensors, displays, memory chips, radios. Rather than dedicate dozens of…"
+---
+
 # 06 · Sensors, I2C & SPI
 
 Real devices are built from *parts that talk to each other*: sensors,

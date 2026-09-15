@@ -1,3 +1,7 @@
+---
+description: "C/C++ for Embedded — Arduino sketches are C++ (with a thin layer of convenience), but embedded C++ has a different center of gravity than desktop C++…"
+---
+
 # 02 · C/C++ for Embedded
 
 Arduino sketches are C++ (with a thin layer of convenience), but embedded

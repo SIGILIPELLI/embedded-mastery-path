@@ -1,3 +1,7 @@
+---
+description: "HIL Testing & CI for Firmware — Module 4-01's fake-HAL pattern lets driver and application logic run as host-side unit tests — fast, but blind to real…"
+---
+
 # HIL Testing & CI for Firmware
 
 Module 4-01's fake-HAL pattern lets driver and application logic run as

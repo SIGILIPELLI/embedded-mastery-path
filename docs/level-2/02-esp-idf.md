@@ -1,3 +1,7 @@
+---
+description: "ESP-IDF Development — Arduino got you productive fast by hiding the build system, the FreeRTOS configuration, and the chip's boot process behind…"
+---
+
 # ESP-IDF Development
 
 Arduino got you productive fast by hiding the build system, the FreeRTOS

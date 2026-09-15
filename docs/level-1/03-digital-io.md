@@ -1,3 +1,7 @@
+---
+description: "Digital I/O — GPIO — general-purpose input/output — is the foundation of everything a microcontroller does. Each pin can be configured as an output (the…"
+---
+
 # 03 · Digital I/O
 
 GPIO — *general-purpose input/output* — is the foundation of everything a

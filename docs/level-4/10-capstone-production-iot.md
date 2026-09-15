@@ -1,3 +1,7 @@
+---
+description: "Capstone — Production IoT Product — This capstone combines every module across Level 4 (and, through it, every prior level) into one design: taking the…"
+---
+
 # Capstone — Production IoT Product
 
 This capstone combines every module across Level 4 (and, through it, every

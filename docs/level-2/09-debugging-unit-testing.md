@@ -1,3 +1,7 @@
+---
+description: "Debugging & Unit Testing — Module 2-08 gave you the machinery to survive a fault in the field. This module is about the other half: finding out why it…"
+---
+
 # Debugging & Unit Testing
 
 Module 2-08 gave you the machinery to survive a fault in the field. This

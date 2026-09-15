@@ -1,3 +1,7 @@
+---
+description: "OTA Firmware Updates — Everything so far ended with idf.py flash and a USB cable. That stops being possible the moment a device is glued inside a wall…"
+---
+
 # OTA Firmware Updates
 
 Everything so far ended with `idf.py flash` and a USB cable. That stops

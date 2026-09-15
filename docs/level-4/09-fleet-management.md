@@ -1,3 +1,7 @@
+---
+description: "Fleet Management & Device Clouds — Module 4-02 covered securing and rolling out an OTA update. This module is about everything a fleet of deployed devices…"
+---
+
 # Fleet Management & Device Clouds
 
 Module 4-02 covered securing and rolling out an OTA update. This module is

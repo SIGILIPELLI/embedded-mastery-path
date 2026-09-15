@@ -1,3 +1,7 @@
+---
+description: "Functional Safety & MISRA — Everything up to this module has optimized for correctness and performance. Functional safety asks a different question: when…"
+---
+
 # Functional Safety & MISRA
 
 Everything up to this module has optimized for correctness and performance.

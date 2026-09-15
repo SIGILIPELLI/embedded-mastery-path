@@ -1,3 +1,7 @@
+---
+description: "Analog I/O & PWM — Digital pins know two values; the real world is continuous. This module covers both directions of the analog boundary: reading…"
+---
+
 # 04 · Analog I/O & PWM
 
 Digital pins know two values; the real world is continuous. This module

@@ -1,3 +1,7 @@
+---
+description: "ESP32 WiFi Intro — The ESP32's superpower is a full WiFi radio on the same chip as your code — this is the moment your device becomes an IoT device. This…"
+---
+
 # 09 · ESP32 WiFi Intro
 
 The ESP32's superpower is a full WiFi radio on the same chip as your code —

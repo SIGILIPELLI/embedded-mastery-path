@@ -1,3 +1,7 @@
+---
+description: "Project — Custom Sensor Board Firmware — This project combines every module in Level 3 into one design: a battery-powered STM32 sensor board that samples…"
+---
+
 # Project — Custom Sensor Board Firmware
 
 This project combines every module in Level 3 into one design: a

@@ -1,3 +1,7 @@
+---
+description: "PCB Design Basics (KiCad) — Every module so far assumed a board already existed. This module is about designing one: taking a schematic from 'MCU + sensor…"
+---
+
 # PCB Design Basics (KiCad)
 
 Every module so far assumed a board already existed. This module is about

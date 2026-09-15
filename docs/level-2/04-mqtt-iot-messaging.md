@@ -1,3 +1,7 @@
+---
+description: "MQTT & IoT Messaging — Module 1-09 got an ESP32 onto WiFi and had it serve a web page — a device that answers when asked. That model breaks down the…"
+---
+
 # MQTT & IoT Messaging
 
 Module 1-09 got an ESP32 onto WiFi and had it serve a web page — a device

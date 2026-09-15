@@ -1,3 +1,7 @@
+---
+description: "Project — WiFi Data Logger — Nine modules of Level 2 have each solved one problem in isolation. This one puts them together into a single device that…"
+---
+
 # Project — WiFi Data Logger
 
 Nine modules of Level 2 have each solved one problem in isolation. This one

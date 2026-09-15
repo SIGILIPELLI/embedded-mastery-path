@@ -1,3 +1,7 @@
+---
+description: "FreeRTOS Tasks & Queues — Every Level 1 sketch had one loop(). It felt single-threaded, but it never was: the Arduino-ESP32 core boots FreeRTOS first and…"
+---
+
 # FreeRTOS Tasks & Queues
 
 Every Level 1 sketch had one `loop()`. It felt single-threaded, but it never

@@ -1,3 +1,7 @@
+---
+description: "Bluetooth Low Energy (BLE) — WiFi (module 1-09) is great when there's an access point and you don't mind the power draw. Bluetooth Low Energy is the other…"
+---
+
 # Bluetooth Low Energy (BLE)
 
 WiFi (module 1-09) is great when there's an access point and you don't mind

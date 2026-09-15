@@ -1,3 +1,7 @@
+---
+description: "Watchdogs & Robust Firmware — Firmware on your desk gets rebooted whenever it misbehaves. Firmware in the field does not — nobody is going to drive out…"
+---
+
 # Watchdogs & Robust Firmware
 
 Firmware on your desk gets rebooted whenever it misbehaves. Firmware in the

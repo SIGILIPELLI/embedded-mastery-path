@@ -1,3 +1,7 @@
+---
+description: "Serial/UART Communication — A microcontroller has no screen and no keyboard — serial over USB is your window into it. Under the hood this is a UART…"
+---
+
 # 05 · Serial/UART Communication
 
 A microcontroller has no screen and no keyboard — **serial over USB** is your

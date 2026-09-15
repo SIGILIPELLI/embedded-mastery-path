@@ -1,3 +1,7 @@
+---
+description: "Registers, Linker Scripts & Startup Code — Module 3-01 wrote to registers and referenced _estack and Reset_Handler without explaining where they come…"
+---
+
 # Registers, Linker Scripts & Startup Code
 
 Module 3-01 wrote to registers and referenced `_estack` and `Reset_Handler`

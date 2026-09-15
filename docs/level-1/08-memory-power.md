@@ -1,3 +1,7 @@
+---
+description: "Memory & Power Basics — Two resources define what an embedded system can do: memory (a few KB to a few hundred KB, fixed forever at design time) and power…"
+---
+
 # 08 · Memory & Power Basics
 
 Two resources define what an embedded system can do: **memory** (a few KB to

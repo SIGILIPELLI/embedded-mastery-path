@@ -1,3 +1,7 @@
+---
+description: "RF & Wireless Protocol Design — Module 2-03 used BLE as a library — pair, advertise, exchange characteristics. This module is about the layer beneath any…"
+---
+
 # RF & Wireless Protocol Design
 
 Module 2-03 used BLE as a library — pair, advertise, exchange

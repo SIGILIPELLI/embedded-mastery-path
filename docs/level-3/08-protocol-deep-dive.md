@@ -1,3 +1,7 @@
+---
+description: "Protocol Deep Dive (UART/I2C/SPI/CAN) — Levels 1 and 2 used UART, I2C, and SPI through library calls (Serial.print, Wire.write, SPI.transfer). This module…"
+---
+
 # Protocol Deep Dive (UART/I2C/SPI/CAN)
 
 Levels 1 and 2 used UART, I2C, and SPI through library calls

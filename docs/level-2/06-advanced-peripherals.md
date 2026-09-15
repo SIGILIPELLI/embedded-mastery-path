@@ -1,3 +1,7 @@
+---
+description: "Advanced Peripherals (I2S, RMT, CAN) — Module 1-06 covered I2C and SPI — the two buses that cover most sensors. This module covers three peripherals that…"
+---
+
 # Advanced Peripherals (I2S, RMT, CAN)
 
 Module 1-06 covered I2C and SPI — the two buses that cover most sensors.

@@ -1,3 +1,7 @@
+---
+description: "Production Firmware Architecture — Levels 1-3 built understanding one concept at a time — a task here, a register there, a bootloader by itself. Shipping…"
+---
+
 # Production Firmware Architecture
 
 Levels 1-3 built understanding one concept at a time — a task here, a

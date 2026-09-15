@@ -1,3 +1,7 @@
+---
+description: "Setup & Toolchain — An embedded program (a sketch, in Arduino terms) doesn't run on your computer — it's compiled on your computer into machine code for a…"
+---
+
 # 01 · Setup & Toolchain
 
 An embedded program (a *sketch*, in Arduino terms) doesn't run on your

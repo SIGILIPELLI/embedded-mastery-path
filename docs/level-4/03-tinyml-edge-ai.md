@@ -1,3 +1,7 @@
+---
+description: "TinyML & Edge AI — Running a trained model on a microcontroller — no cloud round-trip, no GPU — is a different discipline from training one. This module…"
+---
+
 # TinyML & Edge AI
 
 Running a trained model on a microcontroller — no cloud round-trip, no GPU

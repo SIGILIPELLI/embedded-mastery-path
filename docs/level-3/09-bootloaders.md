@@ -1,3 +1,7 @@
+---
+description: "Bootloaders & Firmware Updates — Module 2-05 covered ESP32 OTA at the API level — esp_ota_begin/write/end, handled almost entirely by ESP-IDF. This module…"
+---
+
 # Bootloaders & Firmware Updates
 
 Module 2-05 covered ESP32 OTA at the API level — `esp_ota_begin/write/end`,

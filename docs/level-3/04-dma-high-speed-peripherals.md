@@ -1,3 +1,7 @@
+---
+description: "DMA & High-Speed Peripherals — Every peripheral read/write so far has gone through the CPU: read a register, store it in a variable, move on. That works…"
+---
+
 # DMA & High-Speed Peripherals
 
 Every peripheral read/write so far has gone through the CPU: read a

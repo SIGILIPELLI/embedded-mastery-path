@@ -1,3 +1,7 @@
+---
+description: "Bare-Metal ARM Cortex-M (STM32) — Every board in Level 1 and 2 ran on top of a framework — Arduino-ESP32 or ESP-IDF — that booted FreeRTOS, set up the…"
+---
+
 # Bare-Metal ARM Cortex-M (STM32)
 
 Every board in Level 1 and 2 ran on top of a framework — Arduino-ESP32 or

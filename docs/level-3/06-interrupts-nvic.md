@@ -1,3 +1,7 @@
+---
+description: "Interrupts & the NVIC — Level 1's attachInterrupt() and Level 2's ISR-safe FreeRTOS calls both sit on top of the Cortex-M NVIC (Nested Vectored Interrupt…"
+---
+
 # Interrupts & the NVIC
 
 Level 1's `attachInterrupt()` and Level 2's ISR-safe FreeRTOS calls both sit
