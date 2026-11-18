@@ -253,7 +253,7 @@ pushed even if your sketch stalls.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — 06 · I2C & SPI Sensors](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/06-i2c-spi-sensors/)
+- [Embedded Python — 06 · I2C & SPI Sensors](https://learnmasterypath.com/embedded-python-mastery-path/level-1/06-i2c-spi-sensors/)
 
 ## Exercise
 

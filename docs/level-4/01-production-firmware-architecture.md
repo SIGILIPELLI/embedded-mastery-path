@@ -224,8 +224,8 @@ choice was resolved by the preprocessor before the binary was even linked.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — Production Firmware Architecture](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/01-production-architecture/)
-- [Freertos — Production Firmware Architecture](https://sigilipelli.github.io/freertos-mastery-path/level-4/03-production-architecture/)
+- [Embedded Python — Production Firmware Architecture](https://learnmasterypath.com/embedded-python-mastery-path/level-4/01-production-architecture/)
+- [Freertos — Production Firmware Architecture](https://learnmasterypath.com/freertos-mastery-path/level-4/03-production-architecture/)
 
 ## Exercise
 

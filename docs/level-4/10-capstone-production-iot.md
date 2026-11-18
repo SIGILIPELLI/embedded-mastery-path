@@ -273,5 +273,5 @@ layering violation the traps section warns about in prose.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — Capstone — Production IoT Product](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/10-capstone-production-iot/)
-- [NodeMCU/IoT — Capstone — Production IoT Product Design](https://sigilipelli.github.io/nodemcu-mastery-path/level-4/10-capstone-production-iot-product/)
+- [Embedded Python — Capstone — Production IoT Product](https://learnmasterypath.com/embedded-python-mastery-path/level-4/10-capstone-production-iot/)
+- [NodeMCU/IoT — Capstone — Production IoT Product Design](https://learnmasterypath.com/nodemcu-mastery-path/level-4/10-capstone-production-iot-product/)

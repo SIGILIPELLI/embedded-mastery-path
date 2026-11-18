@@ -273,8 +273,8 @@ of one task doing two jobs (your logic and the network) at once.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — MQTT & IoT Messaging](https://sigilipelli.github.io/embedded-python-mastery-path/level-2/01-mqtt-iot-messaging/)
-- [NodeMCU/IoT — 01 · MQTT Basics for IoT Messaging](https://sigilipelli.github.io/nodemcu-mastery-path/level-2/01-mqtt-basics/)
+- [Embedded Python — MQTT & IoT Messaging](https://learnmasterypath.com/embedded-python-mastery-path/level-2/01-mqtt-iot-messaging/)
+- [NodeMCU/IoT — 01 · MQTT Basics for IoT Messaging](https://learnmasterypath.com/nodemcu-mastery-path/level-2/01-mqtt-basics/)
 
 ## Exercise
 

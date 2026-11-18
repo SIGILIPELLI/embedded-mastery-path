@@ -224,8 +224,8 @@ in-transit encrypted representation.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Linux — 02 · Secure Boot Chain (HAB/AHAB)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-4/02-secure-boot-hab-ahab/)
-- [S32K Automotive — Secure Boot & the HSE Security Engine](https://sigilipelli.github.io/s32k-mastery-path/level-3/07-secure-boot-hse/)
+- [Embedded Linux — 02 · Secure Boot Chain (HAB/AHAB)](https://learnmasterypath.com/embedded-linux-mastery-path/level-4/02-secure-boot-hab-ahab/)
+- [S32K Automotive — Secure Boot & the HSE Security Engine](https://learnmasterypath.com/s32k-mastery-path/level-3/07-secure-boot-hse/)
 
 ## Exercise
 

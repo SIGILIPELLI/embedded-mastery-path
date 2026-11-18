@@ -220,7 +220,7 @@ setup then exit if you don't need it looping forever, unlike Arduino's
 
 ## 🔀 Related lessons on other tracks
 
-- [Freertos — ESP-IDF FreeRTOS Specifics](https://sigilipelli.github.io/freertos-mastery-path/level-2/04-esp-idf-freertos/)
+- [Freertos — ESP-IDF FreeRTOS Specifics](https://learnmasterypath.com/freertos-mastery-path/level-2/04-esp-idf-freertos/)
 
 ## Exercise
 

@@ -217,9 +217,9 @@ input becomes live device behavior.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Linux — 04 · udev & Device Management](https://sigilipelli.github.io/embedded-linux-mastery-path/level-2/04-udev-device-management/)
-- [Embedded Python — Device Provisioning & Secrets Management](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/03-provisioning-secrets/)
-- [NodeMCU/IoT — Fleet Management Concepts](https://sigilipelli.github.io/nodemcu-mastery-path/level-4/03-fleet-management-concepts/)
+- [Embedded Linux — 04 · udev & Device Management](https://learnmasterypath.com/embedded-linux-mastery-path/level-2/04-udev-device-management/)
+- [Embedded Python — Device Provisioning & Secrets Management](https://learnmasterypath.com/embedded-python-mastery-path/level-4/03-provisioning-secrets/)
+- [NodeMCU/IoT — Fleet Management Concepts](https://learnmasterypath.com/nodemcu-mastery-path/level-4/03-fleet-management-concepts/)
 
 ## Exercise
 

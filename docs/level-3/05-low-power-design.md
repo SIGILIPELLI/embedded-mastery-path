@@ -199,9 +199,9 @@ before entering deep sleep, not merely deprioritized.
 
 ## 🔀 Related lessons on other tracks
 
-- [Edge AI — Ultra-Low-Power Inference](https://sigilipelli.github.io/edge-ai-mastery-path/level-4/07-ultra-low-power-inference/)
-- [Freertos — Tickless Idle & Low Power](https://sigilipelli.github.io/freertos-mastery-path/level-2/03-tickless-idle-low-power/)
-- [S32K Automotive — Low-Power Modes & Wakeup Sources](https://sigilipelli.github.io/s32k-mastery-path/level-2/05-low-power-modes/)
+- [Edge AI — Ultra-Low-Power Inference](https://learnmasterypath.com/edge-ai-mastery-path/level-4/07-ultra-low-power-inference/)
+- [Freertos — Tickless Idle & Low Power](https://learnmasterypath.com/freertos-mastery-path/level-2/03-tickless-idle-low-power/)
+- [S32K Automotive — Low-Power Modes & Wakeup Sources](https://learnmasterypath.com/s32k-mastery-path/level-2/05-low-power-modes/)
 
 ## Exercise
 

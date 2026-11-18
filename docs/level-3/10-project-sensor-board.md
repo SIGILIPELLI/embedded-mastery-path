@@ -236,4 +236,4 @@ buffered UART) is caught by CRC-16/32 but invisible to the sum used here.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — Custom Firmware Builds & Board Definitions](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/05-custom-firmware-builds/)
+- [Embedded Python — Custom Firmware Builds & Board Definitions](https://learnmasterypath.com/embedded-python-mastery-path/level-4/05-custom-firmware-builds/)

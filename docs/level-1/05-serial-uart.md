@@ -219,7 +219,7 @@ your OS driver presents as a virtual COM port.
 
 ## 🔀 Related lessons on other tracks
 
-- [S32K Automotive — 05 · UART Communication](https://sigilipelli.github.io/s32k-mastery-path/level-1/05-uart-communication/)
+- [S32K Automotive — 05 · UART Communication](https://learnmasterypath.com/s32k-mastery-path/level-1/05-uart-communication/)
 
 ## Exercise
 

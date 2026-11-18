@@ -239,8 +239,8 @@ ship/no-ship gate.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — Manufacturing & Factory Test](https://sigilipelli.github.io/embedded-python-mastery-path/level-4/09-manufacturing-factory-test/)
-- [S32K Automotive — Manufacturing, EOL Test & Traceability](https://sigilipelli.github.io/s32k-mastery-path/level-4/09-manufacturing-eol-test/)
+- [Embedded Python — Manufacturing & Factory Test](https://learnmasterypath.com/embedded-python-mastery-path/level-4/09-manufacturing-factory-test/)
+- [S32K Automotive — Manufacturing, EOL Test & Traceability](https://learnmasterypath.com/s32k-mastery-path/level-4/09-manufacturing-eol-test/)
 
 ## Exercise
 

@@ -203,8 +203,8 @@ any bottlenecked shared resource, not a compromise on what gets tested.
 
 ## 🔀 Related lessons on other tracks
 
-- [S32K Automotive — HIL Testing & CI for ECU Firmware](https://sigilipelli.github.io/s32k-mastery-path/level-4/07-hil-testing-ci/)
-- [Automotive Testing — 07 · Introduction to HIL Testing](https://sigilipelli.github.io/automotive-testing-mastery-path/level-1/07-introduction-to-hil-testing/)
+- [S32K Automotive — HIL Testing & CI for ECU Firmware](https://learnmasterypath.com/s32k-mastery-path/level-4/07-hil-testing-ci/)
+- [Automotive Testing — 07 · Introduction to HIL Testing](https://learnmasterypath.com/automotive-testing-mastery-path/level-1/07-introduction-to-hil-testing/)
 
 ## Exercise
 

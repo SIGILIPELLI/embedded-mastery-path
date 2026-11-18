@@ -280,7 +280,7 @@ now determining a very concrete correctness property of your logger.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Linux — 06 · Storage & Filesystems (UBI, overlayfs)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-2/06-storage-filesystems/)
+- [Embedded Linux — 06 · Storage & Filesystems (UBI, overlayfs)](https://learnmasterypath.com/embedded-linux-mastery-path/level-2/06-storage-filesystems/)
 
 ## Exercise
 

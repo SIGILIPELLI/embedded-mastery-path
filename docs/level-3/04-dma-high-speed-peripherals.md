@@ -206,7 +206,7 @@ not a polled register, is the only reliable signal for "is it done."
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — Project — High-Speed Data Acquisition](https://sigilipelli.github.io/embedded-python-mastery-path/level-3/10-project-high-speed-daq/)
+- [Embedded Python — Project — High-Speed Data Acquisition](https://learnmasterypath.com/embedded-python-mastery-path/level-3/10-project-high-speed-daq/)
 
 ## Exercise
 

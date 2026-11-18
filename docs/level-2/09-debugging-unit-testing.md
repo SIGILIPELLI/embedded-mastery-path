@@ -398,7 +398,7 @@ the gap between "the overrun happened" and "the allocator noticed."
 
 ## 🔀 Related lessons on other tracks
 
-- [Cpp Testing — 07 · Unit Testing with GoogleTest](https://sigilipelli.github.io/cpp-testing-mastery-path/level-1/07-unit-testing-googletest/)
+- [Cpp Testing — 07 · Unit Testing with GoogleTest](https://learnmasterypath.com/cpp-testing-mastery-path/level-1/07-unit-testing-googletest/)
 
 ## Exercise
 

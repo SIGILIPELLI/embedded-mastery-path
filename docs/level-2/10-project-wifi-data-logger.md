@@ -427,4 +427,4 @@ Steps 4 through 7 are the project. Step 3 is just a demo.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — 10 · Capstone — WiFi Sensor Logger](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/10-capstone-wifi-sensor-logger/)
+- [Embedded Python — 10 · Capstone — WiFi Sensor Logger](https://learnmasterypath.com/embedded-python-mastery-path/level-1/10-capstone-wifi-sensor-logger/)

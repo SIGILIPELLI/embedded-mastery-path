@@ -239,7 +239,7 @@ corruption detection), not merely a "stronger CRC."
 
 ## 🔀 Related lessons on other tracks
 
-- [Freertos — OTA Updates for RTOS Firmware](https://sigilipelli.github.io/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
+- [Freertos — OTA Updates for RTOS Firmware](https://learnmasterypath.com/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
 
 ## Exercise
 

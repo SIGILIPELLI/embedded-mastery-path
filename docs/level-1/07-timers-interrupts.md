@@ -211,7 +211,7 @@ exists to prevent.
 
 ## 🔀 Related lessons on other tracks
 
-- [Embedded Python — 05 · Timers & Interrupts](https://sigilipelli.github.io/embedded-python-mastery-path/level-1/05-timers-interrupts/)
+- [Embedded Python — 05 · Timers & Interrupts](https://learnmasterypath.com/embedded-python-mastery-path/level-1/05-timers-interrupts/)
 
 ## Exercise
 

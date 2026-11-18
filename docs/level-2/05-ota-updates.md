@@ -266,9 +266,9 @@ has to detect or handle.
 
 ## 🔀 Related lessons on other tracks
 
-- [Freertos — OTA Updates for RTOS Firmware](https://sigilipelli.github.io/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
-- [Edge AI — OTA Model Updates](https://sigilipelli.github.io/edge-ai-mastery-path/level-4/02-ota-model-updates/)
-- [Embedded Linux — 03 · OTA Updates (RAUC, SWUpdate, OSTree)](https://sigilipelli.github.io/embedded-linux-mastery-path/level-4/03-ota-updates/)
+- [Freertos — OTA Updates for RTOS Firmware](https://learnmasterypath.com/freertos-mastery-path/level-4/06-ota-rtos-firmware/)
+- [Edge AI — OTA Model Updates](https://learnmasterypath.com/edge-ai-mastery-path/level-4/02-ota-model-updates/)
+- [Embedded Linux — 03 · OTA Updates (RAUC, SWUpdate, OSTree)](https://learnmasterypath.com/embedded-linux-mastery-path/level-4/03-ota-updates/)
 
 ## Exercise
 
