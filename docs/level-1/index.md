@@ -1,3 +1,7 @@
+---
+description: "Level 1 (Entry) of the free Embedded Systems Mastery Path. Get comfortable programming microcontrollers in C/C++ using the Arduino framework on Arduino Uno…"
+---
+
 # Level 1 · Entry <span class="level-badge">Foundations</span>
 
 Goal: get comfortable programming microcontrollers in C/C++ using the Arduino

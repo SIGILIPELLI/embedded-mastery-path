@@ -1,3 +1,7 @@
+---
+description: "Level 4 (Master) of the free Embedded Systems Mastery Path. Operate at production scale — architect maintainable firmware, secure the boot chain and update…"
+---
+
 # Level 4 · Master <span class="level-badge">Master</span>
 
 Goal: operate at production scale — architect maintainable firmware,

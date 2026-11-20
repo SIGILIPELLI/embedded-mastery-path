@@ -1,6 +1,6 @@
 ---
 title: "Learn Embedded Systems Free: Beginner to Master Course"
-description: "Free embedded systems course from beginner to advanced -- hands-on lessons with real capstone projects. Part of a 37-course free learning library."
+description: "Free embedded systems course from beginner to advanced -- hands-on lessons with real capstone projects. Part of a 100+ course free learning library."
 ---
 
 # Embedded Systems Mastery Path

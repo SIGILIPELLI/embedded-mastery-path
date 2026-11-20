@@ -1,3 +1,7 @@
+---
+description: "Level 3 (Advanced) of the free Embedded Systems Mastery Path. Drop below the frameworks — program ARM Cortex-M chips at the register level, understand what…"
+---
+
 # Level 3 · Advanced <span class="level-badge">Advanced</span>
 
 Goal: drop below the frameworks — program ARM Cortex-M chips at the

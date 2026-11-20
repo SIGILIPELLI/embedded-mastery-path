@@ -1,3 +1,7 @@
+---
+description: "Level 2 (Intermediate) of the free Embedded Systems Mastery Path. Move beyond single-loop sketches — run concurrent tasks with FreeRTOS, build with the…"
+---
+
 # Level 2 · Intermediate <span class="level-badge">Intermediate</span>
 
 Goal: move beyond single-loop sketches — run concurrent tasks with
