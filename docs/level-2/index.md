@@ -20,8 +20,3 @@ devices to the real world with BLE, MQTT, and over-the-air updates.
 8. [Watchdogs & Robust Firmware](08-watchdogs-robust-firmware.md)
 9. [Debugging & Unit Testing](09-debugging-unit-testing.md)
 10. [Project — WiFi Data Logger](10-project-wifi-data-logger.md)
-
-!!! info "Content status"
-    Level 2 module content is being written — every page below has its
-    scope defined and will be filled in next. [Level 1](../level-1/index.md)
-    is complete and is the prerequisite for everything here.
