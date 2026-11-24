@@ -94,7 +94,7 @@ nav:
       - "07 · Timers & Interrupts": level-1/07-timers-interrupts.md
       - "08 · Memory & Power Basics": level-1/08-memory-power.md
       - "09 · ESP32 WiFi Intro": level-1/09-esp32-wifi.md
-      - "10 · Capstone — Environment Monitor": level-1/10-capstone-project.md
+      - "10 · Project — Environment Monitor": level-1/10-capstone-project.md
   - "Level 2 · Intermediate":
       - Overview: level-2/index.md
       - "FreeRTOS Tasks & Queues": level-2/01-freertos-tasks-queues.md
