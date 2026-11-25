@@ -1,0 +1,4302 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="179 Embedded Systems interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Embedded Systems Mastery Path.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/embedded-mastery-path/interview-questions/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>Embedded Systems Interview Questions and Answers (179 Questions)</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Embedded Systems Interview Questions and Answers (179 Questions)">
+  <meta property="og:description" content="179 Embedded Systems interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Embedded Systems Mastery Path.">
+  <meta property="og:url" content="https://learnmasterypath.com/embedded-mastery-path/interview-questions/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Embedded Systems Interview Questions and Answers (179 Questions)">
+  <meta name="twitter:description" content="179 Embedded Systems interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the Embedded Systems Mastery Path.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Embedded Systems Mastery Path", "item": "https://learnmasterypath.com/embedded-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Interview Questions", "item": "https://learnmasterypath.com/embedded-mastery-path/interview-questions/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "embedded-mastery-path", "name": "Embedded Systems Mastery Path", "repo": "https://github.com/SIGILIPELLI/embedded-mastery-path", "src": "interview-questions.md", "url": "https://learnmasterypath.com/embedded-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#embedded-systems-interview-questions-and-answers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Embedded Systems Mastery Path" class="md-header__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Embedded Systems Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Embedded Systems Interview Questions and Answers (179 Questions)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cheat-sheet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Embedded Systems Mastery Path" class="md-nav__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    Embedded Systems Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; Toolchain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cc-for-embedded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · C/C++ for Embedded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-digital-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Digital I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-analog-io-pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Analog I/O &amp; PWM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-serialuart-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Serial/UART Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-sensors-i2c-spi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Sensors, I2C &amp; SPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-timers-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Timers &amp; Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-memory-power-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Memory &amp; Power Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-esp32-wifi-intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · ESP32 WiFi Intro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-environment-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Environment Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#freertos-tasks-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS Tasks &amp; Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp-idf-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP-IDF Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth-low-energy-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bluetooth Low Energy (BLE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mqtt-iot-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT &amp; IoT Messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-peripherals-i2s-rmt-can" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Peripherals (I2S, RMT, CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystems-storage-littlefs-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filesystems &amp; Storage (LittleFS, SD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watchdogs-robust-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watchdogs &amp; Robust Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging &amp; Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-wifi-data-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — WiFi Data Logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-arm-cortex-m-stm32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bare-Metal ARM Cortex-M (STM32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registers-linker-scripts-startup-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registers, Linker Scripts &amp; Startup Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtos-internals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTOS Internals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-high-speed-peripherals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA &amp; High-Speed Peripherals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-design-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-Power Design Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts-the-nvic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts &amp; the NVIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcb-design-basics-kicad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCB Design Basics (KiCad)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-deep-dive-uarti2cspican" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Deep Dive (UART/I2C/SPI/CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootloaders-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootloaders &amp; Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-custom-sensor-board-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — Custom Sensor Board Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-firmware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Firmware Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-boot-encrypted-ota-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Boot &amp; Encrypted OTA at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tinyml-edge-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TinyML &amp; Edge AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rf-wireless-protocol-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RF &amp; Wireless Protocol Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hil-testing-ci-for-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIL Testing &amp; CI for Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-safety-misra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Safety &amp; MISRA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ultra-low-power-energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ultra-Low-Power &amp; Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacturing-dfm-factory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manufacturing, DFM &amp; Factory Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fleet-management-device-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fleet Management &amp; Device Clouds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capstone-production-iot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone — Production IoT Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-uart-receive-ring-buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A UART receive ring buffer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debounce-and-register-packing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debounce and register packing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & Toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-c-cpp-for-embedded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · C/C++ for Embedded
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-digital-io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Digital I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-analog-io-pwm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Analog I/O & PWM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-serial-uart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Serial/UART Communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-sensors-i2c-spi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Sensors, I2C & SPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-timers-interrupts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Timers & Interrupts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-memory-power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Memory & Power Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-esp32-wifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · ESP32 WiFi Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Environment Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-freertos-tasks-queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FreeRTOS Tasks & Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-esp-idf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-IDF Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-ble/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bluetooth Low Energy (BLE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-mqtt-iot-messaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MQTT & IoT Messaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Firmware Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-advanced-peripherals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Peripherals (I2S, RMT, CAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-filesystems-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filesystems & Storage (LittleFS, SD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-watchdogs-robust-firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Watchdogs & Robust Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-debugging-unit-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging & Unit Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-wifi-data-logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project — WiFi Data Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-bare-metal-arm-stm32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare-Metal ARM Cortex-M (STM32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-registers-linker-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registers, Linker Scripts & Startup Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-rtos-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTOS Internals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-dma-high-speed-peripherals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA & High-Speed Peripherals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-low-power-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Low-Power Design Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-interrupts-nvic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interrupts & the NVIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-pcb-design-kicad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PCB Design Basics (KiCad)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-protocol-deep-dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Deep Dive (UART/I2C/SPI/CAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-bootloaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bootloaders & Firmware Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-sensor-board/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project — Custom Sensor Board Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-production-firmware-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production Firmware Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-secure-boot-ota-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Boot & Encrypted OTA at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-tinyml-edge-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TinyML & Edge AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-rf-protocol-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Wireless Protocol Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-hil-testing-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HIL Testing & CI for Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-functional-safety-misra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional Safety & MISRA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-ultra-low-power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ultra-Low-Power & Energy Harvesting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-manufacturing-dfm-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manufacturing, DFM & Factory Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-fleet-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fleet Management & Device Clouds
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-production-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone — Production IoT Product
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; Toolchain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cc-for-embedded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · C/C++ for Embedded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-digital-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Digital I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-analog-io-pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Analog I/O &amp; PWM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-serialuart-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Serial/UART Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-sensors-i2c-spi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Sensors, I2C &amp; SPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-timers-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Timers &amp; Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-memory-power-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Memory &amp; Power Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-esp32-wifi-intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · ESP32 WiFi Intro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-environment-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Environment Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#freertos-tasks-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS Tasks &amp; Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp-idf-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP-IDF Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth-low-energy-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bluetooth Low Energy (BLE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mqtt-iot-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT &amp; IoT Messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-peripherals-i2s-rmt-can" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Peripherals (I2S, RMT, CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystems-storage-littlefs-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filesystems &amp; Storage (LittleFS, SD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watchdogs-robust-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watchdogs &amp; Robust Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging &amp; Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-wifi-data-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — WiFi Data Logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-arm-cortex-m-stm32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bare-Metal ARM Cortex-M (STM32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registers-linker-scripts-startup-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registers, Linker Scripts &amp; Startup Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtos-internals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTOS Internals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-high-speed-peripherals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA &amp; High-Speed Peripherals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-design-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-Power Design Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts-the-nvic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts &amp; the NVIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcb-design-basics-kicad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCB Design Basics (KiCad)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-deep-dive-uarti2cspican" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Deep Dive (UART/I2C/SPI/CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootloaders-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootloaders &amp; Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-custom-sensor-board-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — Custom Sensor Board Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-firmware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Firmware Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-boot-encrypted-ota-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Boot &amp; Encrypted OTA at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tinyml-edge-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TinyML &amp; Edge AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rf-wireless-protocol-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RF &amp; Wireless Protocol Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hil-testing-ci-for-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIL Testing &amp; CI for Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-safety-misra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Safety &amp; MISRA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ultra-low-power-energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ultra-Low-Power &amp; Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacturing-dfm-factory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manufacturing, DFM &amp; Factory Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fleet-management-device-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fleet Management &amp; Device Clouds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capstone-production-iot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone — Production IoT Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-uart-receive-ring-buffer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A UART receive ring buffer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debounce-and-register-packing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debounce and register packing
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="embedded-systems-interview-questions-and-answers">Embedded Systems Interview Questions and Answers<a class="headerlink" href="#embedded-systems-interview-questions-and-answers" title="Permanent link">&para;</a></h1>
+<p><strong>179 questions</strong> with the correct answer and a short explanation, organised from beginner (Level 1) to advanced (Level 4). Every question comes from a lesson in the free Embedded Systems Mastery Path, so you can open the lesson to go deeper.</p>
+<div class="admonition tip">
+<p class="admonition-title">Practise, don't just read</p>
+<p>Each lesson also ends with an interactive quiz, and the <a href="../quiz/">final quiz</a> tests all four levels. Try to answer each question below before reading the answer.</p>
+</div>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="01-setup-toolchain"><a href="../level-1/01-setup-toolchain/">01 · Setup &amp; Toolchain</a><a class="headerlink" href="#01-setup-toolchain" title="Permanent link">&para;</a></h3>
+<p><strong>Q1.</strong> What is a microcontroller?</p>
+<p><strong>Answer:</strong> A small self-contained chip with CPU, RAM, flash and peripherals</p>
+<p>Programs are cross-compiled for it.</p>
+<p><strong>Q2.</strong> What does the toolchain do on your laptop?</p>
+<p><strong>Answer:</strong> Compile and link code into machine code for the target MCU</p>
+<p>Cross compilation.</p>
+<p><strong>Q3.</strong> What is a sketch's <code>setup()</code> for?</p>
+<p><strong>Answer:</strong> One-time initialization before loop() runs repeatedly</p>
+<p>Arduino model.</p>
+<p><strong>Q4.</strong> Why upload via a bootloader or programmer?</p>
+<p><strong>Answer:</strong> The compiled image must be written into the MCU's flash</p>
+<p>USB serial or SWD.</p>
+<h3 id="02-cc-for-embedded"><a href="../level-1/02-c-cpp-for-embedded/">02 · C/C++ for Embedded</a><a class="headerlink" href="#02-cc-for-embedded" title="Permanent link">&para;</a></h3>
+<p><strong>Q5.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="mi">250</span><span class="p">;</span><span class="w"> </span><span class="n">x</span><span class="o">+=</span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="kt">int8_t</span><span class="w"> </span><span class="n">y</span><span class="o">=</span><span class="mi">127</span><span class="p">;</span><span class="w"> </span><span class="n">y</span><span class="o">++</span><span class="p">;</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"%u %d"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 4 -128</p>
+<p>Fixed-width types wrap at their size (signed overflow is technically undefined; shown for typical two's complement). Verified by compiling and running.</p>
+<p><strong>Q6.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">reg</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">reg</span><span class="o">|=</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="n">reg</span><span class="o">|=</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="n">reg</span><span class="o">&amp;=~</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"0x%02X"</span><span class="p">,</span><span class="w"> </span><span class="n">reg</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 0x20</p>
+<p>Set bit 3 and 5, then clear bit 3. Verified by compiling and running.</p>
+<p><strong>Q7.</strong> What does <code>volatile</code> tell the compiler?</p>
+<p><strong>Answer:</strong> The value can change outside the program's flow, so don't cache or optimize away accesses</p>
+<p>Hardware registers and ISR-shared variables.</p>
+<p><strong>Q8.</strong> Why prefer fixed-width integers like uint8_t on MCUs?</p>
+<p><strong>Answer:</strong> Sizes of int vary by platform; fixed width makes behavior predictable</p>
+<p>Registers have exact widths.</p>
+<h3 id="03-digital-io"><a href="../level-1/03-digital-io/">03 · Digital I/O</a><a class="headerlink" href="#03-digital-io" title="Permanent link">&para;</a></h3>
+<p><strong>Q9.</strong> What does pinMode(pin, OUTPUT) do?</p>
+<p><strong>Answer:</strong> Configures the pin to drive high or low</p>
+<p>INPUT reads.</p>
+<p><strong>Q10.</strong> What's a floating input?</p>
+<p><strong>Answer:</strong> An unconnected input that picks up noise; use a pull-up or pull-down resistor</p>
+<p>INPUT_PULLUP.</p>
+<p><strong>Q11.</strong> Why debounce a mechanical button?</p>
+<p><strong>Answer:</strong> Contacts bounce for milliseconds producing multiple transitions</p>
+<p>Software or hardware.</p>
+<p><strong>Q12.</strong> What current limit applies to GPIO pins?</p>
+<p><strong>Answer:</strong> A few to tens of mA; use a transistor/driver for larger loads</p>
+<p>Check the datasheet.</p>
+<h3 id="04-analog-io-pwm"><a href="../level-1/04-analog-io-pwm/">04 · Analog I/O &amp; PWM</a><a class="headerlink" href="#04-analog-io-pwm" title="Permanent link">&para;</a></h3>
+<p><strong>Q13.</strong> A 10-bit ADC reads 512 with Vref = 5 V. What voltage is that?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">512</span><span class="o">/</span><span class="mi">1023</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 2.502</p>
+<p>V = raw/(2^n - 1) x Vref. Verified by running it.</p>
+<p><strong>Q14.</strong> What's the ADC resolution step of a 12-bit ADC at 3.3 V?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mf">3.3</span><span class="o">/</span><span class="mi">4096</span><span class="o">*</span><span class="mi">1000</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 0.806</p>
+<p>LSB = Vref / 2^n (in mV). Verified by running it.</p>
+<p><strong>Q15.</strong> What does PWM do?</p>
+<p><strong>Answer:</strong> Switches a pin on and off quickly; the duty cycle sets the average power</p>
+<p>Dimming and motors.</p>
+<p><strong>Q16.</strong> How does a duty cycle of 25% at 5 V behave on an LED?</p>
+<p><strong>Answer:</strong> About 1.25 V average, so it looks dimmer</p>
+<p>Average of the waveform.</p>
+<h3 id="05-serialuart-communication"><a href="../level-1/05-serial-uart/">05 · Serial/UART Communication</a><a class="headerlink" href="#05-serialuart-communication" title="Permanent link">&para;</a></h3>
+<p><strong>Q17.</strong> What does UART need to communicate?</p>
+<p><strong>Answer:</strong> Matching baud rate and framing on TX/RX plus a common ground</p>
+<p>Asynchronous.</p>
+<p><strong>Q18.</strong> At 9600 baud with 8N1 framing, how many characters per second at most?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">print</span><span class="p">(</span><span class="mi">9600</span><span class="o">//</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 960</p>
+<p>10 bits per character (start + 8 data + stop). Verified by running it.</p>
+<p><strong>Q19.</strong> What happens if baud rates mismatch?</p>
+<p><strong>Answer:</strong> Garbled characters</p>
+<p>Check both ends.</p>
+<p><strong>Q20.</strong> Why print debug output over serial sparingly?</p>
+<p><strong>Answer:</strong> It blocks/takes time and can disturb real-time behavior</p>
+<p>Log levels.</p>
+<h3 id="06-sensors-i2c-spi"><a href="../level-1/06-sensors-i2c-spi/">06 · Sensors, I2C &amp; SPI</a><a class="headerlink" href="#06-sensors-i2c-spi" title="Permanent link">&para;</a></h3>
+<p><strong>Q21.</strong> What's the difference between I2C and SPI?</p>
+<p><strong>Answer:</strong> I2C uses two shared wires with addresses; SPI uses a clock, data lines and a chip-select per device and is faster</p>
+<p>Choose by need.</p>
+<p><strong>Q22.</strong> Why do I2C lines need pull-up resistors?</p>
+<p><strong>Answer:</strong> The bus is open-drain: devices only pull low</p>
+<p>Typically 4.7k.</p>
+<p><strong>Q23.</strong> What identifies a device on I2C?</p>
+<p><strong>Answer:</strong> A 7-bit address</p>
+<p>i2cdetect finds them.</p>
+<p><strong>Q24.</strong> What does SPI mode (CPOL/CPHA) define?</p>
+<p><strong>Answer:</strong> Clock polarity and phase for sampling data</p>
+<p>Must match the device.</p>
+<h3 id="07-timers-interrupts"><a href="../level-1/07-timers-interrupts/">07 · Timers &amp; Interrupts</a><a class="headerlink" href="#07-timers-interrupts" title="Permanent link">&para;</a></h3>
+<p><strong>Q25.</strong> Why avoid delay() in real firmware?</p>
+<p><strong>Answer:</strong> It blocks everything else; use timers or millis() state machines</p>
+<p>Non-blocking design.</p>
+<p><strong>Q26.</strong> What does an interrupt do?</p>
+<p><strong>Answer:</strong> Pauses normal code to run a handler when an event occurs</p>
+<p>Keep it short.</p>
+<p><strong>Q27.</strong> What should an ISR do?</p>
+<p><strong>Answer:</strong> Minimal work: set a flag or buffer data and return</p>
+<p>Defer to main loop.</p>
+<p><strong>Q28.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="k">volatile</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">flag</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kt">void</span><span class="w"> </span><span class="nf">isr</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="n">flag</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="n">isr</span><span class="p">();</span><span class="w"> </span><span class="k">if</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"handled"</span><span class="p">);</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"missed"</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> handled</p>
+<p>Share state with an ISR through a volatile flag. Verified by compiling and running.</p>
+<h3 id="08-memory-power-basics"><a href="../level-1/08-memory-power/">08 · Memory &amp; Power Basics</a><a class="headerlink" href="#08-memory-power-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q29.</strong> Which memories does an MCU typically have?</p>
+<p><strong>Answer:</strong> Flash (code), SRAM (data) and EEPROM/NVS for settings</p>
+<p>Fixed at design time.</p>
+<p><strong>Q30.</strong> Where do string literals go on AVR unless told otherwise?</p>
+<p><strong>Answer:</strong> Copied to SRAM at startup; use F()/PROGMEM to keep them in flash</p>
+<p>Save RAM.</p>
+<p><strong>Q31.</strong> What dominates battery life?</p>
+<p><strong>Answer:</strong> How long and how often the MCU and radios are awake</p>
+<p>Sleep modes.</p>
+<p><strong>Q32.</strong> What does deep sleep do?</p>
+<p><strong>Answer:</strong> Powers down most of the chip, waking on a timer or pin</p>
+<p>Microamps.</p>
+<h3 id="09-esp32-wifi-intro"><a href="../level-1/09-esp32-wifi/">09 · ESP32 WiFi Intro</a><a class="headerlink" href="#09-esp32-wifi-intro" title="Permanent link">&para;</a></h3>
+<p><strong>Q33.</strong> What does an ESP32 add over a basic MCU?</p>
+<p><strong>Answer:</strong> Built-in WiFi and Bluetooth radios</p>
+<p>IoT-ready.</p>
+<p><strong>Q34.</strong> What is an HTTP GET used for in a device?</p>
+<p><strong>Answer:</strong> Fetching data from a server</p>
+<p>Check status codes.</p>
+<p><strong>Q35.</strong> Why handle WiFi disconnects in firmware?</p>
+<p><strong>Answer:</strong> Links drop; reconnect and retry rather than hang</p>
+<p>Robustness.</p>
+<p><strong>Q36.</strong> What should you never hardcode in source?</p>
+<p><strong>Answer:</strong> WiFi passwords and API keys</p>
+<p>Use config/NVS.</p>
+<h3 id="10-capstone-environment-monitor"><a href="../level-1/10-capstone-project/">10 · Capstone — Environment Monitor</a><a class="headerlink" href="#10-capstone-environment-monitor" title="Permanent link">&para;</a></h3>
+<p><strong>Q37.</strong> What does the environment monitor combine?</p>
+<p><strong>Answer:</strong> Sensor reading, display, alarm and WiFi in one device</p>
+<p>Level 1 capstone.</p>
+<p><strong>Q38.</strong> Why use millis() scheduling in the project?</p>
+<p><strong>Answer:</strong> Multiple tasks need non-blocking timing</p>
+<p>Cooperative scheduling.</p>
+<p><strong>Q39.</strong> How do you handle a failed sensor read?</p>
+<p><strong>Answer:</strong> Detect and report/skip it rather than using garbage values</p>
+<p>Check for NaN.</p>
+<p><strong>Q40.</strong> What would you add for production?</p>
+<p><strong>Answer:</strong> Watchdog, logging and OTA</p>
+<p>Level 2 topics.</p>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="freertos-tasks-queues"><a href="../level-2/01-freertos-tasks-queues/">FreeRTOS Tasks &amp; Queues</a><a class="headerlink" href="#freertos-tasks-queues" title="Permanent link">&para;</a></h3>
+<p><strong>Q41.</strong> What does FreeRTOS provide?</p>
+<p><strong>Answer:</strong> Tasks, queues, semaphores and timers on an MCU</p>
+<p>Preemptive scheduling.</p>
+<p><strong>Q42.</strong> What's a queue for?</p>
+<p><strong>Answer:</strong> Passing data safely between tasks or from an ISR</p>
+<p>Thread-safe.</p>
+<p><strong>Q43.</strong> What's priority inversion?</p>
+<p><strong>Answer:</strong> A high-priority task blocked by a low-priority one holding a resource</p>
+<p>Use priority inheritance mutexes.</p>
+<p><strong>Q44.</strong> Why not call blocking APIs from an ISR?</p>
+<p><strong>Answer:</strong> They can't wait in interrupt context; use FromISR variants</p>
+<p>xQueueSendFromISR.</p>
+<h3 id="esp-idf-development"><a href="../level-2/02-esp-idf/">ESP-IDF Development</a><a class="headerlink" href="#esp-idf-development" title="Permanent link">&para;</a></h3>
+<p><strong>Q45.</strong> What is ESP-IDF?</p>
+<p><strong>Answer:</strong> Espressif's official development framework underlying Arduino-ESP32</p>
+<p>More control.</p>
+<p><strong>Q46.</strong> What does menuconfig do?</p>
+<p><strong>Answer:</strong> Configures chip, RTOS and component options</p>
+<p>sdkconfig.</p>
+<p><strong>Q47.</strong> What's a component in ESP-IDF?</p>
+<p><strong>Answer:</strong> A reusable module with its own CMake and sources</p>
+<p>Modular.</p>
+<p><strong>Q48.</strong> Why use ESP-IDF over Arduino?</p>
+<p><strong>Answer:</strong> Finer control of resources, partitions and features</p>
+<p>Production firmware.</p>
+<h3 id="bluetooth-low-energy-ble"><a href="../level-2/03-ble/">Bluetooth Low Energy (BLE)</a><a class="headerlink" href="#bluetooth-low-energy-ble" title="Permanent link">&para;</a></h3>
+<p><strong>Q49.</strong> Why use BLE over WiFi?</p>
+<p><strong>Answer:</strong> Much lower power and no router needed for phone connections</p>
+<p>Short data bursts.</p>
+<p><strong>Q50.</strong> What is a GATT characteristic?</p>
+<p><strong>Answer:</strong> A data value a BLE peripheral exposes for read/write/notify</p>
+<p>Services group them.</p>
+<p><strong>Q51.</strong> What is advertising in BLE?</p>
+<p><strong>Answer:</strong> Broadcasting presence so central devices can discover and connect</p>
+<p>Interval affects power.</p>
+<p><strong>Q52.</strong> What does notify do?</p>
+<p><strong>Answer:</strong> Pushes updates to a subscribed client without polling</p>
+<p>Efficient.</p>
+<h3 id="mqtt-iot-messaging"><a href="../level-2/04-mqtt-iot-messaging/">MQTT &amp; IoT Messaging</a><a class="headerlink" href="#mqtt-iot-messaging" title="Permanent link">&para;</a></h3>
+<p><strong>Q53.</strong> What does MQTT use?</p>
+<p><strong>Answer:</strong> Publish/subscribe messaging through a broker</p>
+<p>Lightweight for IoT.</p>
+<p><strong>Q54.</strong> What are MQTT QoS levels 0, 1, 2?</p>
+<p><strong>Answer:</strong> At most once, at least once, exactly once</p>
+<p>Trade-off with overhead.</p>
+<p><strong>Q55.</strong> What does a retained message do?</p>
+<p><strong>Answer:</strong> The broker stores the last value for new subscribers</p>
+<p>Status topics.</p>
+<p><strong>Q56.</strong> What's a Last Will message?</p>
+<p><strong>Answer:</strong> Published by the broker if a client disconnects unexpectedly</p>
+<p>Detect offline devices.</p>
+<h3 id="ota-firmware-updates"><a href="../level-2/05-ota-updates/">OTA Firmware Updates</a><a class="headerlink" href="#ota-firmware-updates" title="Permanent link">&para;</a></h3>
+<p><strong>Q57.</strong> Why use OTA updates?</p>
+<p><strong>Answer:</strong> Devices in the field can't be reached with a cable</p>
+<p>Remote maintenance.</p>
+<p><strong>Q58.</strong> What's needed for a safe OTA?</p>
+<p><strong>Answer:</strong> Two app partitions, validation and rollback</p>
+<p>Fail-safe.</p>
+<p><strong>Q59.</strong> Why sign firmware images?</p>
+<p><strong>Answer:</strong> Prevent installing malicious or corrupted firmware</p>
+<p>Verify before boot.</p>
+<p><strong>Q60.</strong> What does the 'mark app valid' step do?</p>
+<p><strong>Answer:</strong> Confirms the new firmware booted OK so it isn't rolled back</p>
+<p>Anti-brick.</p>
+<h3 id="advanced-peripherals-i2s-rmt-can"><a href="../level-2/06-advanced-peripherals/">Advanced Peripherals (I2S, RMT, CAN)</a><a class="headerlink" href="#advanced-peripherals-i2s-rmt-can" title="Permanent link">&para;</a></h3>
+<p><strong>Q61.</strong> What does I2S carry?</p>
+<p><strong>Answer:</strong> Continuous digital audio streams</p>
+<p>Mics and DACs.</p>
+<p><strong>Q62.</strong> What's RMT used for?</p>
+<p><strong>Answer:</strong> Generating/receiving precisely timed pulse trains (IR, LED strips)</p>
+<p>Hardware timing.</p>
+<p><strong>Q63.</strong> When use DMA with peripherals?</p>
+<p><strong>Answer:</strong> To move data without CPU involvement at high rates</p>
+<p>Frees the CPU.</p>
+<p><strong>Q64.</strong> Why not bit-bang a protocol when hardware support exists?</p>
+<p><strong>Answer:</strong> Timing is jittery and wastes CPU</p>
+<p>Use peripherals.</p>
+<h3 id="filesystems-storage-littlefs-sd"><a href="../level-2/07-filesystems-storage/">Filesystems &amp; Storage (LittleFS, SD)</a><a class="headerlink" href="#filesystems-storage-littlefs-sd" title="Permanent link">&para;</a></h3>
+<p><strong>Q65.</strong> What's NVS for?</p>
+<p><strong>Answer:</strong> Storing small key/value settings that survive reboot</p>
+<p>Configuration.</p>
+<p><strong>Q66.</strong> What's LittleFS suited to?</p>
+<p><strong>Answer:</strong> Wear-leveled, power-loss-resilient files on flash</p>
+<p>Logs.</p>
+<p><strong>Q67.</strong> Why batch flash writes?</p>
+<p><strong>Answer:</strong> Flash has limited erase cycles and slow writes</p>
+<p>Reduce wear.</p>
+<p><strong>Q68.</strong> What happens on a power cut during write without protection?</p>
+<p><strong>Answer:</strong> Corruption; use journaling/atomic updates</p>
+<p>Design for it.</p>
+<h3 id="watchdogs-robust-firmware"><a href="../level-2/08-watchdogs-robust-firmware/">Watchdogs &amp; Robust Firmware</a><a class="headerlink" href="#watchdogs-robust-firmware" title="Permanent link">&para;</a></h3>
+<p><strong>Q69.</strong> What does a watchdog do?</p>
+<p><strong>Answer:</strong> Resets the device if the firmware stops 'feeding' it</p>
+<p>Recovers from hangs.</p>
+<p><strong>Q70.</strong> Where should you feed the watchdog?</p>
+<p><strong>Answer:</strong> Only when the system is truly healthy, not blindly in a timer ISR</p>
+<p>Otherwise it hides hangs.</p>
+<p><strong>Q71.</strong> What is a brownout?</p>
+<p><strong>Answer:</strong> Supply voltage dropping below a safe level, causing erratic behavior</p>
+<p>Brownout detectors reset safely.</p>
+<p><strong>Q72.</strong> What should firmware do after a watchdog reset?</p>
+<p><strong>Answer:</strong> Record the cause and enter a safe state or retry</p>
+<p>Diagnose.</p>
+<h3 id="debugging-unit-testing"><a href="../level-2/09-debugging-unit-testing/">Debugging &amp; Unit Testing</a><a class="headerlink" href="#debugging-unit-testing" title="Permanent link">&para;</a></h3>
+<p><strong>Q73.</strong> What's a core dump/panic handler useful for?</p>
+<p><strong>Answer:</strong> Capturing crash state for post-mortem debugging</p>
+<p>Save to flash.</p>
+<p><strong>Q74.</strong> How do you unit test embedded logic?</p>
+<p><strong>Answer:</strong> Compile hardware-independent code on the host with mocks</p>
+<p>Fast tests.</p>
+<p><strong>Q75.</strong> What does JTAG/SWD provide?</p>
+<p><strong>Answer:</strong> Hardware debugging: breakpoints, memory and register access</p>
+<p>OpenOCD, gdb.</p>
+<p><strong>Q76.</strong> Why add assertions?</p>
+<p><strong>Answer:</strong> Catch invalid states early near the cause</p>
+<p>Fail fast in development.</p>
+<h3 id="project-wifi-data-logger"><a href="../level-2/10-project-wifi-data-logger/">Project — WiFi Data Logger</a><a class="headerlink" href="#project-wifi-data-logger" title="Permanent link">&para;</a></h3>
+<p><strong>Q77.</strong> What does the WiFi data logger combine?</p>
+<p><strong>Answer:</strong> Scheduled sampling, storage, WiFi/MQTT upload, watchdog and OTA</p>
+<p>A year-long device.</p>
+<p><strong>Q78.</strong> How do you handle offline periods?</p>
+<p><strong>Answer:</strong> Buffer data locally and upload when the link returns</p>
+<p>Store and forward.</p>
+<p><strong>Q79.</strong> What validates robustness?</p>
+<p><strong>Answer:</strong> Fault injection: power cuts, WiFi loss and bad sensors</p>
+<p>Test failures.</p>
+<p><strong>Q80.</strong> How do you keep power low?</p>
+<p><strong>Answer:</strong> Sleep between samples and batch transmissions</p>
+<p>Duty cycle.</p>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="bare-metal-arm-cortex-m-stm32"><a href="../level-3/01-bare-metal-arm-stm32/">Bare-Metal ARM Cortex-M (STM32)</a><a class="headerlink" href="#bare-metal-arm-cortex-m-stm32" title="Permanent link">&para;</a></h3>
+<p><strong>Q81.</strong> What does bare-metal programming mean?</p>
+<p><strong>Answer:</strong> Running directly on the hardware without an OS or framework</p>
+<p>You set clocks and registers.</p>
+<p><strong>Q82.</strong> What's the first code that runs after reset?</p>
+<p><strong>Answer:</strong> The reset handler from the vector table, which sets up memory and calls main</p>
+<p>Startup code.</p>
+<p><strong>Q83.</strong> Why configure the clock tree manually?</p>
+<p><strong>Answer:</strong> Peripherals and CPU need correct frequencies from PLLs/dividers</p>
+<p>Datasheet.</p>
+<p><strong>Q84.</strong> What does HAL provide?</p>
+<p><strong>Answer:</strong> A vendor abstraction layer over registers</p>
+<p>LL is lower level.</p>
+<h3 id="registers-linker-scripts-startup-code"><a href="../level-3/02-registers-linker-startup/">Registers, Linker Scripts &amp; Startup Code</a><a class="headerlink" href="#registers-linker-scripts-startup-code" title="Permanent link">&para;</a></h3>
+<p><strong>Q85.</strong> What does the linker script define?</p>
+<p><strong>Answer:</strong> Memory regions and where sections (.text, .data, .bss) are placed</p>
+<p>FLASH/RAM layout.</p>
+<p><strong>Q86.</strong> What is .bss?</p>
+<p><strong>Answer:</strong> Zero-initialized static data (cleared at startup)</p>
+<p>Not stored in flash.</p>
+<p><strong>Q87.</strong> What does startup code do with .data?</p>
+<p><strong>Answer:</strong> Copies initial values from flash to RAM</p>
+<p>Before main.</p>
+<p><strong>Q88.</strong> What's the vector table?</p>
+<p><strong>Answer:</strong> An array of addresses for the stack pointer and exception/interrupt handlers</p>
+<p>At the start of flash.</p>
+<h3 id="rtos-internals"><a href="../level-3/03-rtos-internals/">RTOS Internals</a><a class="headerlink" href="#rtos-internals" title="Permanent link">&para;</a></h3>
+<p><strong>Q89.</strong> What does a scheduler's context switch save?</p>
+<p><strong>Answer:</strong> CPU registers and stack pointer of the running task</p>
+<p>PendSV on Cortex-M.</p>
+<p><strong>Q90.</strong> What's a tick?</p>
+<p><strong>Answer:</strong> A periodic timer interrupt driving scheduling and delays</p>
+<p>SysTick.</p>
+<p><strong>Q91.</strong> What's a semaphore for?</p>
+<p><strong>Answer:</strong> Signaling and resource counting between tasks/ISRs</p>
+<p>Binary or counting.</p>
+<p><strong>Q92.</strong> What's stack overflow's effect in an RTOS?</p>
+<p><strong>Answer:</strong> Corrupts memory and crashes; size stacks and enable checks</p>
+<p>uxTaskGetStackHighWaterMark.</p>
+<h3 id="dma-high-speed-peripherals"><a href="../level-3/04-dma-high-speed-peripherals/">DMA &amp; High-Speed Peripherals</a><a class="headerlink" href="#dma-high-speed-peripherals" title="Permanent link">&para;</a></h3>
+<p><strong>Q93.</strong> What does DMA do?</p>
+<p><strong>Answer:</strong> Moves data between memory and peripherals without CPU copies</p>
+<p>Frees CPU.</p>
+<p><strong>Q94.</strong> When is DMA essential?</p>
+<p><strong>Answer:</strong> High-speed streams like ADC sampling or audio</p>
+<p>Throughput.</p>
+<p><strong>Q95.</strong> What is a circular DMA buffer?</p>
+<p><strong>Answer:</strong> A buffer refilled continuously with half/complete interrupts</p>
+<p>Double buffering.</p>
+<p><strong>Q96.</strong> What hazard do DMA buffers add?</p>
+<p><strong>Answer:</strong> Cache coherency and ownership: CPU and DMA must not touch the same data</p>
+<p>Use barriers.</p>
+<h3 id="low-power-design-deep-dive"><a href="../level-3/05-low-power-design/">Low-Power Design Deep Dive</a><a class="headerlink" href="#low-power-design-deep-dive" title="Permanent link">&para;</a></h3>
+<p><strong>Q97.</strong> What's the biggest lever for low power?</p>
+<p><strong>Answer:</strong> Spend most time in deep sleep and wake rarely</p>
+<p>Duty cycle.</p>
+<p><strong>Q98.</strong> What wakes an MCU from sleep?</p>
+<p><strong>Answer:</strong> Timers, GPIO interrupts and peripherals</p>
+<p>Configure sources.</p>
+<p><strong>Q99.</strong> Why disable unused peripherals and clocks?</p>
+<p><strong>Answer:</strong> They draw current even when idle</p>
+<p>Clock gating.</p>
+<p><strong>Q100.</strong> How do you measure low power accurately?</p>
+<p><strong>Answer:</strong> A current profiler/analyzer capturing sleep and active phases</p>
+<p>Wake spikes matter.</p>
+<h3 id="interrupts-the-nvic"><a href="../level-3/06-interrupts-nvic/">Interrupts &amp; the NVIC</a><a class="headerlink" href="#interrupts-the-nvic" title="Permanent link">&para;</a></h3>
+<p><strong>Q101.</strong> What is NVIC?</p>
+<p><strong>Answer:</strong> Cortex-M's nested vectored interrupt controller handling priorities</p>
+<p>Preemption.</p>
+<p><strong>Q102.</strong> What does interrupt priority mean?</p>
+<p><strong>Answer:</strong> Higher-priority interrupts can preempt lower-priority handlers</p>
+<p>Lower number = higher priority on Cortex-M.</p>
+<p><strong>Q103.</strong> What should an ISR avoid?</p>
+<p><strong>Answer:</strong> Long operations and blocking calls</p>
+<p>Keep latency low.</p>
+<p><strong>Q104.</strong> Why clear the pending flag in an ISR?</p>
+<p><strong>Answer:</strong> Otherwise it re-enters continuously</p>
+<p>Acknowledge the source.</p>
+<h3 id="pcb-design-basics-kicad"><a href="../level-3/07-pcb-design-kicad/">PCB Design Basics (KiCad)</a><a class="headerlink" href="#pcb-design-basics-kicad" title="Permanent link">&para;</a></h3>
+<p><strong>Q105.</strong> What's a typical first step in KiCad?</p>
+<p><strong>Answer:</strong> Draw the schematic, then assign footprints and lay out the PCB</p>
+<p>ERC then DRC.</p>
+<p><strong>Q106.</strong> Why add decoupling capacitors near ICs?</p>
+<p><strong>Answer:</strong> They supply transient current and filter noise</p>
+<p>100 nF close to pins.</p>
+<p><strong>Q107.</strong> What does DRC check?</p>
+<p><strong>Answer:</strong> Design rules like clearances and trace widths</p>
+<p>Before fabrication.</p>
+<p><strong>Q108.</strong> Why consider return paths and ground planes?</p>
+<p><strong>Answer:</strong> Signal integrity and EMI depend on them</p>
+<p>Solid ground.</p>
+<h3 id="protocol-deep-dive-uarti2cspican"><a href="../level-3/08-protocol-deep-dive/">Protocol Deep Dive (UART/I2C/SPI/CAN)</a><a class="headerlink" href="#protocol-deep-dive-uarti2cspican" title="Permanent link">&para;</a></h3>
+<p><strong>Q109.</strong> What does a logic analyzer do?</p>
+<p><strong>Answer:</strong> Captures digital signals over time to decode protocols</p>
+<p>Debug I2C/SPI.</p>
+<p><strong>Q110.</strong> What's clock stretching in I2C?</p>
+<p><strong>Answer:</strong> A slave holding SCL low to delay the master</p>
+<p>Some masters mishandle it.</p>
+<p><strong>Q111.</strong> What does CAN provide?</p>
+<p><strong>Answer:</strong> A robust multi-master differential bus with arbitration (automotive/industrial)</p>
+<p>Error detection.</p>
+<p><strong>Q112.</strong> Why add checksums/CRC to custom protocols?</p>
+<p><strong>Answer:</strong> Detect corrupted frames</p>
+<p>Reliability.</p>
+<h3 id="bootloaders-firmware-updates"><a href="../level-3/09-bootloaders/">Bootloaders &amp; Firmware Updates</a><a class="headerlink" href="#bootloaders-firmware-updates" title="Permanent link">&para;</a></h3>
+<p><strong>Q113.</strong> What does a bootloader do?</p>
+<p><strong>Answer:</strong> Runs first, can update application firmware, then jumps to it</p>
+<p>Update path.</p>
+<p><strong>Q114.</strong> What must a bootloader verify before jumping?</p>
+<p><strong>Answer:</strong> A valid application image (CRC/signature) and vector table</p>
+<p>Avoid bricking.</p>
+<p><strong>Q115.</strong> Why keep the bootloader minimal and protected?</p>
+<p><strong>Answer:</strong> A bug or erase in it can brick the device</p>
+<p>Write-protect flash.</p>
+<p><strong>Q116.</strong> How does the app vector table relocate?</p>
+<p><strong>Answer:</strong> VTOR points to the app's table</p>
+<p>Cortex-M.</p>
+<h3 id="project-custom-sensor-board-firmware"><a href="../level-3/10-project-sensor-board/">Project — Custom Sensor Board Firmware</a><a class="headerlink" href="#project-custom-sensor-board-firmware" title="Permanent link">&para;</a></h3>
+<p><strong>Q117.</strong> What does the sensor board project combine?</p>
+<p><strong>Answer:</strong> Custom PCB, bare-metal firmware, DMA/low power and a bootloader</p>
+<p>Level 3 capstone.</p>
+<p><strong>Q118.</strong> How do you validate the board?</p>
+<p><strong>Answer:</strong> Bring-up checklist: power rails, clocks, communications and sensor accuracy</p>
+<p>Stage the bring-up.</p>
+<p><strong>Q119.</strong> Why add test points?</p>
+<p><strong>Answer:</strong> Probing signals for debug and manufacturing test</p>
+<p>DFT.</p>
+<p><strong>Q120.</strong> What documentation helps?</p>
+<p><strong>Answer:</strong> Schematics, BOM, pinouts and firmware notes</p>
+<p>Handover.</p>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="production-firmware-architecture"><a href="../level-4/01-production-firmware-architecture/">Production Firmware Architecture</a><a class="headerlink" href="#production-firmware-architecture" title="Permanent link">&para;</a></h3>
+<p><strong>Q121.</strong> What does a production firmware architecture include?</p>
+<p><strong>Answer:</strong> Layered modules, HAL abstraction, state machines, logging and update support</p>
+<p>Maintainable.</p>
+<p><strong>Q122.</strong> Why layer HAL, drivers and application?</p>
+<p><strong>Answer:</strong> Testability and portability across hardware</p>
+<p>Mock hardware.</p>
+<p><strong>Q123.</strong> Why use state machines?</p>
+<p><strong>Answer:</strong> Explicit, testable behavior for event-driven devices</p>
+<p>Avoid spaghetti.</p>
+<p><strong>Q124.</strong> What should logging support?</p>
+<p><strong>Answer:</strong> Levels and persistent crash logs without blocking</p>
+<p>Field diagnosis.</p>
+<h3 id="secure-boot-encrypted-ota-at-scale"><a href="../level-4/02-secure-boot-ota-scale/">Secure Boot &amp; Encrypted OTA at Scale</a><a class="headerlink" href="#secure-boot-encrypted-ota-at-scale" title="Permanent link">&para;</a></h3>
+<p><strong>Q125.</strong> What does secure boot at scale require?</p>
+<p><strong>Answer:</strong> Key management, signed images and anti-rollback</p>
+<p>Chain of trust.</p>
+<p><strong>Q126.</strong> What does anti-rollback prevent?</p>
+<p><strong>Answer:</strong> Installing older vulnerable firmware</p>
+<p>Version counters.</p>
+<p><strong>Q127.</strong> Why use staged OTA rollouts?</p>
+<p><strong>Answer:</strong> Limit damage from a bad release</p>
+<p>Canary.</p>
+<p><strong>Q128.</strong> Where are signing keys kept?</p>
+<p><strong>Answer:</strong> In an HSM or secured offline infrastructure</p>
+<p>Never in the repo.</p>
+<h3 id="tinyml-edge-ai"><a href="../level-4/03-tinyml-edge-ai/">TinyML &amp; Edge AI</a><a class="headerlink" href="#tinyml-edge-ai" title="Permanent link">&para;</a></h3>
+<p><strong>Q129.</strong> What's TinyML?</p>
+<p><strong>Answer:</strong> Running machine learning inference on microcontrollers</p>
+<p>Quantized models.</p>
+<p><strong>Q130.</strong> What are TinyML constraints?</p>
+<p><strong>Answer:</strong> Memory, compute and power budgets</p>
+<p>Small models.</p>
+<p><strong>Q131.</strong> Why quantize models?</p>
+<p><strong>Answer:</strong> Smaller size and faster integer inference</p>
+<p>int8.</p>
+<p><strong>Q132.</strong> What data matters most?</p>
+<p><strong>Answer:</strong> Representative data from the target sensors</p>
+<p>Field accuracy.</p>
+<h3 id="rf-wireless-protocol-design"><a href="../level-4/04-rf-protocol-design/">RF &amp; Wireless Protocol Design</a><a class="headerlink" href="#rf-wireless-protocol-design" title="Permanent link">&para;</a></h3>
+<p><strong>Q133.</strong> What does link budget account for?</p>
+<p><strong>Answer:</strong> Transmit power, antenna gains, path loss and receiver sensitivity</p>
+<p>Range planning.</p>
+<p><strong>Q134.</strong> Why choose LoRa for long range?</p>
+<p><strong>Answer:</strong> Low data rate with high sensitivity and low power</p>
+<p>Trade-offs.</p>
+<p><strong>Q135.</strong> What's a packet format design concern?</p>
+<p><strong>Answer:</strong> Framing, CRC, versioning and security</p>
+<p>Interoperability.</p>
+<p><strong>Q136.</strong> Why consider regulatory limits (duty cycle)?</p>
+<p><strong>Answer:</strong> Radio rules limit transmit time and power</p>
+<p>Compliance.</p>
+<h3 id="hil-testing-ci-for-firmware"><a href="../level-4/05-hil-testing-ci/">HIL Testing &amp; CI for Firmware</a><a class="headerlink" href="#hil-testing-ci-for-firmware" title="Permanent link">&para;</a></h3>
+<p><strong>Q137.</strong> What does HIL testing do?</p>
+<p><strong>Answer:</strong> Runs real firmware on hardware with simulated inputs automatically</p>
+<p>Hardware-in-the-loop.</p>
+<p><strong>Q138.</strong> Why integrate HIL into CI?</p>
+<p><strong>Answer:</strong> Catch hardware-dependent regressions on every change</p>
+<p>Test farms.</p>
+<p><strong>Q139.</strong> What does a HIL rig need?</p>
+<p><strong>Answer:</strong> Device under test, power/reset control, signal injection and result capture</p>
+<p>Automation.</p>
+<p><strong>Q140.</strong> What stays in host unit tests?</p>
+<p><strong>Answer:</strong> Pure logic without hardware dependencies</p>
+<p>Fast feedback.</p>
+<h3 id="functional-safety-misra"><a href="../level-4/06-functional-safety-misra/">Functional Safety &amp; MISRA</a><a class="headerlink" href="#functional-safety-misra" title="Permanent link">&para;</a></h3>
+<p><strong>Q141.</strong> What is MISRA C?</p>
+<p><strong>Answer:</strong> A coding standard for safe C in critical systems</p>
+<p>Reduces undefined behavior.</p>
+<p><strong>Q142.</strong> What does functional safety (IEC 61508/ISO 26262) require?</p>
+<p><strong>Answer:</strong> Hazard analysis, defined processes, verification and traceability</p>
+<p>Safety integrity levels.</p>
+<p><strong>Q143.</strong> What's a safe state?</p>
+<p><strong>Answer:</strong> A defined condition the system enters on fault to avoid harm</p>
+<p>Design for it.</p>
+<p><strong>Q144.</strong> Why static analysis?</p>
+<p><strong>Answer:</strong> Find rule violations and defects without running the code</p>
+<p>Part of the process.</p>
+<h3 id="ultra-low-power-energy-harvesting"><a href="../level-4/07-ultra-low-power/">Ultra-Low-Power &amp; Energy Harvesting</a><a class="headerlink" href="#ultra-low-power-energy-harvesting" title="Permanent link">&para;</a></h3>
+<p><strong>Q145.</strong> What's the target in ultra-low-power design?</p>
+<p><strong>Answer:</strong> Microamp average current via deep sleep and minimal wake time</p>
+<p>Energy budget.</p>
+<p><strong>Q146.</strong> What often dominates energy?</p>
+<p><strong>Answer:</strong> Radio transmissions and wake overhead</p>
+<p>Batch and shorten.</p>
+<p><strong>Q147.</strong> How to estimate battery life?</p>
+<p><strong>Answer:</strong> Average current from duty cycle, battery capacity and derating</p>
+<p>Measure.</p>
+<p><strong>Q148.</strong> What's leakage current?</p>
+<p><strong>Answer:</strong> Current drawn by components even when idle, such as regulators and pull-ups</p>
+<p>Choose parts carefully.</p>
+<h3 id="manufacturing-dfm-factory-test"><a href="../level-4/08-manufacturing-dfm-test/">Manufacturing, DFM &amp; Factory Test</a><a class="headerlink" href="#manufacturing-dfm-factory-test" title="Permanent link">&para;</a></h3>
+<p><strong>Q149.</strong> What is DFM?</p>
+<p><strong>Answer:</strong> Design for manufacturing: making the board easy and cheap to build</p>
+<p>Footprints, panelization.</p>
+<p><strong>Q150.</strong> Why provide test fixtures and a factory test mode?</p>
+<p><strong>Answer:</strong> Verify every unit and provision keys/IDs on the line</p>
+<p>Production test.</p>
+<p><strong>Q151.</strong> What belongs in the BOM?</p>
+<p><strong>Answer:</strong> Parts, values, footprints and approved alternatives</p>
+<p>Supply chain.</p>
+<p><strong>Q152.</strong> Why provision unique identities at manufacturing?</p>
+<p><strong>Answer:</strong> Per-device keys and IDs enable secure fleet management</p>
+<p>Secure provisioning.</p>
+<h3 id="fleet-management-device-clouds"><a href="../level-4/09-fleet-management/">Fleet Management &amp; Device Clouds</a><a class="headerlink" href="#fleet-management-device-clouds" title="Permanent link">&para;</a></h3>
+<p><strong>Q153.</strong> What does fleet management provide?</p>
+<p><strong>Answer:</strong> Monitoring, configuration and updates of many devices</p>
+<p>Scale.</p>
+<p><strong>Q154.</strong> What telemetry matters?</p>
+<p><strong>Answer:</strong> Version, health, battery, errors and connectivity</p>
+<p>Observability.</p>
+<p><strong>Q155.</strong> How do you handle devices offline for months?</p>
+<p><strong>Answer:</strong> Resumable updates and compatibility across versions</p>
+<p>Version skew.</p>
+<p><strong>Q156.</strong> What's a device twin/shadow?</p>
+<p><strong>Answer:</strong> A cloud representation of desired and reported device state</p>
+<p>Sync later.</p>
+<h3 id="capstone-production-iot-product"><a href="../level-4/10-capstone-production-iot/">Capstone — Production IoT Product</a><a class="headerlink" href="#capstone-production-iot-product" title="Permanent link">&para;</a></h3>
+<p><strong>Q157.</strong> What does the production IoT capstone integrate?</p>
+<p><strong>Answer:</strong> Secure boot, OTA, telemetry, low power, testing and manufacturing</p>
+<p>Full product.</p>
+<p><strong>Q158.</strong> How do you prove readiness?</p>
+<p><strong>Answer:</strong> HIL/CI, field trials, fault injection and a staged rollout plan</p>
+<p>Evidence.</p>
+<p><strong>Q159.</strong> What documentation matters?</p>
+<p><strong>Answer:</strong> Architecture, runbooks, release and support procedures</p>
+<p>Lifecycle.</p>
+<p><strong>Q160.</strong> What guards long-term support?</p>
+<p><strong>Answer:</strong> Version policy, security updates and compatibility testing</p>
+<p>Years in the field.</p>
+<h2 id="mixed-questions-across-all-levels">Mixed questions across all levels<a class="headerlink" href="#mixed-questions-across-all-levels" title="Permanent link">&para;</a></h2>
+<p><strong>Q161.</strong> What does a microcontroller's toolchain do on your laptop?</p>
+<p><strong>Answer:</strong> Cross-compiles code into machine code for the target MCU</p>
+<p>Then flash via a bootloader or SWD.</p>
+<p><strong>Q162.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="k">volatile</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">r</span><span class="o">|=</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="n">r</span><span class="o">|=</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">5</span><span class="p">);</span><span class="w"> </span><span class="n">r</span><span class="o">&amp;=~</span><span class="p">(</span><span class="mi">1u</span><span class="o">&lt;&lt;</span><span class="mi">3</span><span class="p">);</span><span class="w"> </span><span class="n">r</span><span class="o">^=</span><span class="mi">1u</span><span class="p">;</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"0x%02X"</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 0x21</p>
+<p>Set bits 3 and 5, clear 3, toggle bit 0. Verified by compiling and running.</p>
+<p><strong>Q163.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdbool.h&gt;</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">){</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">a</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">s</span><span class="o">=</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">w</span><span class="o">=</span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">)</span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"%u %u"</span><span class="p">,</span><span class="w"> </span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">w</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 44 300</p>
+<p>8-bit arithmetic wraps; widen before adding. Verified by compiling and running.</p>
+<p><strong>Q164.</strong> A 12-bit ADC at 3.3 V reads 2048. What voltage is that?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">2048</span><span class="o">/</span><span class="mi">4095</span><span class="o">*</span><span class="mf">3.3</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 1.65</p>
+<p>V = raw/(2^12-1) x Vref. Verified by running it.</p>
+<p><strong>Q165.</strong> At 115200 baud, 8N1, how long does one character take in microseconds (rounded)?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="mi">10</span><span class="o">/</span><span class="mi">115200</span><span class="o">*</span><span class="mf">1e6</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 87</p>
+<p>10 bits per character. Verified by running it.</p>
+<p><strong>Q166.</strong> Why is a floating digital input a problem?</p>
+<p><strong>Answer:</strong> It picks up noise and reads random values; add a pull-up or pull-down</p>
+<p>INPUT_PULLUP.</p>
+<p><strong>Q167.</strong> A button produces several transitions per press. What fixes it?</p>
+<p><strong>Answer:</strong> Debounce in hardware (RC) or software (stable-sample counting)</p>
+<p>Contacts bounce for milliseconds.</p>
+<p><strong>Q168.</strong> Why shouldn't an ISR call printf or delay?</p>
+<p><strong>Answer:</strong> ISRs must be short and non-blocking; set a flag or buffer data and return</p>
+<p>Defer work to the main loop.</p>
+<p><strong>Q169.</strong> Which qualifier must a flag shared with an ISR have?</p>
+<p><strong>Answer:</strong> volatile (and ensure atomic access)</p>
+<p>Prevent caching in a register.</p>
+<p><strong>Q170.</strong> Two tasks on FreeRTOS pass sensor data. What's the right primitive?</p>
+<p><strong>Answer:</strong> A queue (thread-safe, can be used from ISRs with FromISR variants)</p>
+<p>Avoid data races.</p>
+<p><strong>Q171.</strong> A low-priority task holds a mutex a high-priority task needs while a medium task runs. What is this and the fix?</p>
+<p><strong>Answer:</strong> Priority inversion; use mutexes with priority inheritance</p>
+<p>FreeRTOS mutexes provide inheritance.</p>
+<p><strong>Q172.</strong> Which MQTT QoS gives at-least-once delivery?</p>
+<p><strong>Answer:</strong> QoS 1</p>
+<p>QoS 2 is exactly once.</p>
+<p><strong>Q173.</strong> A field device loses WiFi for hours. What should firmware do?</p>
+<p><strong>Answer:</strong> Buffer readings locally and upload when reconnected, with reconnect/backoff</p>
+<p>Store and forward.</p>
+<p><strong>Q174.</strong> A firmware update is interrupted by a power cut. Which design survives?</p>
+<p><strong>Answer:</strong> Dual application partitions with validation and rollback</p>
+<p>OTA safety.</p>
+<p><strong>Q175.</strong> Where should the watchdog be fed?</p>
+<p><strong>Answer:</strong> In the main control path only when all critical tasks report healthy</p>
+<p>Otherwise it masks hangs.</p>
+<p><strong>Q176.</strong> What does the startup code do before main()?</p>
+<p><strong>Answer:</strong> Copies .data from flash to RAM, zeroes .bss and sets up the stack and vector table</p>
+<p>Reset handler.</p>
+<p><strong>Q177.</strong> Why use DMA for a 1 MS/s ADC stream?</p>
+<p><strong>Answer:</strong> The CPU can't service every sample by interrupt; DMA moves data to memory</p>
+<p>Use half/full-transfer interrupts.</p>
+<p><strong>Q178.</strong> Battery life is much worse than calculated. What do you measure first?</p>
+<p><strong>Answer:</strong> Current in sleep and during wake spikes with a current profiler, including regulators and pull-ups</p>
+<p>Leakage and radio bursts dominate.</p>
+<p><strong>Q179.</strong> A product needs functional safety evidence. What do you need besides passing tests?</p>
+<p><strong>Answer:</strong> Hazard analysis, defined process, traceability, coding standard (MISRA) and independent verification</p>
+<p>Standards require process evidence.</p>
+<h2 id="practical-coding-questions">Practical coding questions<a class="headerlink" href="#practical-coding-questions" title="Permanent link">&para;</a></h2>
+<h3 id="a-uart-receive-ring-buffer">A UART receive ring buffer<a class="headerlink" href="#a-uart-receive-ring-buffer" title="Permanent link">&para;</a></h3>
+<p>Complete rb_put (store at head, advance, drop and count when full) and rb_get (empty check, read from tail, advance). The buffer holds RB_SIZE-1 bytes so full and empty are distinguishable. A burst of 10 bytes arrives, then the main loop drains it.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>#include &lt;stdio.h&gt;
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>#include &lt;stdint.h&gt;
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>#include &lt;stdbool.h&gt;
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>#include &lt;string.h&gt;
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>#define RB_SIZE 8   /* capacity is RB_SIZE - 1 so full and empty differ */
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>typedef struct {
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    uint8_t buf[RB_SIZE];
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    volatile uint8_t head;   /* written by the ISR (producer) */
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    volatile uint8_t tail;   /* written by the main loop (consumer) */
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    uint32_t dropped;
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>} ring_t;
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>static bool rb_put(ring_t *r, uint8_t b) {
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    /* store b at head and advance; if the buffer is full, count a drop and return false */
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    return false;
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>}
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>static bool rb_get(ring_t *r, uint8_t *out) {
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    /* return false if empty; otherwise read from tail, advance and return true */
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    return false;
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>}
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>int main(void) {
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    ring_t r; memset(&amp;r, 0, sizeof r);
+<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a>    for (uint8_t i = 1; i &lt;= 10; i++) rb_put(&amp;r, i);       /* simulate a burst of 10 bytes */
+<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a>    printf("dropped=%u\n", (unsigned)r.dropped);
+<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    uint8_t b;
+<a id="__codelineno-10-30" name="__codelineno-10-30" href="#__codelineno-10-30"></a>    while (rb_get(&amp;r, &amp;b)) printf("%u ", b);
+<a id="__codelineno-10-31" name="__codelineno-10-31" href="#__codelineno-10-31"></a>    printf("\n");
+<a id="__codelineno-10-32" name="__codelineno-10-32" href="#__codelineno-10-32"></a>    rb_put(&amp;r, 42); rb_put(&amp;r, 43);
+<a id="__codelineno-10-33" name="__codelineno-10-33" href="#__codelineno-10-33"></a>    rb_get(&amp;r, &amp;b);
+<a id="__codelineno-10-34" name="__codelineno-10-34" href="#__codelineno-10-34"></a>    printf("after wrap: first=%u\n", b);
+<a id="__codelineno-10-35" name="__codelineno-10-35" href="#__codelineno-10-35"></a>    return 0;
+<a id="__codelineno-10-36" name="__codelineno-10-36" href="#__codelineno-10-36"></a>}
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>dropped=3
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>1 2 3 4 5 6 7 
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>after wrap: first=42
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;string.h&gt;
+
+#define RB_SIZE 8   /* capacity is RB_SIZE - 1 so full and empty differ */
+
+typedef struct {
+    uint8_t buf[RB_SIZE];
+    volatile uint8_t head;   /* written by the ISR (producer) */
+    volatile uint8_t tail;   /* written by the main loop (consumer) */
+    uint32_t dropped;
+} ring_t;
+
+static bool rb_put(ring_t *r, uint8_t b) {
+    uint8_t next = (uint8_t)((r-&gt;head + 1) % RB_SIZE);
+    if (next == r-&gt;tail) { r-&gt;dropped++; return false; }   /* full: drop, never overwrite */
+    r-&gt;buf[r-&gt;head] = b;
+    r-&gt;head = next;
+    return true;
+}
+
+static bool rb_get(ring_t *r, uint8_t *out) {
+    if (r-&gt;head == r-&gt;tail) return false;                  /* empty */
+    *out = r-&gt;buf[r-&gt;tail];
+    r-&gt;tail = (uint8_t)((r-&gt;tail + 1) % RB_SIZE);
+    return true;
+}
+
+int main(void) {
+    ring_t r; memset(&amp;r, 0, sizeof r);
+    for (uint8_t i = 1; i &lt;= 10; i++) rb_put(&amp;r, i);       /* simulate a burst of 10 bytes */
+    printf("dropped=%u\n", (unsigned)r.dropped);
+    uint8_t b;
+    while (rb_get(&amp;r, &amp;b)) printf("%u ", b);
+    printf("\n");
+    rb_put(&amp;r, 42); rb_put(&amp;r, 43);
+    rb_get(&amp;r, &amp;b);
+    printf("after wrap: first=%u\n", b);
+    return 0;
+}
+```
+
+The ISR only writes head and the main loop only writes tail, so a single-producer/single-consumer ring buffer needs no lock; dropping on overflow is safer than overwriting unread data. Verified by compiling and running the solution with gcc.
+</code></pre></div>
+<h3 id="debounce-and-register-packing">Debounce and register packing<a class="headerlink" href="#debounce-and-register-packing" title="Permanent link">&para;</a></h3>
+<p>Implement debounce(): the stable state flips only after STABLE_COUNT identical consecutive samples that differ from it, and <code>*changed</code> is true only on that sample. The program also packs a mode/enable/channel register; observe the output.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>#include &lt;stdio.h&gt;
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>#include &lt;stdint.h&gt;
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>#include &lt;stdbool.h&gt;
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>#include &lt;string.h&gt;
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>/* Debounce a noisy button: the stable state changes only after STABLE_COUNT identical samples. */
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>#define STABLE_COUNT 3
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>typedef struct { bool stable; bool last; uint8_t count; } debounce_t;
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>static bool debounce(debounce_t *d, bool sample, bool *changed) {
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>    /* *changed = true only on the sample where the stable state flips. The stable state flips
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>       only after STABLE_COUNT identical consecutive samples that differ from the current stable state. */
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>    *changed = false;
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    return d-&gt;stable;
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>}
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>/* Pack/unpack a register: bits [7:4] = mode, bit 3 = enable, bits [2:0] = channel. */
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>#define MODE_SHIFT 4
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>#define EN_BIT     3
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>static uint8_t reg_make(uint8_t mode, bool en, uint8_t ch) {
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>    return (uint8_t)(((mode &amp; 0xF) &lt;&lt; MODE_SHIFT) | ((en ? 1u : 0u) &lt;&lt; EN_BIT) | (ch &amp; 0x7));
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>}
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>int main(void) {
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>    int samples[] = {0,1,0,0,1,1,1,1,0,1,0,0,0,0};   /* noisy press then noisy release */
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>    debounce_t d = {false, false, 0};
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>    for (unsigned i = 0; i &lt; sizeof samples / sizeof *samples; i++) {
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>        bool ch;
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>        debounce(&amp;d, samples[i] != 0, &amp;ch);
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>        if (ch) printf("sample %u: stable -&gt; %s\n", i, d.stable ? "PRESSED" : "RELEASED");
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>    }
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>    uint8_t reg = reg_make(0xA, true, 5);
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>    printf("reg=0x%02X mode=%u en=%u ch=%u\n", reg, reg &gt;&gt; MODE_SHIFT, (reg &gt;&gt; EN_BIT) &amp; 1u, reg &amp; 7u);
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>    return 0;
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>}
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>sample 6: stable -&gt; PRESSED
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sample 12: stable -&gt; RELEASED
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>reg=0xAD mode=10 en=1 ch=5
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+#include &lt;stdio.h&gt;
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+#include &lt;string.h&gt;
+
+/* Debounce a noisy button: the stable state changes only after STABLE_COUNT identical samples. */
+#define STABLE_COUNT 3
+
+typedef struct { bool stable; bool last; uint8_t count; } debounce_t;
+
+static bool debounce(debounce_t *d, bool sample, bool *changed) {
+    *changed = false;
+    if (sample == d-&gt;last) {
+        if (d-&gt;count &lt; STABLE_COUNT) d-&gt;count++;
+    } else {
+        d-&gt;last = sample;
+        d-&gt;count = 1;
+    }
+    if (d-&gt;count &gt;= STABLE_COUNT &amp;&amp; d-&gt;stable != d-&gt;last) {
+        d-&gt;stable = d-&gt;last;
+        *changed = true;
+    }
+    return d-&gt;stable;
+}
+
+/* Pack/unpack a register: bits [7:4] = mode, bit 3 = enable, bits [2:0] = channel. */
+#define MODE_SHIFT 4
+#define EN_BIT     3
+static uint8_t reg_make(uint8_t mode, bool en, uint8_t ch) {
+    return (uint8_t)(((mode &amp; 0xF) &lt;&lt; MODE_SHIFT) | ((en ? 1u : 0u) &lt;&lt; EN_BIT) | (ch &amp; 0x7));
+}
+
+int main(void) {
+    int samples[] = {0,1,0,0,1,1,1,1,0,1,0,0,0,0};   /* noisy press then noisy release */
+    debounce_t d = {false, false, 0};
+    for (unsigned i = 0; i &lt; sizeof samples / sizeof *samples; i++) {
+        bool ch;
+        debounce(&amp;d, samples[i] != 0, &amp;ch);
+        if (ch) printf("sample %u: stable -&gt; %s\n", i, d.stable ? "PRESSED" : "RELEASED");
+    }
+    uint8_t reg = reg_make(0xA, true, 5);
+    printf("reg=0x%02X mode=%u en=%u ch=%u\n", reg, reg &gt;&gt; MODE_SHIFT, (reg &gt;&gt; EN_BIT) &amp; 1u, reg &amp; 7u);
+    return 0;
+}
+```
+
+Counting consecutive identical samples filters contact bounce without delay(). Masks and shifts pack fields into a register exactly as peripheral registers are laid out. Verified by compiling and running the solution with gcc.
+</code></pre></div>
+<hr />
+<p>More free practice: the <a href="../">Embedded Systems Mastery Path</a> curriculum, the <a href="https://learnmasterypath.com/interview-pack/">Interview Prep Pack</a> and the <a href="https://learnmasterypath.com/resume/">free resume ATS check</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/embedded-linux-mastery-path/">Embedded Linux</a></li><li><a href="https://learnmasterypath.com/embedded-python-mastery-path/">Embedded Python</a></li><li><a href="https://learnmasterypath.com/freertos-mastery-path/">FreeRTOS</a></li><li><a href="https://learnmasterypath.com/s32k-mastery-path/">S32K</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cheat-sheet/" class="md-footer__link md-footer__link--next" aria-label="Next: Cheat Sheet">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Cheat Sheet
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/embedded-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/embedded-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>

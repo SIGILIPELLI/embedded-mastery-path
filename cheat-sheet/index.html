@@ -1,0 +1,5334 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free Embedded Systems cheat sheet: 40 quick-reference tables from every level of the Embedded Systems Mastery Path, each linked to its full lesson.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/embedded-mastery-path/cheat-sheet/">
+      
+      
+        <link rel="prev" href="../interview-questions/">
+      
+      
+        <link rel="next" href="../level-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>Embedded Systems Cheat Sheet: Quick Reference, Beginner to Advanced</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Embedded Systems Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta property="og:description" content="A free Embedded Systems cheat sheet: 40 quick-reference tables from every level of the Embedded Systems Mastery Path, each linked to its full lesson.">
+  <meta property="og:url" content="https://learnmasterypath.com/embedded-mastery-path/cheat-sheet/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Embedded Systems Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta name="twitter:description" content="A free Embedded Systems cheat sheet: 40 quick-reference tables from every level of the Embedded Systems Mastery Path, each linked to its full lesson.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "Embedded Systems Mastery Path", "item": "https://learnmasterypath.com/embedded-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Cheat Sheet", "item": "https://learnmasterypath.com/embedded-mastery-path/cheat-sheet/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "embedded-mastery-path", "name": "Embedded Systems Mastery Path", "repo": "https://github.com/SIGILIPELLI/embedded-mastery-path", "src": "cheat-sheet.md", "url": "https://learnmasterypath.com/embedded-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#embedded-systems-cheat-sheet" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Embedded Systems Mastery Path" class="md-header__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Embedded Systems Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Embedded Systems Cheat Sheet: Quick Reference, Beginner to Advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="teal"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../interview-questions/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Embedded Systems Mastery Path" class="md-nav__button md-logo" aria-label="Embedded Systems Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    Embedded Systems Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/embedded-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    embedded-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interview-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; Toolchain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cc-for-embedded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · C/C++ for Embedded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-digital-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Digital I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-analog-io-pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Analog I/O &amp; PWM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-serialuart-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Serial/UART Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-sensors-i2c-spi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Sensors, I2C &amp; SPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-timers-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Timers &amp; Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-memory-power-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Memory &amp; Power Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-esp32-wifi-intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · ESP32 WiFi Intro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-environment-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Environment Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#freertos-tasks-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS Tasks &amp; Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp-idf-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP-IDF Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth-low-energy-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bluetooth Low Energy (BLE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mqtt-iot-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT &amp; IoT Messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-peripherals-i2s-rmt-can" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Peripherals (I2S, RMT, CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystems-storage-littlefs-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filesystems &amp; Storage (LittleFS, SD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watchdogs-robust-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watchdogs &amp; Robust Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging &amp; Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-wifi-data-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — WiFi Data Logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-arm-cortex-m-stm32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bare-Metal ARM Cortex-M (STM32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registers-linker-scripts-startup-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registers, Linker Scripts &amp; Startup Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtos-internals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTOS Internals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-high-speed-peripherals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA &amp; High-Speed Peripherals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-design-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-Power Design Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts-the-nvic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts &amp; the NVIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcb-design-basics-kicad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCB Design Basics (KiCad)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-deep-dive-uarti2cspican" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Deep Dive (UART/I2C/SPI/CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootloaders-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootloaders &amp; Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-custom-sensor-board-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — Custom Sensor Board Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-firmware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Firmware Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-boot-encrypted-ota-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Boot &amp; Encrypted OTA at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tinyml-edge-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TinyML &amp; Edge AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rf-wireless-protocol-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RF &amp; Wireless Protocol Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hil-testing-ci-for-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIL Testing &amp; CI for Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-safety-misra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Safety &amp; MISRA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ultra-low-power-energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ultra-Low-Power &amp; Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacturing-dfm-factory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manufacturing, DFM &amp; Factory Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fleet-management-device-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fleet Management &amp; Device Clouds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capstone-production-iot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone — Production IoT Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup-toolchain/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & Toolchain
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-c-cpp-for-embedded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · C/C++ for Embedded
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-digital-io/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Digital I/O
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-analog-io-pwm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Analog I/O & PWM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-serial-uart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Serial/UART Communication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-sensors-i2c-spi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Sensors, I2C & SPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-timers-interrupts/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Timers & Interrupts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-memory-power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Memory & Power Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-esp32-wifi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · ESP32 WiFi Intro
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Environment Monitor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-freertos-tasks-queues/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FreeRTOS Tasks & Queues
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-esp-idf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ESP-IDF Development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-ble/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bluetooth Low Energy (BLE)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-mqtt-iot-messaging/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MQTT & IoT Messaging
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-ota-updates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    OTA Firmware Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-advanced-peripherals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Advanced Peripherals (I2S, RMT, CAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-filesystems-storage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Filesystems & Storage (LittleFS, SD)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-watchdogs-robust-firmware/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Watchdogs & Robust Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-debugging-unit-testing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Debugging & Unit Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-wifi-data-logger/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project — WiFi Data Logger
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-bare-metal-arm-stm32/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bare-Metal ARM Cortex-M (STM32)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-registers-linker-startup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Registers, Linker Scripts & Startup Code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-rtos-internals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RTOS Internals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-dma-high-speed-peripherals/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DMA & High-Speed Peripherals
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-low-power-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Low-Power Design Deep Dive
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-interrupts-nvic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interrupts & the NVIC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-pcb-design-kicad/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PCB Design Basics (KiCad)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-protocol-deep-dive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Protocol Deep Dive (UART/I2C/SPI/CAN)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-bootloaders/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bootloaders & Firmware Updates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-sensor-board/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Project — Custom Sensor Board Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-production-firmware-architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Production Firmware Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-secure-boot-ota-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure Boot & Encrypted OTA at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-tinyml-edge-ai/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    TinyML & Edge AI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-rf-protocol-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    RF & Wireless Protocol Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-hil-testing-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HIL Testing & CI for Firmware
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-functional-safety-misra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Functional Safety & MISRA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-ultra-low-power/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ultra-Low-Power & Energy Harvesting
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-manufacturing-dfm-test/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manufacturing, DFM & Factory Test
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-fleet-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fleet Management & Device Clouds
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-production-iot/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Capstone — Production IoT Product
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-toolchain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; Toolchain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cc-for-embedded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · C/C++ for Embedded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-digital-io" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Digital I/O
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-analog-io-pwm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Analog I/O &amp; PWM
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-serialuart-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Serial/UART Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-sensors-i2c-spi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Sensors, I2C &amp; SPI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-timers-interrupts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Timers &amp; Interrupts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-memory-power-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Memory &amp; Power Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-esp32-wifi-intro" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · ESP32 WiFi Intro
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-environment-monitor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone — Environment Monitor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#freertos-tasks-queues" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FreeRTOS Tasks &amp; Queues
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#esp-idf-development" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ESP-IDF Development
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bluetooth-low-energy-ble" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bluetooth Low Energy (BLE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mqtt-iot-messaging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MQTT &amp; IoT Messaging
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ota-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTA Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-peripherals-i2s-rmt-can" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Advanced Peripherals (I2S, RMT, CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filesystems-storage-littlefs-sd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Filesystems &amp; Storage (LittleFS, SD)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#watchdogs-robust-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Watchdogs &amp; Robust Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debugging-unit-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Debugging &amp; Unit Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-wifi-data-logger" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — WiFi Data Logger
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bare-metal-arm-cortex-m-stm32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bare-Metal ARM Cortex-M (STM32)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#registers-linker-scripts-startup-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Registers, Linker Scripts &amp; Startup Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rtos-internals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RTOS Internals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dma-high-speed-peripherals" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DMA &amp; High-Speed Peripherals
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#low-power-design-deep-dive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Low-Power Design Deep Dive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interrupts-the-nvic" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interrupts &amp; the NVIC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pcb-design-basics-kicad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PCB Design Basics (KiCad)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#protocol-deep-dive-uarti2cspican" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Protocol Deep Dive (UART/I2C/SPI/CAN)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bootloaders-firmware-updates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bootloaders &amp; Firmware Updates
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#project-custom-sensor-board-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project — Custom Sensor Board Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#production-firmware-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Production Firmware Architecture
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-boot-encrypted-ota-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Secure Boot &amp; Encrypted OTA at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tinyml-edge-ai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        TinyML &amp; Edge AI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rf-wireless-protocol-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RF &amp; Wireless Protocol Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hil-testing-ci-for-firmware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        HIL Testing &amp; CI for Firmware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#functional-safety-misra" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Functional Safety &amp; MISRA
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ultra-low-power-energy-harvesting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ultra-Low-Power &amp; Energy Harvesting
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manufacturing-dfm-factory-test" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manufacturing, DFM &amp; Factory Test
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fleet-management-device-clouds" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fleet Management &amp; Device Clouds
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capstone-production-iot-product" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capstone — Production IoT Product
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="embedded-systems-cheat-sheet">Embedded Systems Cheat Sheet<a class="headerlink" href="#embedded-systems-cheat-sheet" title="Permanent link">&para;</a></h1>
+<p>Quick-reference tables from <strong>40 lessons</strong> of the free Embedded Systems Mastery Path, in course order from beginner to advanced. Each section links to the full lesson with explanations and runnable examples.</p>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="01-setup-toolchain"><a href="../level-1/01-setup-toolchain/">01 · Setup &amp; Toolchain</a><a class="headerlink" href="#01-setup-toolchain" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sketch</td>
+<td>An Arduino program (<code>.ino</code> file)</td>
+</tr>
+<tr>
+<td><code>setup()</code></td>
+<td>Runs once at power-on/reset — do initialization here</td>
+</tr>
+<tr>
+<td><code>loop()</code></td>
+<td>Runs repeatedly forever after <code>setup()</code></td>
+</tr>
+<tr>
+<td><code>delay(ms)</code></td>
+<td>Pause execution for <code>ms</code> milliseconds (blocking)</td>
+</tr>
+<tr>
+<td><code>LED_BUILTIN</code></td>
+<td>Pin number of the onboard LED (13 on Uno, 2 on most ESP32)</td>
+</tr>
+<tr>
+<td>Verify / Upload</td>
+<td>Compile only / compile + flash to the board</td>
+</tr>
+<tr>
+<td>Board package ("core")</td>
+<td>Adds compiler + definitions for a chip family (e.g. ESP32)</td>
+</tr>
+<tr>
+<td>Flash vs RAM</td>
+<td>Program storage vs working memory — both small and fixed</td>
+</tr>
+<tr>
+<td><a href="https://wokwi.com/">Wokwi</a></td>
+<td>Free browser simulator — runs all course sketches, no hardware</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-cc-for-embedded"><a href="../level-1/02-c-cpp-for-embedded/">02 · C/C++ for Embedded</a><a class="headerlink" href="#02-cc-for-embedded" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Guidance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code> size</td>
+<td>2 bytes on Uno, 4 on ESP32 — don't assume</td>
+</tr>
+<tr>
+<td><code>uint8_t</code>/<code>int16_t</code>/<code>uint32_t</code></td>
+<td>Fixed-width types — prefer for anything size-sensitive</td>
+</tr>
+<tr>
+<td>Overflow</td>
+<td>Silent wraparound — pick types with headroom (<code>uint32_t</code> for <code>millis()</code>)</td>
+</tr>
+<tr>
+<td><code>const uint8_t X = 5;</code></td>
+<td>Preferred constant — typed, scoped, zero RAM cost</td>
+</tr>
+<tr>
+<td><code>#define X 5</code></td>
+<td>Text substitution — common in libraries, avoid in your code</td>
+</tr>
+<tr>
+<td><code>String</code></td>
+<td>Heap allocations → fragmentation → long-run crashes; avoid in unattended code</td>
+</tr>
+<tr>
+<td><code>char buf[N]</code> + <code>snprintf</code></td>
+<td>Fixed-size, allocation-free text formatting</td>
+</tr>
+<tr>
+<td><code>F("literal")</code></td>
+<td>Keeps string literals out of SRAM on AVR; harmless on ESP32</td>
+</tr>
+<tr>
+<td>Flash vs SRAM</td>
+<td>Code lives in flash, variables in SRAM — both fixed budgets</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-digital-io"><a href="../level-1/03-digital-io/">03 · Digital I/O</a><a class="headerlink" href="#03-digital-io" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function / idiom</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pinMode(pin, OUTPUT)</code></td>
+<td>Configure pin to drive HIGH/LOW</td>
+</tr>
+<tr>
+<td><code>pinMode(pin, INPUT_PULLUP)</code></td>
+<td>Input with internal pull-up — idle HIGH, pressed LOW</td>
+</tr>
+<tr>
+<td><code>digitalWrite(pin, HIGH/LOW)</code></td>
+<td>Set output level</td>
+</tr>
+<tr>
+<td><code>digitalRead(pin)</code></td>
+<td>Read input level (returns <code>HIGH</code> or <code>LOW</code>)</td>
+</tr>
+<tr>
+<td>LED wiring</td>
+<td>pin → 220 Ω resistor → LED anode; cathode → GND</td>
+</tr>
+<tr>
+<td>Button wiring (pull-up)</td>
+<td>pin → button → GND, <code>INPUT_PULLUP</code>, pressed = <code>LOW</code></td>
+</tr>
+<tr>
+<td>Floating input</td>
+<td>Unconnected input pin reads noise — always define idle state</td>
+</tr>
+<tr>
+<td>Bounce</td>
+<td>Mechanical contacts chatter for ~1–10 ms; debounce with a ~30 ms stability window</td>
+</tr>
+<tr>
+<td>Edge detection</td>
+<td>Compare current vs previous state to act once per press</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-analog-io-pwm"><a href="../level-1/04-analog-io-pwm/">04 · Analog I/O &amp; PWM</a><a class="headerlink" href="#04-analog-io-pwm" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Uno</th>
+<th>ESP32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>analogRead</code> range</td>
+<td>0–1023 (10-bit)</td>
+<td>0–4095 (12-bit)</td>
+</tr>
+<tr>
+<td>Full-scale voltage</td>
+<td>5 V</td>
+<td>3.3 V</td>
+</tr>
+<tr>
+<td>ADC pins</td>
+<td>A0–A5</td>
+<td>GPIO 32–39 safest (ADC2 dies with WiFi on)</td>
+</tr>
+<tr>
+<td>PWM call</td>
+<td><code>analogWrite(pin, 0..255)</code></td>
+<td><code>ledcAttach(pin, freq, res)</code> + <code>ledcWrite(pin, duty)</code></td>
+</tr>
+<tr>
+<td>PWM pins</td>
+<td>Only <code>~</code> pins (3,5,6,9,10,11)</td>
+<td>Any output pin, 16 channels</td>
+</tr>
+<tr>
+<td>PWM frequency</td>
+<td>Fixed (~490/980 Hz)</td>
+<td>Configurable (5 kHz LEDs, ~20 kHz motors)</td>
+</tr>
+<tr>
+<td>Rescaling</td>
+<td><code>map(x, inLo, inHi, outLo, outHi)</code></td>
+<td>same</td>
+</tr>
+<tr>
+<td>Duty cycle</td>
+<td>Fraction of time HIGH — sets average power</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-serialuart-communication"><a href="../level-1/05-serial-uart/">05 · Serial/UART Communication</a><a class="headerlink" href="#05-serialuart-communication" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Serial.begin(115200)</code></td>
+<td>Start serial; baud must match the monitor</td>
+</tr>
+<tr>
+<td><code>Serial.print(x)</code> / <code>println(x)</code></td>
+<td>Write without / with trailing newline</td>
+</tr>
+<tr>
+<td><code>Serial.print(f, 2)</code></td>
+<td>Float with 2 decimal places</td>
+</tr>
+<tr>
+<td><code>Serial.println(x, HEX)</code></td>
+<td>Print in hex (also <code>BIN</code>, <code>OCT</code>)</td>
+</tr>
+<tr>
+<td><code>Serial.available()</code></td>
+<td>Number of received bytes waiting in the buffer</td>
+</tr>
+<tr>
+<td><code>Serial.read()</code></td>
+<td>Consume one byte (returns <code>-1</code> if none)</td>
+</tr>
+<tr>
+<td><code>Serial.readStringUntil('\n')</code></td>
+<td>Read a full line (set monitor line ending to Newline)</td>
+</tr>
+<tr>
+<td><code>str.trim()</code> / <code>startsWith()</code> / <code>substring()</code> / <code>toInt()</code></td>
+<td>Basic parsing toolkit</td>
+</tr>
+<tr>
+<td><code>millis()</code> in logs</td>
+<td>Timestamp events, measure durations</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-sensors-i2c-spi"><a href="../level-1/06-sensors-i2c-spi/">06 · Sensors, I2C &amp; SPI</a><a class="headerlink" href="#06-sensors-i2c-spi" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C wires</td>
+<td>SDA + SCL, shared by all devices; pull-ups required</td>
+</tr>
+<tr>
+<td>I2C addressing</td>
+<td>7-bit address per device (OLED: <code>0x3C</code>); scanner finds them</td>
+</tr>
+<tr>
+<td>I2C pins</td>
+<td>Uno: A4/A5 — ESP32: GPIO 21 (SDA) / 22 (SCL)</td>
+</tr>
+<tr>
+<td>SPI wires</td>
+<td>SCK, MOSI, MISO + one CS per device; much faster than I2C</td>
+</tr>
+<tr>
+<td>Choosing a bus</td>
+<td>Sensors → I2C; SD cards, fast displays → SPI</td>
+</tr>
+<tr>
+<td>DHT22</td>
+<td>Single-wire protocol, one read per 2 s, returns floats, check <code>isnan()</code></td>
+</tr>
+<tr>
+<td>SSD1306 pattern</td>
+<td>draw to buffer → <code>display.display()</code> pushes it to the panel</td>
+</tr>
+<tr>
+<td>Library Manager</td>
+<td>IDE: Sketch menu — Wokwi: Library Manager tab</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-timers-interrupts"><a href="../level-1/07-timers-interrupts/">07 · Timers &amp; Interrupts</a><a class="headerlink" href="#07-timers-interrupts" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>millis()</code></td>
+<td><code>uint32_t</code> ms since boot; wraps after ~49.7 days</td>
+</tr>
+<tr>
+<td>Schedule pattern</td>
+<td><code>if (now - last &gt;= interval) { last = now; ...task... }</code></td>
+</tr>
+<tr>
+<td>Wraparound safety</td>
+<td>Always compare with subtraction, never absolute times</td>
+</tr>
+<tr>
+<td>Cooperative rule</td>
+<td>No task in <code>loop()</code> may block</td>
+</tr>
+<tr>
+<td><code>attachInterrupt(digitalPinToInterrupt(pin), isr, mode)</code></td>
+<td>Run <code>isr</code> on pin event</td>
+</tr>
+<tr>
+<td>Modes</td>
+<td><code>RISING</code>, <code>FALLING</code>, <code>CHANGE</code>, <code>LOW</code></td>
+</tr>
+<tr>
+<td>Interrupt pins</td>
+<td>Uno: only 2, 3 — ESP32: any GPIO</td>
+</tr>
+<tr>
+<td>ISR rules</td>
+<td>Short; no Serial/delay/I2C; shared vars <code>volatile</code></td>
+</tr>
+<tr>
+<td><code>IRAM_ATTR</code></td>
+<td>ESP32: keeps the ISR in RAM — required</td>
+</tr>
+<tr>
+<td>Critical section</td>
+<td><code>noInterrupts()</code> / <code>interrupts()</code> around multi-byte shared reads</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-memory-power-basics"><a href="../level-1/08-memory-power/">08 · Memory &amp; Power Basics</a><a class="headerlink" href="#08-memory-power-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Flash / SRAM / EEPROM-NVS</td>
+<td>Program (persistent) / variables (volatile, scarce) / runtime settings (persistent)</td>
+</tr>
+<tr>
+<td>Out of SRAM</td>
+<td>No error — stack corrupts data → random resets</td>
+</tr>
+<tr>
+<td><code>ESP.getFreeHeap()</code> / <code>getMinFreeHeap()</code></td>
+<td>Current / worst-case free RAM; falling min = leak</td>
+</tr>
+<tr>
+<td><code>EEPROM.get/put(addr, var)</code></td>
+<td>AVR persistent storage</td>
+</tr>
+<tr>
+<td><code>Preferences</code> (NVS)</td>
+<td>ESP32 key-value persistent store — preferred</td>
+</tr>
+<tr>
+<td>Flash wear</td>
+<td>~10k–100k erase cycles — write on change, not per loop</td>
+</tr>
+<tr>
+<td>Deep sleep current</td>
+<td>~10 µA vs 30–250 mA active — the battery-life lever</td>
+</tr>
+<tr>
+<td><code>esp_sleep_enable_timer_wakeup(µs)</code> + <code>esp_deep_sleep_start()</code></td>
+<td>Timed sleep; wake = reboot into <code>setup()</code></td>
+</tr>
+<tr>
+<td><code>RTC_DATA_ATTR</code></td>
+<td>Variable survives deep sleep (not power loss)</td>
+</tr>
+<tr>
+<td><code>Serial.flush()</code> before sleep</td>
+<td>Otherwise the last log lines are cut off</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-esp32-wifi-intro"><a href="../level-1/09-esp32-wifi/">09 · ESP32 WiFi Intro</a><a class="headerlink" href="#09-esp32-wifi-intro" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WiFi.mode(WIFI_STA)</code> + <code>WiFi.begin(ssid, pass)</code></td>
+<td>Join a network as a client</td>
+</tr>
+<tr>
+<td><code>WiFi.status() == WL_CONNECTED</code></td>
+<td>Poll until (and monitor after) connection</td>
+</tr>
+<tr>
+<td><code>WiFi.localIP()</code> / <code>WiFi.RSSI()</code></td>
+<td>Board's IP / signal strength (dBm)</td>
+</tr>
+<tr>
+<td>Wokwi network</td>
+<td>SSID <code>Wokwi-GUEST</code>, empty password, has internet</td>
+</tr>
+<tr>
+<td>2.4 GHz only</td>
+<td>ESP32 cannot see 5 GHz networks</td>
+</tr>
+<tr>
+<td><code>HTTPClient</code> GET</td>
+<td><code>begin(url)</code> → <code>GET()</code> → check code → <code>getString()</code> → <code>end()</code></td>
+</tr>
+<tr>
+<td>Status codes</td>
+<td>200 OK; negative = connection failed</td>
+</tr>
+<tr>
+<td><code>WebServer server(80)</code></td>
+<td>HTTP server on the board</td>
+</tr>
+<tr>
+<td><code>server.on(path, handler)</code> + <code>server.begin()</code></td>
+<td>Routing setup</td>
+</tr>
+<tr>
+<td><code>server.handleClient()</code> in <code>loop()</code></td>
+<td>Actually serves requests — keep loop non-blocking</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-capstone-environment-monitor"><a href="../level-1/10-capstone-project/">10 · Capstone — Environment Monitor</a><a class="headerlink" href="#10-capstone-environment-monitor" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Where it came from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>setup()</code> init, task-based <code>loop()</code></td>
+<td>Modules 1, 7</td>
+</tr>
+<tr>
+<td>Fixed-width types, <code>char[]</code> + <code>snprintf</code>, <code>F()</code></td>
+<td>Module 2</td>
+</tr>
+<tr>
+<td>LED + resistor on GPIO, <code>digitalWrite</code></td>
+<td>Module 3</td>
+</tr>
+<tr>
+<td>I2C device at address (OLED <code>0x3C</code>)</td>
+<td>Module 6</td>
+</tr>
+<tr>
+<td>Check <code>isnan()</code> on every sensor read</td>
+<td>Module 6</td>
+</tr>
+<tr>
+<td><code>if (now - last &gt;= period)</code> scheduling</td>
+<td>Module 7</td>
+</tr>
+<tr>
+<td>OK/ERR command console with validation</td>
+<td>Module 5</td>
+</tr>
+<tr>
+<td>Struct as single source of truth</td>
+<td>This module</td>
+</tr>
+<tr>
+<td>Fault signalling (blink = sensor dead)</td>
+<td>This module</td>
+</tr>
+<tr>
+<td>WiFi/web as an add-on task</td>
+<td>Module 9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="freertos-tasks-queues"><a href="../level-2/01-freertos-tasks-queues/">FreeRTOS Tasks &amp; Queues</a><a class="headerlink" href="#freertos-tasks-queues" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>xTaskCreatePinnedToCore(fn, name, stack, arg, prio, &amp;handle, core)</code></td>
+<td>Create + pin a task; returns <code>pdPASS</code></td>
+</tr>
+<tr>
+<td>Stack size units</td>
+<td><strong>Bytes</strong> on ESP-IDF (vanilla FreeRTOS uses words — a real gotcha)</td>
+</tr>
+<tr>
+<td>Priority</td>
+<td><code>0</code> (idle) .. <code>configMAX_PRIORITIES-1</code> (25); higher preempts lower</td>
+</tr>
+<tr>
+<td><code>loopTask</code></td>
+<td>Arduino's <code>loop()</code>, running as a task at priority 1, core 1</td>
+</tr>
+<tr>
+<td><code>vTaskDelay(pdMS_TO_TICKS(ms))</code></td>
+<td>Blocks <em>this</em> task only, yields CPU to others</td>
+</tr>
+<tr>
+<td>Priority inversion</td>
+<td>Low-prio task holds a lock a high-prio task needs; a mid-prio task starves both</td>
+</tr>
+<tr>
+<td>Fix: real mutex</td>
+<td><code>xSemaphoreCreateMutex()</code> — has priority inheritance; binary semaphores don't</td>
+</tr>
+<tr>
+<td><code>xQueueCreate(len, itemSize)</code></td>
+<td>Fixed-size FIFO; copies data, not pointers, between tasks</td>
+</tr>
+<tr>
+<td><code>xQueueSend</code>/<code>xQueueReceive(q, &amp;item, ticks)</code></td>
+<td><code>0</code>=don't block, <code>portMAX_DELAY</code>=block forever</td>
+</tr>
+<tr>
+<td><code>xSemaphoreTake</code>/<code>Give(mutex, ticks)</code></td>
+<td>Guard any resource shared across tasks</td>
+</tr>
+<tr>
+<td><code>uxTaskGetStackHighWaterMark(NULL)</code></td>
+<td>Worst-case-ever free stack (words) for the calling task</td>
+</tr>
+</tbody>
+</table>
+<h3 id="esp-idf-development"><a href="../level-2/02-esp-idf/">ESP-IDF Development</a><a class="headerlink" href="#esp-idf-development" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Entry point</td>
+<td><code>app_main(void)</code> in <code>main/main.c</code> — no <code>setup()</code>/<code>loop()</code></td>
+</tr>
+<tr>
+<td>Logging</td>
+<td><code>ESP_LOGE/W/I/D/V(TAG, "fmt", ...)</code> — leveled, tagged</td>
+</tr>
+<tr>
+<td><code>idf.py set-target esp32</code></td>
+<td>Once per project, before first build</td>
+</tr>
+<tr>
+<td><code>idf.py build</code> / <code>flash</code> / <code>monitor</code></td>
+<td>Compile / upload / watch serial</td>
+</tr>
+<tr>
+<td><code>idf.py menuconfig</code></td>
+<td>Interactive config → written to <code>sdkconfig</code></td>
+</tr>
+<tr>
+<td><code>sdkconfig</code></td>
+<td>Commit it — it's build configuration, not a cache</td>
+</tr>
+<tr>
+<td>Component</td>
+<td>Folder + <code>CMakeLists.txt</code> calling <code>idf_component_register()</code></td>
+</tr>
+<tr>
+<td><code>idf_component.yml</code></td>
+<td>Declares dependencies from the ESP Component Registry</td>
+</tr>
+<tr>
+<td><code>idf.py size</code></td>
+<td>Flash/RAM usage breakdown per component</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bluetooth-low-energy-ble"><a href="../level-2/03-ble/">Bluetooth Low Energy (BLE)</a><a class="headerlink" href="#bluetooth-low-energy-ble" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GAP</td>
+<td>Discovery/connection layer — roles: peripheral (advertises) / central (scans)</td>
+</tr>
+<tr>
+<td>GATT</td>
+<td>Data layer — services contain characteristics; characteristics have properties</td>
+</tr>
+<tr>
+<td>Properties</td>
+<td><code>READ</code>, <code>WRITE</code>, <code>NOTIFY</code>, <code>INDICATE</code> — what a central may do</td>
+</tr>
+<tr>
+<td>CCCD (<code>0x2902</code>)</td>
+<td>Descriptor a central writes to subscribe to notify/indicate</td>
+</tr>
+<tr>
+<td><code>BLEDevice::init(name)</code></td>
+<td>Sets the advertised device name, starts the BLE stack</td>
+</tr>
+<tr>
+<td><code>createServer()</code> → <code>createService()</code> → <code>createCharacteristic()</code></td>
+<td>GATT tree, built top-down</td>
+</tr>
+<tr>
+<td><code>BLE2902</code> descriptor</td>
+<td>Required on any <code>NOTIFY</code>/<code>INDICATE</code> characteristic</td>
+</tr>
+<tr>
+<td><code>pCharacteristic-&gt;notify()</code></td>
+<td>Push value to subscribed centrals only — no-op if none</td>
+</tr>
+<tr>
+<td><code>onDisconnect()</code></td>
+<td>Must call <code>pServer-&gt;getAdvertising()-&gt;start()</code> to be reachable again</td>
+</tr>
+<tr>
+<td>Default MTU</td>
+<td>23 bytes (~20 usable) unless negotiated up</td>
+</tr>
+</tbody>
+</table>
+<h3 id="mqtt-iot-messaging"><a href="../level-2/04-mqtt-iot-messaging/">MQTT &amp; IoT Messaging</a><a class="headerlink" href="#mqtt-iot-messaging" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Model</td>
+<td>Publish/subscribe via a broker; one persistent outbound TCP connection</td>
+</tr>
+<tr>
+<td>Topic</td>
+<td><code>site/device/measurement</code> — hierarchical, implicit, no leading <code>/</code></td>
+</tr>
+<tr>
+<td><code>+</code> / <code>#</code></td>
+<td>One level / all remaining levels (must be last) — subscribe side only</td>
+</tr>
+<tr>
+<td>QoS 0 / 1 / 2</td>
+<td>At most once / at least once (<strong>dupes</strong>) / exactly once</td>
+</tr>
+<tr>
+<td>Retain</td>
+<td>Broker keeps the last message per topic and replays it — for <em>state</em></td>
+</tr>
+<tr>
+<td>LWT</td>
+<td>Broker publishes it on an unclean drop — with retain, gives presence</td>
+</tr>
+<tr>
+<td><code>.broker.address.uri</code></td>
+<td><code>mqtt://host:1883</code> or <code>mqtts://host:8883</code></td>
+</tr>
+<tr>
+<td><code>esp_mqtt_client_init()</code> / <code>_start()</code></td>
+<td>Non-blocking; a background task owns the connection</td>
+</tr>
+<tr>
+<td><code>esp_mqtt_client_register_event(c, ESP_EVENT_ANY_ID, h, arg)</code></td>
+<td>One handler, switch on <code>event_id</code></td>
+</tr>
+<tr>
+<td><code>event-&gt;topic_len</code> / <code>data_len</code></td>
+<td>Payload is <strong>not</strong> null-terminated — always use lengths</td>
+</tr>
+<tr>
+<td><code>esp_mqtt_client_enqueue()</code></td>
+<td>Non-blocking publish — the safe call from inside a handler</td>
+</tr>
+<tr>
+<td>Reconnection</td>
+<td>Automatic — don't write your own retry loop</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ota-firmware-updates"><a href="../level-2/05-ota-updates/">OTA Firmware Updates</a><a class="headerlink" href="#ota-firmware-updates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Why two slots</td>
+<td>Can't overwrite the flash you're executing from — alternate <code>ota_0</code>/<code>ota_1</code></td>
+</tr>
+<tr>
+<td><code>otadata</code></td>
+<td>0x2000 data partition holding the boot selection and per-slot state</td>
+</tr>
+<tr>
+<td>Partition table</td>
+<td>Custom <code>partitions.csv</code> + menuconfig; <code>app</code> partitions align to 64 KB</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>Roughly half your flash budget goes to the spare slot</td>
+</tr>
+<tr>
+<td><code>esp_https_ota(&amp;cfg)</code></td>
+<td>One blocking call: download → write → verify. Needs its own task</td>
+</tr>
+<tr>
+<td><code>esp_ota_get_next_update_partition(NULL)</code></td>
+<td>The slot you're <em>not</em> running from</td>
+</tr>
+<tr>
+<td><code>esp_ota_begin/write/end</code></td>
+<td>Manual path; <code>end()</code> validates before you commit</td>
+</tr>
+<tr>
+<td><code>esp_ota_set_boot_partition()</code></td>
+<td>Point of no return — only after <code>esp_ota_end() == ESP_OK</code></td>
+</tr>
+<tr>
+<td><code>CONFIG_BOOTLOADER_APP_ROLLBACK_ENABLE</code></td>
+<td>New image boots as <code>ESP_OTA_IMG_PENDING_VERIFY</code></td>
+</tr>
+<tr>
+<td><code>esp_ota_mark_app_valid_cancel_rollback()</code></td>
+<td>"Confirmed good" — call it <em>late</em>, after a real self-test</td>
+</tr>
+<tr>
+<td><code>esp_ota_mark_app_invalid_rollback_and_reboot()</code></td>
+<td>Give up now and return to the old slot</td>
+</tr>
+<tr>
+<td>Crash during probation</td>
+<td>Bootloader falls back to the previous slot automatically</td>
+</tr>
+<tr>
+<td><code>esp_app_get_description()</code></td>
+<td>Version, build date, IDF version from the image header</td>
+</tr>
+</tbody>
+</table>
+<h3 id="advanced-peripherals-i2s-rmt-can"><a href="../level-2/06-advanced-peripherals/">Advanced Peripherals (I2S, RMT, CAN)</a><a class="headerlink" href="#advanced-peripherals-i2s-rmt-can" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2S</td>
+<td>Continuous synchronous audio: BCLK + WS (left/right) + data, DMA-backed</td>
+</tr>
+<tr>
+<td><code>i2s_new_channel(&amp;cfg, &amp;tx, &amp;rx)</code></td>
+<td>Pass <code>NULL</code> for the direction you don't need</td>
+</tr>
+<tr>
+<td><code>I2S_STD_PHILIPS_SLOT_DEFAULT_CONFIG(bits, mode)</code></td>
+<td>Standard format for most mics/DACs</td>
+</tr>
+<tr>
+<td><code>i2s_channel_read(h, buf, len, &amp;got, timeout)</code></td>
+<td>Blocks until a DMA buffer is full</td>
+</tr>
+<tr>
+<td>24-bit mic in 32-bit slot</td>
+<td>Shift the padding out (<code>&gt;&gt; 14</code>) or the numbers look absurd</td>
+</tr>
+<tr>
+<td>RMT</td>
+<td>Hardware (level, duration) pulse generator — IR, WS2812, any tight timing</td>
+</tr>
+<tr>
+<td><code>resolution_hz</code></td>
+<td>Sets the tick; 10 MHz → 1 tick = 0.1 µs</td>
+</tr>
+<tr>
+<td><code>rmt_symbol_word_t</code></td>
+<td><code>{level0, duration0, level1, duration1}</code> — one bit's waveform</td>
+</tr>
+<tr>
+<td><code>rmt_transmit()</code></td>
+<td>Queues and returns; hardware clocks it out, immune to preemption</td>
+</tr>
+<tr>
+<td>TWAI</td>
+<td>ESP32's CAN 2.0 controller — needs an external transceiver + 120 Ω ends</td>
+</tr>
+<tr>
+<td>Message ID</td>
+<td>Describes content, not destination; <strong>lower ID wins arbitration</strong></td>
+</tr>
+<tr>
+<td><code>TWAI_GENERAL_CONFIG_DEFAULT(tx, rx, mode)</code></td>
+<td>Plus timing + filter configs into <code>twai_driver_install()</code></td>
+</tr>
+<tr>
+<td>Bus-off</td>
+<td>256 TX errors (often: no second node to ACK) → controller stops transmitting</td>
+</tr>
+<tr>
+<td><code>TWAI_MODE_NO_ACK</code></td>
+<td>Self-test mode for a solo node on the bench</td>
+</tr>
+</tbody>
+</table>
+<h3 id="filesystems-storage-littlefs-sd"><a href="../level-2/07-filesystems-storage/">Filesystems &amp; Storage (LittleFS, SD)</a><a class="headerlink" href="#filesystems-storage-littlefs-sd" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NVS</td>
+<td>Key/value settings; <code>nvs_open</code> → <code>set</code> → <strong><code>nvs_commit</code></strong> → <code>nvs_close</code></td>
+</tr>
+<tr>
+<td>NVS limits</td>
+<td>Key and namespace ≤ 15 chars; <code>ESP_ERR_NVS_NOT_FOUND</code> on first boot is normal</td>
+</tr>
+<tr>
+<td><code>nvs_flash_init()</code></td>
+<td>Handle <code>NO_FREE_PAGES</code>/<code>NEW_VERSION_FOUND</code> by erasing; must run before WiFi</td>
+</tr>
+<tr>
+<td>LittleFS</td>
+<td>Power-fail safe, wear-levelled files in internal flash</td>
+</tr>
+<tr>
+<td><code>esp_vfs_littlefs_register(&amp;conf)</code></td>
+<td>Mounts at <code>base_path</code>; then use plain <code>fopen</code>/<code>fprintf</code></td>
+</tr>
+<tr>
+<td><code>esp_littlefs_info(label, &amp;total, &amp;used)</code></td>
+<td>Space check — act before the partition fills</td>
+</tr>
+<tr>
+<td>Partition</td>
+<td>Custom <code>partitions.csv</code> entry, subtype <code>littlefs</code> (or <code>spiffs</code>)</td>
+</tr>
+<tr>
+<td>SPIFFS</td>
+<td>Legacy, no power-fail guarantee, slows badly when full — prefer LittleFS</td>
+</tr>
+<tr>
+<td>Flash erase unit</td>
+<td>4 KB sector, ~100k cycles — the write cost is the <em>erase</em></td>
+</tr>
+<tr>
+<td>Wear rule</td>
+<td><strong>Append, don't rewrite in place</strong>; batch small writes; keep 10–20% free</td>
+</tr>
+<tr>
+<td>FAT/SD</td>
+<td><code>esp_vfs_fat_sdspi_mount()</code> → <code>/sdcard/...</code>; unmount before removal</td>
+</tr>
+<tr>
+<td><code>format_if_mount_failed</code> on SD</td>
+<td>Leave <code>false</code> — <code>true</code> silently wipes a user's card</td>
+</tr>
+<tr>
+<td>Durability</td>
+<td><code>fclose()</code> (or <code>fflush</code> + <code>fsync</code>) is where the data actually lands</td>
+</tr>
+</tbody>
+</table>
+<h3 id="watchdogs-robust-firmware"><a href="../level-2/08-watchdogs-robust-firmware/">Watchdogs &amp; Robust Firmware</a><a class="headerlink" href="#watchdogs-robust-firmware" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Task WDT</td>
+<td>Resets the chip if a subscribed task stops checking in</td>
+</tr>
+<tr>
+<td><code>esp_task_wdt_add(NULL)</code> / <code>esp_task_wdt_reset()</code></td>
+<td>Subscribe this task / report in from it</td>
+</tr>
+<tr>
+<td><code>esp_task_wdt_config_t</code></td>
+<td><code>.timeout_ms</code>, <code>.idle_core_mask</code>, <code>.trigger_panic</code></td>
+</tr>
+<tr>
+<td><code>idle_core_mask</code></td>
+<td>Watch the idle tasks — catches any task hogging a core</td>
+</tr>
+<tr>
+<td>Timeout sizing</td>
+<td>Several × the loop period; too tight and the WDT <em>is</em> the bug</td>
+</tr>
+<tr>
+<td>Anti-pattern</td>
+<td>Resetting the WDT from a timer/keepalive — it then proves nothing</td>
+</tr>
+<tr>
+<td>Interrupt WDT</td>
+<td>On by default; firing means an ISR or critical section ran too long</td>
+</tr>
+<tr>
+<td><code>esp_task_wdt_delete(NULL)</code></td>
+<td>Unsubscribe around a known-long blocking call, deliberately</td>
+</tr>
+<tr>
+<td><code>esp_reset_reason()</code></td>
+<td><code>ESP_RST_POWERON</code> / <code>PANIC</code> / <code>TASK_WDT</code> / <code>INT_WDT</code> / <code>BROWNOUT</code> / ...</td>
+</tr>
+<tr>
+<td>Crash counter in NVS</td>
+<td>Cheapest field telemetry there is — publish it</td>
+</tr>
+<tr>
+<td>Brownout detector</td>
+<td>On by default; <code>ESP_RST_BROWNOUT</code> means fix the <em>hardware</em></td>
+</tr>
+<tr>
+<td>Retry policy</td>
+<td>Bounded attempts, exponential backoff, capped, with a give-up branch</td>
+</tr>
+<tr>
+<td>Heap trend</td>
+<td><code>esp_get_minimum_free_heap_size()</code> falling over days = leak</td>
+</tr>
+<tr>
+<td><code>esp_restart()</code></td>
+<td>A valid recovery path — log first, rate-limit it</td>
+</tr>
+</tbody>
+</table>
+<h3 id="debugging-unit-testing"><a href="../level-2/09-debugging-unit-testing/">Debugging &amp; Unit Testing</a><a class="headerlink" href="#debugging-unit-testing" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LoadProhibited</code> / <code>StoreProhibited</code></td>
+<td>Bad pointer; <code>EXCVADDR</code> holds the address, <code>0x0</code> = null</td>
+</tr>
+<tr>
+<td><code>IllegalInstruction</code></td>
+<td>Often a task function that returned without <code>vTaskDelete(NULL)</code></td>
+</tr>
+<tr>
+<td>Backtrace</td>
+<td><code>PC:SP</code> pairs, innermost first; <code>idf.py monitor</code> symbolicates them</td>
+</tr>
+<tr>
+<td><code>addr2line -pfiaC -e build/app.elf &lt;pc&gt;</code></td>
+<td>Decode a backtrace captured elsewhere</td>
+</tr>
+<tr>
+<td><code>esp_backtrace_print(depth)</code></td>
+<td>Print the current stack without crashing</td>
+</tr>
+<tr>
+<td><code>CONFIG_ESP_SYSTEM_PANIC</code></td>
+<td>Print+reboot / halt / <strong>GDBStub</strong> (live GDB over plain serial)</td>
+</tr>
+<tr>
+<td><code>CONFIG_LOG_MAXIMUM_LEVEL</code></td>
+<td>Compile-time ceiling — above it, the code isn't in the binary</td>
+</tr>
+<tr>
+<td><code>esp_log_level_set(tag, level)</code></td>
+<td>Runtime, per tag; <code>"*"</code> for all tags</td>
+</tr>
+<tr>
+<td><code>ESP_LOG_BUFFER_HEXDUMP(tag, buf, len, level)</code></td>
+<td>Hex + ASCII dump for protocol work</td>
+</tr>
+<tr>
+<td>Logging trap</td>
+<td>Blocks for milliseconds; never from an ISR — toggle a GPIO instead</td>
+</tr>
+<tr>
+<td>Core dump</td>
+<td><code>coredump</code> data partition + <code>CONFIG_ESP_COREDUMP_ENABLE_TO_FLASH</code></td>
+</tr>
+<tr>
+<td><code>idf.py coredump-info</code> / <code>coredump-debug</code></td>
+<td>Summary / full GDB session on a stored crash</td>
+</tr>
+<tr>
+<td><code>esp_core_dump_image_get()</code> / <code>_erase()</code></td>
+<td>Detect a dump at boot; clear it or lose the next one</td>
+</tr>
+<tr>
+<td><code>idf.py openocd gdb</code></td>
+<td>Live JTAG; ESP32 needs ESP-Prog, C3/S3 have USB-JTAG built in</td>
+</tr>
+<tr>
+<td>ESP32 JTAG pins</td>
+<td>GPIO12–15; GPIO12 (MTDI) also straps the flash supply voltage at reset</td>
+</tr>
+<tr>
+<td>Leak hunting</td>
+<td><code>esp_get_minimum_free_heap_size()</code> trend, then <code>HEAP_TRACE_LEAKS</code></td>
+</tr>
+<tr>
+<td><code>heap_trace_init_standalone(recs, n)</code> → <code>start</code> → <code>stop</code> → <code>dump</code></td>
+<td>Names the caller of every unfreed block</td>
+</tr>
+<tr>
+<td><code>CONFIG_HEAP_CORRUPTION_DETECTION</code></td>
+<td>Comprehensive: <code>0xCE</code> fresh, <code>0xFE</code> freed, canaries around blocks</td>
+</tr>
+<tr>
+<td><code>heap_caps_check_integrity_all(true)</code></td>
+<td>Bisect to where the overrun happens</td>
+</tr>
+<tr>
+<td><code>uxTaskGetStackHighWaterMark()</code></td>
+<td>On ESP-IDF this is <strong>bytes</strong> (vanilla FreeRTOS docs say words)</td>
+</tr>
+<tr>
+<td>Unity test</td>
+<td><code>TEST_CASE("name", "[tag]")</code> in <code>components/&lt;c&gt;/test/test_*.c</code></td>
+</tr>
+<tr>
+<td>Test CMake</td>
+<td><code>idf_component_register(SRC_DIRS "." INCLUDE_DIRS "." REQUIRES unity &lt;comp&gt;)</code></td>
+</tr>
+<tr>
+<td>Running tests</td>
+<td>Flash, press Enter for the menu; <code>*</code> runs all; <code>pytest-embedded</code> for CI</td>
+</tr>
+</tbody>
+</table>
+<h3 id="project-wifi-data-logger"><a href="../level-2/10-project-wifi-data-logger/">Project — WiFi Data Logger</a><a class="headerlink" href="#project-wifi-data-logger" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Choice made here</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Topology</td>
+<td>3 tasks, 2 queues, samples copied by value</td>
+<td>No shared mutable state between tasks</td>
+</tr>
+<tr>
+<td>Priorities</td>
+<td>sampler 6 &gt; logger 5 &gt; uplink 4 &gt; ota 3</td>
+<td>Timing-critical first; network last</td>
+</tr>
+<tr>
+<td><code>sample_q</code> depth 60</td>
+<td>Deep, 50 ms send timeout</td>
+<td>A slow flash write must not cost a reading</td>
+</tr>
+<tr>
+<td><code>uplink_q</code> depth 30</td>
+<td>Shallow, <strong>0 ms</strong> send timeout</td>
+<td>A dead network must not stall the logger</td>
+</tr>
+<tr>
+<td><code>vTaskDelayUntil()</code></td>
+<td>Fixed period, drift-free</td>
+<td><code>vTaskDelay()</code> adds the work time to every cycle</td>
+</tr>
+<tr>
+<td>Batching 30 samples</td>
+<td>One <code>fopen</code>/<code>fclose</code> per batch</td>
+<td>Erase cost is per 4 KB sector, not per byte</td>
+</tr>
+<tr>
+<td>Rotation at 64 KB</td>
+<td><code>rename()</code> to <code>log.1.csv</code></td>
+<td>Bounded storage regardless of uptime</td>
+</tr>
+<tr>
+<td>MQTT publish</td>
+<td><code>esp_mqtt_client_enqueue()</code>, QoS 1, retain</td>
+<td>Non-blocking; dashboards get state on connect</td>
+</tr>
+<tr>
+<td>Timestamps</td>
+<td>SNTP, stored as UTC epoch seconds</td>
+<td>Local time in a log breaks twice a year</td>
+</tr>
+<tr>
+<td>Task WDT</td>
+<td>sampler + logger subscribed; uplink not</td>
+<td>Only tasks with a duty cycle should be watched</td>
+</tr>
+<tr>
+<td>OTA trigger</td>
+<td>MQTT command → dedicated 8 KB task</td>
+<td>Never do the work in the event handler</td>
+</tr>
+<tr>
+<td>Rollback gate</td>
+<td><code>self_test_ok()</code> = IP + broker + filesystem</td>
+<td>Proves the device can receive the <em>next</em> fix</td>
+</tr>
+<tr>
+<td>Mutex type</td>
+<td><code>xSemaphoreCreateMutex()</code> for the filesystem</td>
+<td>Priority inheritance; binary semaphores have none</td>
+</tr>
+<tr>
+<td>Crash reporting</td>
+<td>Reset reason + core dump published at boot</td>
+<td>Field telemetry you can't get any other way</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="bare-metal-arm-cortex-m-stm32"><a href="../level-3/01-bare-metal-arm-stm32/">Bare-Metal ARM Cortex-M (STM32)</a><a class="headerlink" href="#bare-metal-arm-cortex-m-stm32" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Memory-mapped register</td>
+<td><code>*(volatile T *)ADDRESS</code> — <code>volatile</code> prevents caching/reordering</td>
+</tr>
+<tr>
+<td>Enable order</td>
+<td>Clock enable (<code>RCC_*ENR</code>) before touching any peripheral register</td>
+</tr>
+<tr>
+<td>Reset entry</td>
+<td>CPU loads SP from <code>0x0</code>, PC from <code>0x4</code> — no bootloader code runs first</td>
+</tr>
+<tr>
+<td>Weak alias</td>
+<td>Unimplemented vectors fall back to <code>Default_Handler</code> instead of link errors</td>
+</tr>
+<tr>
+<td><code>BSRR</code> vs <code>ODR |=</code></td>
+<td><code>BSRR</code> is a true atomic set/clear; <code>ODR</code> read-modify-write is not</td>
+</tr>
+<tr>
+<td>Toolchain</td>
+<td><code>arm-none-eabi-gcc</code> + OpenOCD/ST-Link, not Arduino/ESP-IDF build system</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Portable bit-logic compiled/run with <code>gcc</code>; addresses reviewed against ARM/ST docs only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="registers-linker-scripts-startup-code"><a href="../level-3/02-registers-linker-startup/">Registers, Linker Scripts &amp; Startup Code</a><a class="headerlink" href="#registers-linker-scripts-startup-code" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.text</code>/<code>.rodata</code></td>
+<td>Code and constants — stay in FLASH, never copied</td>
+</tr>
+<tr>
+<td><code>.data</code></td>
+<td>Non-zero globals — live in RAM, load image in FLASH, copied by startup code</td>
+</tr>
+<tr>
+<td><code>.bss</code></td>
+<td>Zero-initialized globals — live in RAM only, zeroed by startup code, occupy no flash</td>
+</tr>
+<tr>
+<td><code>AT&gt; FLASH</code></td>
+<td>Tells linker the <em>load</em> address differs from the <em>run</em> address</td>
+</tr>
+<tr>
+<td><code>_sdata</code>/<code>_edata</code>/<code>_sbss</code>/<code>_ebss</code></td>
+<td>Linker-defined symbols marking section boundaries, used by startup code</td>
+</tr>
+<tr>
+<td>Stack direction</td>
+<td>Grows <strong>down</strong> from <code>_estack</code> (top of RAM)</td>
+</tr>
+<tr>
+<td><code>KEEP()</code></td>
+<td>Prevents the linker from discarding a section nothing references directly (e.g. <code>.isr_vector</code>)</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Copy/zero logic simulated and run with <code>gcc</code>; real flash/RAM layout not testable off-chip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rtos-internals"><a href="../level-3/03-rtos-internals/">RTOS Internals</a><a class="headerlink" href="#rtos-internals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TCB</td>
+<td>Task Control Block — saved SP + priority + list linkage, not the stack itself</td>
+</tr>
+<tr>
+<td>Initial fake context</td>
+<td>Stack pre-filled so the first switch "resumes" the task at its entry point</td>
+</tr>
+<tr>
+<td><code>PendSV</code></td>
+<td>Lowest-priority exception, dedicated to context switches, never preempts real IRQs</td>
+</tr>
+<tr>
+<td>Auto-saved by hardware</td>
+<td>R0-R3, R12, LR, PC, xPSR — pushed/popped by exception entry/return</td>
+</tr>
+<tr>
+<td>Manually saved in handler</td>
+<td>R4-R11 — the context-switch code's own job</td>
+</tr>
+<tr>
+<td>Ready bitmap</td>
+<td>One bit per priority; highest set bit = next task to run (O(1) via CLZ)</td>
+</tr>
+<tr>
+<td>Same-priority tasks</td>
+<td>Time-slice via <code>SysTick</code>; only strictly higher priority guarantees preemption</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Bitmap scheduling logic compiled/run with <code>gcc</code>; PendSV assembly reviewed, not executed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dma-high-speed-peripherals"><a href="../level-3/04-dma-high-speed-peripherals/">DMA &amp; High-Speed Peripherals</a><a class="headerlink" href="#dma-high-speed-peripherals" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DMA controller</td>
+<td>Independent hardware that moves data peripheral&lt;-&gt;memory without CPU load/store per byte</td>
+</tr>
+<tr>
+<td>Circular mode</td>
+<td>DMA re-arms automatically at the end of the buffer — true continuous capture</td>
+</tr>
+<tr>
+<td>D-Cache coherency</td>
+<td>Only relevant on cached cores (e.g. M7); invalidate before CPU read, clean before DMA read</td>
+</tr>
+<tr>
+<td><code>SCB_InvalidateDCache_by_Addr</code></td>
+<td>CMSIS call to drop stale cached copies before reading DMA'd data</td>
+</tr>
+<tr>
+<td>Double buffering</td>
+<td>Two buffers, DMA fills one while code processes the other — avoids torn reads</td>
+</tr>
+<tr>
+<td><code>volatile</code> on shared flags</td>
+<td>Required wherever an ISR sets a flag <code>main_loop</code> polls</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Buffer-swap bookkeeping compiled/run with <code>gcc</code>; cache/DMA hardware behavior reviewed, not executed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="low-power-design-deep-dive"><a href="../level-3/05-low-power-design/">Low-Power Design Deep Dive</a><a class="headerlink" href="#low-power-design-deep-dive" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>WFI</code></td>
+<td>Halts CPU until any enabled interrupt is pending — the core sleep primitive</td>
+</tr>
+<tr>
+<td><code>SLEEPDEEP</code> (SCB_SCR)</td>
+<td>Selects how deep <code>WFI</code> goes: Sleep vs Stop/Standby</td>
+</tr>
+<tr>
+<td>Sleep</td>
+<td>CPU clock off, peripherals/RAM retained, µs wake</td>
+</tr>
+<tr>
+<td>Stop</td>
+<td>Most clocks off, RAM retained, µs-ms wake, reconfigure clocks on resume</td>
+</tr>
+<tr>
+<td>Standby</td>
+<td>RAM lost, behaves like reset on wake, must persist state externally</td>
+</tr>
+<tr>
+<td>Any pending IRQ wakes</td>
+<td>Disable/mask anything not meant to wake the device (e.g. <code>SysTick</code>) before deep sleep</td>
+</tr>
+<tr>
+<td>Wake source setup</td>
+<td>Must be enabled in <strong>both</strong> the power controller and the NVIC/EXTI</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Battery-life arithmetic compiled/run with <code>gcc</code>; actual sleep-mode current is hardware-measured, not testable here</td>
+</tr>
+</tbody>
+</table>
+<h3 id="interrupts-the-nvic"><a href="../level-3/06-interrupts-nvic/">Interrupts &amp; the NVIC</a><a class="headerlink" href="#interrupts-the-nvic" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NVIC</td>
+<td>Cortex-M's interrupt controller — enable, priority, and pending state per IRQ</td>
+</tr>
+<tr>
+<td>Priority numbers</td>
+<td><strong>Lower number = higher urgency</strong>; can preempt any strictly higher-numbered priority</td>
+</tr>
+<tr>
+<td>Equal priority</td>
+<td>Never preempts — queues and runs after the current handler returns</td>
+</tr>
+<tr>
+<td><code>EXTI_PR</code> / pending bit</td>
+<td>Must be cleared in the handler, with care about ordering vs. reading data</td>
+</tr>
+<tr>
+<td><code>volatile</code></td>
+<td>Prevents compiler caching/reordering; does <strong>not</strong> by itself guarantee atomicity</td>
+</tr>
+<tr>
+<td><code>__disable_irq()</code>/<code>__enable_irq()</code></td>
+<td>Critical section for accesses that must be atomic w.r.t. an ISR</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Preemption-rule logic compiled/run with <code>gcc</code>; real NVIC register behavior reviewed against ARM docs only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="pcb-design-basics-kicad"><a href="../level-3/07-pcb-design-kicad/">PCB Design Basics (KiCad)</a><a class="headerlink" href="#pcb-design-basics-kicad" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ERC</td>
+<td>Checks the <strong>schematic</strong>: unconnected pins, conflicting drivers, missing power symbols</td>
+</tr>
+<tr>
+<td>DRC</td>
+<td>Checks the <strong>physical board</strong>: clearance, drill sizes, fab capability limits</td>
+</tr>
+<tr>
+<td>Decoupling cap</td>
+<td>~100 nF ceramic per IC power pin, placed as close as physically possible</td>
+</tr>
+<tr>
+<td>Trace width for current</td>
+<td>Use an IPC-2152 calculator; ~0.25 mm/A (1oz Cu, external) is only a rough starting estimate</td>
+</tr>
+<tr>
+<td>Ground plane</td>
+<td>Gives every signal a short return path; avoid routing across plane splits</td>
+</tr>
+<tr>
+<td>Gerber/drill files</td>
+<td>The actual manufacturing output sent to a fab house</td>
+</tr>
+<tr>
+<td>Reality check</td>
+<td>This module is manual technical review — no board from this course was fabricated or tested</td>
+</tr>
+</tbody>
+</table>
+<h3 id="protocol-deep-dive-uarti2cspican"><a href="../level-3/08-protocol-deep-dive/">Protocol Deep Dive (UART/I2C/SPI/CAN)</a><a class="headerlink" href="#protocol-deep-dive-uarti2cspican" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UART framing</td>
+<td>Start(0), 8 data bits LSB-first, optional parity, stop(1) — no shared clock</td>
+</tr>
+<tr>
+<td>I2C clock stretching</td>
+<td>Slave holds SCL low to pause the master — legitimate, must be handled</td>
+</tr>
+<tr>
+<td>I2C arbitration</td>
+<td>Multi-master: whoever tries to send <code>1</code> while another sends <code>0</code> backs off</td>
+</tr>
+<tr>
+<td>SPI CPOL/CPHA</td>
+<td>Four modes; mismatch produces plausible garbage, not an obvious failure</td>
+</tr>
+<tr>
+<td>CAN arbitration</td>
+<td>Dominant bit (<code>0</code>) always wins; lower numeric ID = higher priority, by design</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>UART/CAN logic compiled/run with <code>gcc</code>; real bus electrical behavior reviewed against spec only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bootloaders-firmware-updates"><a href="../level-3/09-bootloaders/">Bootloaders &amp; Firmware Updates</a><a class="headerlink" href="#bootloaders-firmware-updates" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two-stage boot</td>
+<td>Fixed bootloader at reset address, jumps to application elsewhere in flash</td>
+</tr>
+<tr>
+<td><code>SCB_VTOR</code></td>
+<td>Must be set to the application's vector table address after the jump</td>
+</tr>
+<tr>
+<td>Dual-bank update</td>
+<td>Write+verify the new image in the inactive bank; flip active bank only after</td>
+</tr>
+<tr>
+<td>Never erase-before-verify</td>
+<td>The rule that prevents power-loss bricking</td>
+</tr>
+<tr>
+<td>Boot counter / rollback</td>
+<td>Falls back to the previous bank after N failed boots of a new image</td>
+</tr>
+<tr>
+<td>CRC vs signature</td>
+<td>CRC catches corruption; only cryptographic signing catches tampering (module 4-02)</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Header/CRC validation logic compiled/run with <code>gcc</code>; real flash erase/write needs actual hardware</td>
+</tr>
+</tbody>
+</table>
+<h3 id="project-custom-sensor-board-firmware"><a href="../level-3/10-project-sensor-board/">Project — Custom Sensor Board Firmware</a><a class="headerlink" href="#project-custom-sensor-board-firmware" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module combined</th>
+<th>Role in this project</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3-01/3-02</td>
+<td>Register access, linker/startup for the whole firmware image</td>
+</tr>
+<tr>
+<td>3-03</td>
+<td>Not directly used — bare-metal main loop chosen over an RTOS for this design's simplicity</td>
+</tr>
+<tr>
+<td>3-04</td>
+<td>DMA-driven I2C sampling, freeing the CPU to sleep between reads</td>
+</tr>
+<tr>
+<td>3-05</td>
+<td>Stop mode between samples; wake source must be unmasked in the NVIC</td>
+</tr>
+<tr>
+<td>3-06</td>
+<td><code>volatile</code> + ISR-safe ring buffer indices shared between DMA ISR and main loop</td>
+</tr>
+<tr>
+<td>3-07</td>
+<td>Decoupling placement, ground plane, test points on the physical board</td>
+</tr>
+<tr>
+<td>3-08</td>
+<td>UART framing for the debug/report protocol</td>
+</tr>
+<tr>
+<td>3-09</td>
+<td>Vector table relocation if deployed behind a bootloader for field updates</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="production-firmware-architecture"><a href="../level-4/01-production-firmware-architecture/">Production Firmware Architecture</a><a class="headerlink" href="#production-firmware-architecture" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HAL</td>
+<td>Bottom layer — knows chip registers, exposes a portable function-pointer interface</td>
+</tr>
+<tr>
+<td>Driver</td>
+<td>Knows a specific peripheral's protocol, depends only on the HAL interface</td>
+</tr>
+<tr>
+<td>Application</td>
+<td>Business logic — no register access, no board <code>#ifdef</code></td>
+</tr>
+<tr>
+<td>Feature flags</td>
+<td><code>HAS_X</code> compile-time flags, not board-name checks, in application code</td>
+</tr>
+<tr>
+<td>Fake HAL</td>
+<td>Swap in a canned-response HAL to unit-test drivers on a host machine, no hardware needed</td>
+</tr>
+<tr>
+<td>Consistent error enum</td>
+<td>Decide once, project-wide — expensive to retrofit later</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Driver-against-fake-HAL logic compiled/run with <code>gcc</code>; real hardware timing not represented</td>
+</tr>
+</tbody>
+</table>
+<h3 id="secure-boot-encrypted-ota-at-scale"><a href="../level-4/02-secure-boot-ota-scale/">Secure Boot &amp; Encrypted OTA at Scale</a><a class="headerlink" href="#secure-boot-encrypted-ota-at-scale" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRC</td>
+<td>Detects accidental corruption only — trivially recomputable by an attacker</td>
+</tr>
+<tr>
+<td>Signature (Ed25519/ECDSA)</td>
+<td>Proves the image came from whoever holds the private key</td>
+</tr>
+<tr>
+<td>Public key placement</td>
+<td>Must be immutable (OTP fuses/ROM) — a rewritable key defeats the whole scheme</td>
+</tr>
+<tr>
+<td>Secure boot root of trust</td>
+<td>First-stage verification anchored in hardware, not just software checking software</td>
+</tr>
+<tr>
+<td>Encryption</td>
+<td>Confidentiality, separate from and additional to signature-based authenticity</td>
+</tr>
+<tr>
+<td>Downgrade protection</td>
+<td>Version monotonicity check prevents re-installing an old, vulnerable, validly signed image</td>
+</tr>
+<tr>
+<td>Canary/staged rollout</td>
+<td>Procedural mitigation for a legitimately signed but regressive build</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Verify-then-trust decision logic compiled/run with <code>gcc</code>; real crypto primitives reviewed, not implemented/executed here</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tinyml-edge-ai"><a href="../level-4/03-tinyml-edge-ai/">TinyML &amp; Edge AI</a><a class="headerlink" href="#tinyml-edge-ai" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quantization</td>
+<td>Map float weights/activations to int8 via <code>scale</code>/<code>zero_point</code>, computed offline</td>
+</tr>
+<tr>
+<td>Why it matters</td>
+<td>Often the difference between a model fitting in MCU flash/RAM and not fitting at all</td>
+</tr>
+<tr>
+<td>Accumulator width</td>
+<td>int8 x int8 products summed in int32 to avoid overflow</td>
+</tr>
+<tr>
+<td>Requantization</td>
+<td>Each layer's int32 accumulator is rescaled back to int8 before the next layer</td>
+</tr>
+<tr>
+<td>No FPU needed</td>
+<td>int8 MAC operations run on cores without a floating point unit</td>
+</tr>
+<tr>
+<td>RAM sizing</td>
+<td>Driven by the largest single layer's activation buffer, not total model size</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Quantize/dequantize and one dense layer compiled/run with <code>gcc</code>; no real trained model or NN framework used</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rf-wireless-protocol-design"><a href="../level-4/04-rf-protocol-design/">RF &amp; Wireless Protocol Design</a><a class="headerlink" href="#rf-wireless-protocol-design" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Link budget</td>
+<td>TX power + antenna gains - path loss - cable loss, compared against RX sensitivity + margin</td>
+</tr>
+<tr>
+<td>Path loss (free space)</td>
+<td><code>20*log10(4*pi*d/wavelength)</code> — a best case, real environments lose more</td>
+</tr>
+<tr>
+<td>Processing gain</td>
+<td>Lower data rate/spreading factor trades throughput for range/noise immunity</td>
+</tr>
+<tr>
+<td>Sequence number</td>
+<td>Detects lost/duplicate packets — expected on RF links, not just a nice-to-have</td>
+</tr>
+<tr>
+<td>Duty cycle</td>
+<td>Legally regulated in many ISM bands — a protocol design constraint, not just politeness</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Link-budget arithmetic and CRC/seq-num logic compiled/run with <code>gcc</code>; real RF/antenna/propagation behavior needs lab equipment</td>
+</tr>
+</tbody>
+</table>
+<h3 id="hil-testing-ci-for-firmware"><a href="../level-4/05-hil-testing-ci/">HIL Testing &amp; CI for Firmware</a><a class="headerlink" href="#hil-testing-ci-for-firmware" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Testing pyramid</td>
+<td>Mostly host-side unit tests (fake HAL), fewer integration/emulator tests, fewest HIL tests</td>
+</tr>
+<tr>
+<td>HIL</td>
+<td>Real target hardware, automated (flash, power, UART, GPIO) — catches timing/electrical bugs simulators can't</td>
+</tr>
+<tr>
+<td>CI without hardware</td>
+<td>Build, static analysis, host unit tests, flash/RAM size gate</td>
+</tr>
+<tr>
+<td>Size gate</td>
+<td>Cheap, automatic protection against silent flash/RAM budget creep</td>
+</tr>
+<tr>
+<td>HIL scope</td>
+<td>Timing margins, real power measurement, end-to-end — not a replacement for fast unit tests</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Size-budget policy logic compiled/run with <code>gcc</code>; HIL rig automation is architecture reviewed, not executed (no rig available)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="functional-safety-misra"><a href="../level-4/06-functional-safety-misra/">Functional Safety &amp; MISRA</a><a class="headerlink" href="#functional-safety-misra" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fail-safe</td>
+<td>On detected failure, go to a known-safe state — most common design goal</td>
+</tr>
+<tr>
+<td>Fail-operational</td>
+<td>Must keep working correctly through a failure — needs redundancy, reserved for critical systems</td>
+</tr>
+<tr>
+<td>MISRA C:2012</td>
+<td>Restricts C to eliminate undefined/unspecified/misuse-prone constructs</td>
+</tr>
+<tr>
+<td>Rule 15.5</td>
+<td>Single point of exit per function (advisory)</td>
+</tr>
+<tr>
+<td>Rule 8.13</td>
+<td><code>const</code>-correctness for read-only pointer parameters (advisory)</td>
+</tr>
+<tr>
+<td>Rule 10.x</td>
+<td>Essential-type conversion rules — governs signed/unsigned/width mismatches</td>
+</tr>
+<tr>
+<td>Plausibility check</td>
+<td>Validates a reading against recent history/rate limits, not just its static range</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Validation/plausibility logic compiled/run with <code>gcc</code>; MISRA rule text and safety-process claims reviewed against real, citable published material only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ultra-low-power-energy-harvesting"><a href="../level-4/07-ultra-low-power/">Ultra-Low-Power &amp; Energy Harvesting</a><a class="headerlink" href="#ultra-low-power-energy-harvesting" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Power balance</td>
+<td>Harvesting designs must satisfy avg(harvest) &gt;= avg(consume), not a fixed total budget</td>
+</tr>
+<tr>
+<td>Adaptive duty cycling</td>
+<td>Sample stored energy, classify state, adjust sleep interval accordingly</td>
+</tr>
+<tr>
+<td><code>E = 0.5 * C * V^2</code></td>
+<td>Supercapacitor stored energy — voltage is the measurable proxy for energy level</td>
+</tr>
+<tr>
+<td>Regulator quiescent current</td>
+<td>Can dominate a microwatt-scale power budget — choose parts for this, not battery convenience</td>
+</tr>
+<tr>
+<td>Hysteresis</td>
+<td>Needed between power states to avoid oscillation near a threshold</td>
+</tr>
+<tr>
+<td>Worst-case sizing</td>
+<td>Storage capacity and critical-state behavior must survive worst case, not average, harvest conditions</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Power-balance and state-classification logic compiled/run with <code>gcc</code>; real harvester/regulator behavior needs lab measurement</td>
+</tr>
+</tbody>
+</table>
+<h3 id="manufacturing-dfm-factory-test"><a href="../level-4/08-manufacturing-dfm-test/">Manufacturing, DFM &amp; Factory Test</a><a class="headerlink" href="#manufacturing-dfm-factory-test" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DFM</td>
+<td>Layout choices for reliable machine assembly — placement, panelization, stencil design</td>
+</tr>
+<tr>
+<td>Bed-of-nails / flying probe</td>
+<td>Physical test-point contact for electrical test — needs accessible test points</td>
+</tr>
+<tr>
+<td>Boundary-scan (JTAG)</td>
+<td>Pin-level connectivity test through the chip's own scan chain, no physical probe needed</td>
+</tr>
+<tr>
+<td>Factory test firmware</td>
+<td>Separate image, exercises every peripheral once, never ships to customers</td>
+</tr>
+<tr>
+<td>Run-all-tests policy</td>
+<td>Log every result even after a failure — preserves diagnostic information</td>
+</tr>
+<tr>
+<td>Serial-number traceability</td>
+<td>Permanent record linking each unit to its exact factory test results</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Test-aggregation/logging logic compiled/run with <code>gcc</code>; real DFM/assembly-line behavior reviewed against manufacturing practice only</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fleet-management-device-clouds"><a href="../level-4/09-fleet-management/">Fleet Management &amp; Device Clouds</a><a class="headerlink" href="#fleet-management-device-clouds" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Detail</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Device identity</td>
+<td>Provisioned UUID + fleet-CA-signed certificate — never a MAC address alone</td>
+</tr>
+<tr>
+<td>Telemetry aggregation</td>
+<td>Report summaries (min/max/mean/count) on an interval, not every raw sample</td>
+</tr>
+<tr>
+<td>Config validation</td>
+<td>Validate before applying, same principle as firmware verify-before-install</td>
+</tr>
+<tr>
+<td>Staged config rollout</td>
+<td>Canary/staged pattern from module 4-02 applies to configuration, not just firmware</td>
+</tr>
+<tr>
+<td>Cardinality limits</td>
+<td>Fleet-scale telemetry backends need bounded label/tag cardinality to stay operational</td>
+</tr>
+<tr>
+<td>Offline behavior</td>
+<td>Devices must buffer and retry, not block, during connectivity loss</td>
+</tr>
+<tr>
+<td>Verification here</td>
+<td>Aggregation/validation logic compiled/run with <code>gcc</code>; real fleet backend/network behavior not represented</td>
+</tr>
+</tbody>
+</table>
+<h3 id="capstone-production-iot-product"><a href="../level-4/10-capstone-production-iot/">Capstone — Production IoT Product</a><a class="headerlink" href="#capstone-production-iot-product" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Role in the capstone</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4-01</td>
+<td>Layering: application depends only on driver/HAL interfaces</td>
+</tr>
+<tr>
+<td>4-02</td>
+<td>Bootloader signature verification + staged rollout for updates</td>
+</tr>
+<tr>
+<td>4-03</td>
+<td>Quantized on-device anomaly inference on sensor readings</td>
+</tr>
+<tr>
+<td>4-04</td>
+<td>(If wireless) link budget and packet design for the report path</td>
+</tr>
+<tr>
+<td>4-05</td>
+<td>HIL tier catches what this capstone's host-side tests structurally cannot</td>
+</tr>
+<tr>
+<td>4-06</td>
+<td>Plausibility/range validation before any reading is trusted or aggregated</td>
+</tr>
+<tr>
+<td>4-07</td>
+<td>Power-state classification driving adaptive duty cycling</td>
+</tr>
+<tr>
+<td>4-08</td>
+<td>DFM-reviewed layout and factory test firmware at manufacturing time</td>
+</tr>
+<tr>
+<td>4-09</td>
+<td>Telemetry aggregation and device identity for fleet reporting</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Go deeper with the full <a href="../">Embedded Systems Mastery Path</a> curriculum or test yourself with the <a href="../interview-questions/">interview questions</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/embedded-linux-mastery-path/">Embedded Linux</a></li><li><a href="https://learnmasterypath.com/embedded-python-mastery-path/">Embedded Python</a></li><li><a href="https://learnmasterypath.com/freertos-mastery-path/">FreeRTOS</a></li><li><a href="https://learnmasterypath.com/s32k-mastery-path/">S32K</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../interview-questions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Interview Questions">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Interview Questions
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../level-1/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/embedded-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/embedded-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>
