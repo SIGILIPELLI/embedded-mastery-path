@@ -8,7 +8,7 @@ description: "Free embedded systems course from beginner to advanced -- hands-on
 A structured, module-wise embedded systems training program that takes you
 from blinking your first LED to designing production-grade, master-level
 firmware — starting with Arduino/ESP32 and C/C++, with real compilable code
-in every module and a hands-on project at the end of each level.
+in every module and a hands-on project at the end of Levels 1–3 and a capstone at the end of Level 4.
 
 **No hardware required to start.** Every Level 1 example runs in the free
 [Wokwi online simulator](https://wokwi.com/) — a browser-based Arduino/ESP32
@@ -30,8 +30,7 @@ unchanged on real boards when you get one.
 - Every topic page has real, compilable Arduino C/C++ sketches — paste them
   into the [Wokwi simulator](https://wokwi.com/) (or the Arduino IDE with a
   real board) and run them as you read.
-- Each level ends with a project that combines everything learned in that
-  level.
+- Levels 1–3 each end with a project that combines everything learned in that level, and Level 4 ends with the course capstone.
 - Use the search bar (top of the page) to jump straight to a topic.
 
 Start here → [Level 1 · Entry](level-1/index.md)
